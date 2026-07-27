@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-07-27T10:48:05.860Z",
+  "updatedAt": "2026-07-27T10:53:43.843Z",
   "products": [
     {
       "id": "sb1",
@@ -243,7 +243,7 @@
       "price": 0.22,
       "category": "Sides",
       "brand": "McDonald's",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/mc12-2026-07-27T10-53-43-843Z.jpg",
       "description": "Crispy battered onion rings, golden fried"
     },
     {
@@ -270,7 +270,7 @@
       "price": 0.24,
       "category": "Cold Coffee",
       "brand": "Dunkin'",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/dk3-2026-07-27T10-53-43-843Z.jpg",
       "description": "Iced coffee with butter pecan flavor swirl"
     },
     {
@@ -288,7 +288,7 @@
       "price": 0.13,
       "category": "Bakery",
       "brand": "Dunkin'",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/dk5-2026-07-27T10-53-43-843Z.jpg",
       "description": "Classic yeast donut with sweet glaze"
     },
     {
@@ -360,7 +360,7 @@
       "price": 1,
       "category": "Chicken",
       "brand": "Jollibee",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/jb4-2026-07-27T10-53-43-843Z.jpg",
       "description": "6 pieces of signature crispy fried chicken"
     },
     {
@@ -369,7 +369,7 @@
       "price": 0.39,
       "category": "Pasta",
       "brand": "Jollibee",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/jb5-2026-07-27T10-53-43-843Z.jpg",
       "description": "Rice noodles with garlic shrimp sauce, pork, and egg"
     },
     {
@@ -522,7 +522,7 @@
       "price": 0.23,
       "category": "Tea",
       "brand": "Coffee Bean",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/cb3-2026-07-27T10-53-43-843Z.jpg",
       "description": "Full-bodied black tea blend from Assam, Ceylon and Kenya"
     },
     {
@@ -612,7 +612,7 @@
       "price": 0.39,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/vn1-2026-07-27T10-53-43-843Z.jpg",
       "description": "Phở bò với thịt bò tái, nước dùng hầm xương 24 giờ"
     },
     {
@@ -684,7 +684,7 @@
       "price": 0.44,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/vn23-2026-07-27T10-53-43-843Z.jpg",
       "description": "Bò kho mềm, cà rốt, sả, ăn với bánh mì hoặc bún"
     },
     {
@@ -729,7 +729,7 @@
       "price": 0.89,
       "category": "Hotpot",
       "brand": "Quán Việt",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/vn21-2026-07-27T10-53-43-843Z.jpg",
       "description": "Lẩu Thái chua cay — tôm, mực, cá, nấm, rau"
     },
     {
@@ -747,7 +747,7 @@
       "price": 0.23,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/vn24-2026-07-27T10-53-43-843Z.jpg",
       "description": "Cà phê phin Robusta với sữa đặc, served over ice"
     },
     {
@@ -756,7 +756,7 @@
       "price": 0.19,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
-      "image": "(uploaded-image-needs-url)",
+      "image": "/uploads/products/vn25-2026-07-27T10-53-43-843Z.jpg",
       "description": "Cà phê phin đen đậm đà, không sữa, served over ice"
     },
     {
