@@ -734,7 +734,7 @@ function PublishButton({ products }: { products: any[] }) {
   const [result, setResult] = useState<string | null>(null);
 
   const handlePublish = async () => {
-    if (!confirm(`Publish ${products.length} products to the live shop?\n\nThis will update coffeehouse-shop.vercel.app/shop for all visitors.`)) return;
+    if (!confirm(`Publish ${products.length} products to the live shop?\n\nThis will update thedailycup.vercel.app/shop for all visitors.`)) return;
     setPublishing(true);
     setResult(null);
     try {
@@ -750,10 +750,10 @@ function PublishButton({ products }: { products: any[] }) {
       });
       const data = await resp.json();
       if (data.success) {
-        setResult(`✅ Published! Deploying in ~30s. Commit: ${data.commit}`);
-      } else {
-        setResult(`❌ ${data.error}`);
-      }
+          setResult(`✅ Published to The Daily Cup. Deploying in about 30 seconds. Commit: ${data.commit}`);
+        } else {
+          setResult(`❌ ${data.error}`);
+        }
     } catch (err) {
       setResult(`❌ Connection error`);
     }
@@ -1200,7 +1200,7 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
   const publishToSite = async () => {
     const prods = JSON.parse(localStorage.getItem('thedailycup_products') || '[]');
     if (!prods.length) { alert('No products to publish'); return; }
-    if (!window.confirm(`Publish ${prods.length} products to live site?\n\nThis will update https://coffeehouse-shop.vercel.app/shop for all visitors.`)) return;
+    if (!window.confirm(`Publish ${prods.length} products to the live site?\n\nThis will update https://thedailycup.vercel.app/shop for all visitors.`)) return;
 
     setPublishing(true);
     setPublishStatus(null);
@@ -1209,10 +1209,10 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ products: prods }),
-      });
-      const data = await resp.json();
-      if (data.success) {
-        setPublishStatus('Published! Changes will be live in ~30 seconds.');
+        });
+        const data = await resp.json();
+        if (data.success) {
+        setPublishStatus('Published to The Daily Cup. Changes should be live in about 30 seconds.');
         localStorage.setItem('thedailycup_last_publish', new Date().toLocaleString());
       } else {
         setPublishStatus('Error: ' + (data.error || 'Unknown error'));
@@ -1234,7 +1234,7 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
           Publish to Live Site
         </h3>
         <p className="text-xs text-slate-500 mb-3">
-          Push your current products to <strong>coffeehouse-shop.vercel.app/shop</strong> so all visitors see the latest changes.
+          Push your current products to <strong>thedailycup.vercel.app/shop</strong> so all visitors see the latest changes.
         </p>
         <button onClick={publishToSite} disabled={publishing}
           className="btn-primary !bg-green-600 hover:!bg-green-700 !text-sm">
