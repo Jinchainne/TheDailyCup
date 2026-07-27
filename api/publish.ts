@@ -43,6 +43,31 @@ async function githubJson(url: string, init?: RequestInit) {
   return { resp, data };
 }
 
+async function fetchCurrentProductsFile() {
+  const getUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+  const { resp, data } = await githubJson(getUrl, { method: 'GET' });
+
+  let sha: string | undefined;
+  let productsById = new Map<string, { image?: string }>();
+
+  if (resp.ok) {
+    sha = data.sha;
+    try {
+      const decoded = Buffer.from(data.content, 'base64').toString('utf8');
+      const parsed = JSON.parse(decoded);
+      if (Array.isArray(parsed?.products)) {
+        productsById = new Map(
+          parsed.products.map((product: { id: string; image?: string }) => [product.id, product])
+        );
+      }
+    } catch {
+      // ignore parse errors and continue with empty map
+    }
+  }
+
+  return { getUrl, sha, productsById };
+}
+
 async function uploadImageAsset(product: PublishProduct, updatedAt: string): Promise<string> {
   const rawImage = typeof product.image === 'string' ? product.image : '';
   const parsed = parseDataUri(rawImage);
@@ -87,26 +112,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const updatedAt = new Date().toISOString();
-    // Get current file SHA (needed for update)
-    const getUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-    const { resp: getResp, data: fileData } = await githubJson(getUrl, { method: 'GET' });
-
-    let sha: string | undefined;
-    let existingProductsById = new Map<string, { image?: string }>();
-    if (getResp.ok) {
-      sha = fileData.sha;
-      try {
-        const decoded = Buffer.from(fileData.content, 'base64').toString('utf8');
-        const parsed = JSON.parse(decoded);
-        if (Array.isArray(parsed?.products)) {
-          existingProductsById = new Map(
-            parsed.products.map((product: { id: string; image?: string }) => [product.id, product])
-          );
-        }
-      } catch {
-        // keep publishing even if the previous file cannot be parsed
-      }
-    }
+    let { getUrl, sha, productsById: existingProductsById } = await fetchCurrentProductsFile();
 
     const normalizedProducts = await Promise.all(products.map(async (product: PublishProduct) => {
       const existing = existingProductsById.get(product.id);
@@ -129,6 +135,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         image: normalizedImage,
       };
     }));
+
+    // Uploading image files creates repo commits, so fetch the latest products.json SHA again
+    // before updating it to avoid "is at ... but expected ..." conflicts.
+    ({ getUrl, sha } = await fetchCurrentProductsFile());
 
     // Prepare the JSON content
     const content = JSON.stringify({
