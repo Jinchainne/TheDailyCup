@@ -4,6 +4,72 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO_OWNER = 'Jinchainne';
 const REPO_NAME = 'TheDailyCup';
 const FILE_PATH = 'public/data/products.json';
+const IMAGE_UPLOADS_DIR = 'public/uploads/products';
+
+type PublishProduct = {
+  id: string;
+  image?: string;
+  [key: string]: unknown;
+};
+
+function sanitizeName(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48) || 'product';
+}
+
+function parseDataUri(dataUri: string): { mime: string; content: string } | null {
+  const match = dataUri.match(/^data:([^;]+);base64,(.+)$/);
+  if (!match) return null;
+  return { mime: match[1], content: match[2] };
+}
+
+function getExtensionFromMime(mime: string): string {
+  if (mime === 'image/png') return 'png';
+  if (mime === 'image/webp') return 'webp';
+  if (mime === 'image/gif') return 'gif';
+  return 'jpg';
+}
+
+async function githubJson(url: string, init?: RequestInit) {
+  const resp = await fetch(url, {
+    ...init,
+    headers: {
+      'Authorization': `token ${GITHUB_TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+      ...(init?.headers || {}),
+    },
+  });
+  const data = await resp.json();
+  return { resp, data };
+}
+
+async function uploadImageAsset(product: PublishProduct, updatedAt: string): Promise<string> {
+  const rawImage = typeof product.image === 'string' ? product.image : '';
+  const parsed = parseDataUri(rawImage);
+  if (!parsed) return rawImage;
+
+  const extension = getExtensionFromMime(parsed.mime);
+  const stamp = updatedAt.replace(/[:.]/g, '-');
+  const assetName = `${sanitizeName(product.id || 'product')}-${stamp}.${extension}`;
+  const assetPath = `${IMAGE_UPLOADS_DIR}/${assetName}`;
+  const assetUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${assetPath}`;
+
+  const uploadPayload = {
+    message: `admin: upload image for ${product.id} - ${updatedAt}`,
+    content: parsed.content,
+  };
+
+  const { resp, data } = await githubJson(assetUrl, {
+    method: 'PUT',
+    body: JSON.stringify(uploadPayload),
+  });
+
+  if (!resp.ok) {
+    throw new Error(data.message || `Failed to upload image for ${product.id}`);
+  }
+
+  return `/uploads/products/${assetName}`;
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -23,17 +89,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const updatedAt = new Date().toISOString();
     // Get current file SHA (needed for update)
     const getUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-    const getResp = await fetch(getUrl, {
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json',
-      },
-    });
+    const { resp: getResp, data: fileData } = await githubJson(getUrl, { method: 'GET' });
 
     let sha: string | undefined;
     let existingProductsById = new Map<string, { image?: string }>();
     if (getResp.ok) {
-      const fileData = await getResp.json();
       sha = fileData.sha;
       try {
         const decoded = Buffer.from(fileData.content, 'base64').toString('utf8');
@@ -48,21 +108,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
-    const normalizedProducts = products.map((product: { id: string; image?: string; [key: string]: unknown }) => {
+    const normalizedProducts = await Promise.all(products.map(async (product: PublishProduct) => {
       const existing = existingProductsById.get(product.id);
       const image = typeof product.image === 'string' ? product.image : '';
       const shouldReuseExistingImage =
         !image ||
         image === '(uploaded-image-needs-url)' ||
-        image.startsWith('data:');
+        image.startsWith('data:') === false && image.startsWith('http') === false && image.startsWith('/') === false;
+
+      let normalizedImage = image;
+
+      if (image.startsWith('data:')) {
+        normalizedImage = await uploadImageAsset(product, updatedAt);
+      } else if (shouldReuseExistingImage) {
+        normalizedImage = existing?.image || image || 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop';
+      }
 
       return {
         ...product,
-        image: shouldReuseExistingImage
-          ? existing?.image || image || 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop'
-          : image,
+        image: normalizedImage,
       };
-    });
+    }));
 
     // Prepare the JSON content
     const content = JSON.stringify({
@@ -72,13 +138,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }, null, 2);
 
     // Commit the file
-    const putResp = await fetch(getUrl, {
+    const { resp: putResp, data: result } = await githubJson(getUrl, {
       method: 'PUT',
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify({
         message: `admin: update products (${products.length} items) - ${new Date().toISOString()}`,
         content: Buffer.from(content).toString('base64'),
@@ -87,16 +148,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     if (!putResp.ok) {
-      const err = await putResp.json();
-      return res.status(putResp.status).json({ error: err.message || 'GitHub API error' });
+      return res.status(putResp.status).json({ error: result.message || 'GitHub API error' });
     }
 
-    const result = await putResp.json();
     return res.status(200).json({
       success: true,
       message: `Published ${products.length} products. Vercel will auto-deploy in ~30 seconds.`,
       commit: result.commit?.sha?.slice(0, 7),
       updatedAt,
+      products: normalizedProducts,
     });
   } catch (err) {
     return res.status(500).json({ error: (err as Error).message });

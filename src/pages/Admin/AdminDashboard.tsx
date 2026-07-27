@@ -741,19 +741,14 @@ function PublishButton({ products }: { products: any[] }) {
     setPublishing(true);
     setResult(null);
     try {
-      // Filter out base64 images (too large for GitHub)
-      const cleanProducts = products.map(p => ({
-        ...p,
-        image: p.image?.startsWith('data:') ? '(uploaded-image-needs-url)' : p.image,
-      }));
       const resp = await fetch('/api/publish', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ products: cleanProducts }),
+        body: JSON.stringify({ products }),
       });
       const data = await resp.json();
       if (data.success) {
-          localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(cleanProducts));
+          localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(data.products || products));
           localStorage.setItem(PRODUCTS_DIRTY_STORAGE_KEY, 'false');
           if (data.updatedAt) {
             localStorage.setItem(PRODUCTS_SYNCED_AT_STORAGE_KEY, data.updatedAt);
@@ -1220,7 +1215,7 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
         });
         const data = await resp.json();
         if (data.success) {
-        localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(prods));
+        localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(data.products || prods));
         localStorage.setItem(PRODUCTS_DIRTY_STORAGE_KEY, 'false');
         if (data.updatedAt) {
           localStorage.setItem(PRODUCTS_SYNCED_AT_STORAGE_KEY, data.updatedAt);
