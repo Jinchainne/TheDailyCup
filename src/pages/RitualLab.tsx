@@ -33,7 +33,7 @@ export default function RitualLab() {
           </div>
           <h1 className="mt-4 text-3xl sm:text-5xl font-black leading-tight">The Daily Cup, rebuilt for Ritual.</h1>
           <p className="mt-3 text-sm sm:text-base text-slate-100 max-w-2xl">
-            {CHAIN_DESCRIPTION} This hub gives users one place to add the network, claim faucet funds, learn deployment flow, and play while the next block lands.
+            {CHAIN_DESCRIPTION} This hub gives users one place to add the network, claim faucet funds, learn deployment flow, and take a quick Ritual quiz while the next block lands.
           </p>
           <div className="mt-5 flex flex-wrap gap-3 text-sm">
             <a href={FAUCET_URL} target="_blank" rel="noreferrer" className="btn-primary !bg-white !text-slate-950 hover:!bg-orange-100">

@@ -71,7 +71,7 @@ export default function Layout() {
             </div>
           </div>
           <div className="mb-8">
-            <Suspense fallback={<WidgetLoader label="Loading Ritual Runner..." />}>
+            <Suspense fallback={<WidgetLoader label="Loading Ritual Quiz..." />}>
               <RitualDinoGame />
             </Suspense>
           </div>
