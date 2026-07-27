@@ -204,9 +204,9 @@ export default function AdminDashboard() {
                         <span>Ship: ${order.shippingFee.toFixed(2)}</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-sm font-extrabold">${order.total.toFixed(2)} USDC</span>
+                        <span className="text-sm font-extrabold">${order.total.toFixed(2)} RITUAL</span>
                         {order.txHash && (
-                          <a href={`https://testnet.arcscan.app/tx/${order.txHash}`} target="_blank" rel="noreferrer"
+                          <a href={`https://testnet.explorer.ritualfoundation.org/tx/${order.txHash}`} target="_blank" rel="noreferrer"
                             className="text-blue-500 hover:text-blue-700">
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>
@@ -910,7 +910,7 @@ function POSConfigTab() {
           <pre className="bg-slate-900 text-green-400 p-3 rounded-lg text-[11px] overflow-x-auto">{`{
   "event": "payment_received",
   "amount": 11.61,
-  "currency": "USDC",
+  "currency": "RITUAL",
   "merchant_id": "${config.merchantId || 'MERCHANT_ID'}",
   "tx_hash": "0xabc123...",
   "customer_wallet": "0x...",
@@ -1409,3 +1409,4 @@ function getCategoryRevenue(orders: any[]): [string, number][] {
   });
   return Object.entries(catMap).sort((a, b) => b[1] - a[1]).slice(0, 8);
 }
+

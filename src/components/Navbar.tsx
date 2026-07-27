@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { Bell, Coffee, Menu, X, ClipboardList, Shield, MapPin, ShoppingCart, MessageSquare, User, ChefHat } from 'lucide-react';
+import { Bell, Coffee, Menu, X, ClipboardList, Shield, MapPin, ShoppingCart, MessageSquare, User, ChefHat, Sparkles } from 'lucide-react';
 import WalletConnect from './WalletConnect';
 import { useShop } from '../hooks/useShop';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,7 @@ export default function Navbar() {
     { label: t('nav.feedback'), path: '/shop/feedback', icon: MessageSquare },
     { label: 'Kitchen', path: '/shop/kitchen', icon: ChefHat },
     { label: 'Profile', path: '/shop/profile', icon: User },
+    { label: 'Ritual Lab', path: '/ritual', icon: Sparkles },
     { label: t('nav.admin'), path: '/admin', icon: Shield },
   ];
 
@@ -37,8 +38,8 @@ export default function Navbar() {
           <NavLink to="/shop" className="flex items-center gap-2.5 flex-shrink-0">
             <img src="/logo.png" alt="Coffee House" className="w-9 h-9 rounded-xl object-cover shadow-md" />
             <div className="hidden sm:block">
-              <h1 className="text-sm font-extrabold text-slate-900 leading-tight tracking-tight">COFFEE HOUSE</h1>
-              <p className="text-[8px] text-slate-400 uppercase tracking-[0.2em]">The Coffee of the World</p>
+              <h1 className="text-sm font-extrabold text-slate-900 leading-tight tracking-tight">THE DAILY CUP</h1>
+              <p className="text-[8px] text-slate-400 uppercase tracking-[0.2em]">Powered by Ritual</p>
             </div>
           </NavLink>
 

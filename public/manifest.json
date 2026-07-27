@@ -1,7 +1,7 @@
 {
-  "name": "COFFEE HOUSE — The Coffee of the World",
-  "short_name": "COFFEE HOUSE",
-  "description": "Premium coffee shop. Order and pay with USDC on Arc Testnet.",
+  "name": "The Daily Cup — Powered by Ritual",
+  "short_name": "The Daily Cup",
+  "description": "Premium coffee shop. Order and pay with RITUAL on Ritual.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f0f4f8",
@@ -27,3 +27,5 @@
     }
   ]
 }
+
+

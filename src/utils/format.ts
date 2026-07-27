@@ -1,4 +1,4 @@
-export function formatCurrency(amount: number, currency: string = 'USDC'): string {
+export function formatCurrency(amount: number, currency: string = 'RITUAL'): string {
   return `${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${currency}`;
 }
 

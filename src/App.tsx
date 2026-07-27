@@ -21,6 +21,7 @@ import AdminLogin from './pages/Admin/AdminLogin';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import RevenueReport from './pages/Admin/RevenueReport';
 import { CustomerProvider } from './hooks/useCustomer';
+import RitualLab from './pages/RitualLab';
 
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ export default function App() {
                     <Route path="shop/feedback" element={<ShopFeedback />} />
                     <Route path="shop/profile" element={<CustomerProfile />} />
                     <Route path="shop/kitchen" element={<KitchenView />} />
+                    <Route path="ritual" element={<RitualLab />} />
                   </Route>
                   <Route path="/admin" element={<AdminLogin />} />
                   <Route path="/admin/dashboard" element={<AdminDashboard />} />

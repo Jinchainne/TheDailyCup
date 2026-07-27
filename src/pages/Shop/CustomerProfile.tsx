@@ -106,11 +106,11 @@ export default function CustomerProfile() {
                     }
                   </button>
                   <a
-                    href={`https://testnet.arcscan.app/address/${walletAddress}`}
+                    href={`https://testnet.explorer.ritualfoundation.app/address/${walletAddress}`}
                     target="_blank"
                     rel="noreferrer"
                     className="p-1 rounded-md hover:bg-slate-100 transition-colors"
-                    title="View on ArcScan"
+                    title="View on RitualScan"
                   >
                     <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
                   </a>
@@ -311,7 +311,7 @@ export default function CustomerProfile() {
                         <span className="text-sm font-extrabold text-slate-900">${order.total.toFixed(2)}</span>
                         {order.txHash && (
                           <a
-                            href={`https://testnet.arcscan.app/tx/${order.txHash}`}
+                            href={`https://testnet.explorer.ritualfoundation.app/tx/${order.txHash}`}
                             target="_blank"
                             rel="noreferrer"
                             className="text-blue-500 hover:text-blue-700"
@@ -380,3 +380,4 @@ export default function CustomerProfile() {
     </div>
   );
 }
+

@@ -54,7 +54,7 @@ export interface Order {
 
 export function generateOrderCode(): string {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let code = 'ARX-';
+  let code = 'RTL-';
   for (let i = 0; i < 5; i++) code += chars[Math.floor(Math.random() * chars.length)];
   return code;
 }

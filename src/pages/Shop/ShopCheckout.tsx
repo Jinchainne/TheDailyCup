@@ -5,6 +5,7 @@ import { useShop, MERCHANT_ADDRESS, generateOrderCode, type DeliveryAddress } fr
 import { useAgent } from '../../hooks/useAgent';
 import { useSendUSDC, useUSDCBalance } from '../../hooks/useOnChain';
 import { formatCurrency, shortenAddress } from '../../utils/format';
+import { CHAIN_ID, CURRENCY_SYMBOL } from '../../config/network';
 import WalletConnect from '../../components/WalletConnect';
 import { ArrowLeft, AlertCircle, Trash2, Plus, Minus, MapPin, Truck, QrCode, X, Tag } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
@@ -42,7 +43,7 @@ export default function ShopCheckout() {
   const insufficientBalance = grandTotal > balance;
 
   // Payment URI for QR code (EIP-681 format)
-  const paymentURI = `ethereum:${MERCHANT_ADDRESS}@5042002?value=${(grandTotal * 1e18).toFixed(0)}&gas=200000`;
+  const paymentURI = `ethereum:${MERCHANT_ADDRESS}@${CHAIN_ID}?value=${(grandTotal * 1e18).toFixed(0)}`;
 
   const copyAddress = () => {
     navigator.clipboard.writeText(MERCHANT_ADDRESS);
@@ -100,7 +101,7 @@ export default function ShopCheckout() {
         <div className="max-w-lg mx-auto px-4 py-8 text-center">
           <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-4" />
           <h3 className="text-lg font-bold text-slate-900 mb-2">Connect Wallet to Pay</h3>
-          <p className="text-sm text-slate-400 mb-4">Connect your wallet to pay with USDC on Arc Testnet</p>
+          <p className="text-sm text-slate-400 mb-4">Connect your wallet to pay with native {CURRENCY_SYMBOL} on Ritual</p>
           <WalletConnect />
         </div>
       </div>
@@ -115,7 +116,7 @@ export default function ShopCheckout() {
         </button>
 
         <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Checkout</h1>
-        <p className="text-sm text-slate-400 mb-6">Pay with USDC on Arc Testnet</p>
+        <p className="text-sm text-slate-400 mb-6">Pay with native {CURRENCY_SYMBOL} on Ritual testnet</p>
 
         {/* Step 1: Review */}
         {step === 'review' && (
@@ -245,7 +246,7 @@ export default function ShopCheckout() {
                 </div>
                 <div className="border-t border-slate-100 pt-2 mt-2 flex justify-between">
                   <span className="text-sm font-bold text-slate-900">Total</span>
-                  <span className="text-lg font-extrabold text-blue-600">${grandTotal.toFixed(2)} USDC</span>
+                  <span className="text-lg font-extrabold text-blue-600">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}</span>
                 </div>
               </div>
             </div>
@@ -253,7 +254,7 @@ export default function ShopCheckout() {
             {/* Balance */}
             <div className={`card p-3 ${insufficientBalance ? 'border-red-200 bg-red-50' : 'border-emerald-200 bg-emerald-50'}`}>
               <div className="flex justify-between text-sm">
-                <span className={insufficientBalance ? 'text-red-700' : 'text-emerald-700'}>Your USDC Balance</span>
+                <span className={insufficientBalance ? 'text-red-700' : 'text-emerald-700'}>Your {CURRENCY_SYMBOL} Balance</span>
                 <span className={`font-bold ${insufficientBalance ? 'text-red-700' : 'text-emerald-700'}`}>{formatCurrency(balance)}</span>
               </div>
               {insufficientBalance && <p className="text-xs text-red-600 mt-1">Insufficient balance. Need {formatCurrency(grandTotal - balance)} more.</p>}
@@ -291,11 +292,11 @@ export default function ShopCheckout() {
               <div className="mt-4 space-y-2">
                 <div className="flex items-center justify-between bg-white rounded-xl p-2.5">
                   <span className="text-xs text-slate-500">Amount</span>
-                  <span className="text-sm font-bold text-blue-600">${grandTotal.toFixed(2)} USDC</span>
+                  <span className="text-sm font-bold text-blue-600">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}</span>
                 </div>
                 <div className="flex items-center justify-between bg-white rounded-xl p-2.5">
                   <span className="text-xs text-slate-500">Network</span>
-                  <span className="text-xs font-semibold text-slate-700">Arc Testnet (5042002)</span>
+                  <span className="text-xs font-semibold text-slate-700">Ritual ({CHAIN_ID})</span>
                 </div>
                 <div className="flex items-center justify-between bg-white rounded-xl p-2.5">
                   <span className="text-xs text-slate-500">Merchant</span>
@@ -305,7 +306,7 @@ export default function ShopCheckout() {
                   </button>
                 </div>
               </div>
-              <p className="text-[10px] text-blue-500 mt-3">Only send ARC Testnet USDC to this address</p>
+              <p className="text-[10px] text-blue-500 mt-3">Only send Ritual {CURRENCY_SYMBOL} to this address</p>
             </div>
 
             {/* Divider */}
@@ -316,7 +317,7 @@ export default function ShopCheckout() {
             </div>
 
             <button onClick={handlePay} disabled={insufficientBalance || cartTotal <= 0} className="btn-primary w-full">
-              Pay ${grandTotal.toFixed(2)} USDC
+              Pay ${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}
             </button>
           </div>
         )}
@@ -335,7 +336,7 @@ export default function ShopCheckout() {
               {isConfirming && (
                 <div className="text-center">
                   <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-3" />
-                  <p className="text-sm font-bold text-blue-900">Confirming on Arc Testnet...</p>
+                  <p className="text-sm font-bold text-blue-900">Confirming on Ritual...</p>
                   <p className="text-xs text-blue-600 mt-1">Usually takes &lt;1 second</p>
                 </div>
               )}
@@ -395,8 +396,8 @@ export default function ShopCheckout() {
               </div>
 
               <div className="px-6 pb-2 text-center">
-                <p className="text-xs text-slate-400 mb-2">Send <span className="font-bold text-slate-900">${grandTotal.toFixed(2)} USDC</span> to:</p>
-                <p className="text-[11px] text-slate-400 mb-1">Only send <span className="font-semibold">ARC Testnet</span> assets to this address</p>
+                <p className="text-xs text-slate-400 mb-2">Send <span className="font-bold text-slate-900">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}</span> to:</p>
+                <p className="text-[11px] text-slate-400 mb-1">Only send <span className="font-semibold">Ritual</span> assets to this address</p>
               </div>
 
               <div className="px-6 pb-2">
@@ -413,8 +414,8 @@ export default function ShopCheckout() {
 
               <div className="px-6 pb-6">
                 <div className="bg-blue-50 rounded-xl p-3 text-center">
-                  <p className="text-xs font-bold text-blue-700">Network: Arc Testnet (Chain 5042002)</p>
-                  <p className="text-[10px] text-blue-500 mt-1">Token: USDC · Gas: ~$0.01</p>
+                  <p className="text-xs font-bold text-blue-700">Network: Ritual (Chain {CHAIN_ID})</p>
+                  <p className="text-[10px] text-blue-500 mt-1">Token: {CURRENCY_SYMBOL} · Gas paid in native Ritual</p>
                 </div>
               </div>
             </div>

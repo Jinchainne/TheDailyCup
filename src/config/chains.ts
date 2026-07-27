@@ -1,33 +1,38 @@
 import { defineChain } from 'viem';
+import {
+  CHAIN_ID,
+  CURRENCY_DECIMALS,
+  CURRENCY_NAME,
+  CURRENCY_SYMBOL,
+  EXPLORER_URL,
+  NETWORK_NAME,
+  RPC_HTTP_URL,
+  RPC_WS_URL,
+} from './network';
 
-export const arcTestnet = defineChain({
-  id: 5042002,
-  name: 'Arc Testnet',
+export const ritualTestnet = defineChain({
+  id: CHAIN_ID,
+  name: NETWORK_NAME,
   nativeCurrency: {
-    name: 'USDC',
-    symbol: 'USDC',
-    decimals: 18,
+    name: CURRENCY_NAME,
+    symbol: CURRENCY_SYMBOL,
+    decimals: CURRENCY_DECIMALS,
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.testnet.arc.network'],
-      webSocket: ['wss://rpc.testnet.arc.network'],
+      http: [RPC_HTTP_URL],
+      webSocket: [RPC_WS_URL],
     },
   },
   blockExplorers: {
     default: {
-      name: 'ArcScan',
-      url: 'https://testnet.arcscan.app',
+      name: 'Ritual Explorer',
+      url: EXPLORER_URL,
     },
   },
   testnet: true,
 });
 
-// Real contract addresses on Arc Testnet (from official docs)
-export const USDC_ADDRESS = '0x3600000000000000000000000000000000000000' as const;
-export const EURC_ADDRESS = '0x89B50855Aa3bE2F677cD6303Cec089B5F319D72a' as const;
-
-// ERC-20 ABI (balanceOf, transfer, decimals, symbol)
 export const ERC20_ABI = [
   {
     name: 'balanceOf',
@@ -46,38 +51,7 @@ export const ERC20_ABI = [
     ],
     outputs: [{ name: '', type: 'bool' }],
   },
-  {
-    name: 'decimals',
-    type: 'function',
-    stateMutability: 'view',
-    inputs: [],
-    outputs: [{ name: '', type: 'uint8' }],
-  },
-  {
-    name: 'symbol',
-    type: 'function',
-    stateMutability: 'view',
-    inputs: [],
-    outputs: [{ name: '', type: 'string' }],
-  },
-  {
-    name: 'approve',
-    type: 'function',
-    stateMutability: 'nonpayable',
-    inputs: [
-      { name: 'spender', type: 'address' },
-      { name: 'amount', type: 'uint256' },
-    ],
-    outputs: [{ name: '', type: 'bool' }],
-  },
-  {
-    name: 'allowance',
-    type: 'function',
-    stateMutability: 'view',
-    inputs: [
-      { name: 'owner', type: 'address' },
-      { name: 'spender', type: 'address' },
-    ],
-    outputs: [{ name: '', type: 'uint256' }],
-  },
 ] as const;
+
+export const USDC_ADDRESS = '0x0000000000000000000000000000000000000000' as const;
+export const EURC_ADDRESS = '0x0000000000000000000000000000000000000000' as const;

@@ -169,7 +169,7 @@ export default function OrderTracking() {
               </div>
               <div className="border-t border-slate-100 mt-3 pt-3 flex justify-between">
                 <span className="text-xs text-slate-500">Shipping: ${order.shippingFee.toFixed(2)}</span>
-                <span className="text-sm font-extrabold text-blue-600">${order.total.toFixed(2)} USDC</span>
+                <span className="text-sm font-extrabold text-blue-600">${order.total.toFixed(2)} RITUAL</span>
               </div>
             </div>
 
@@ -189,7 +189,7 @@ export default function OrderTracking() {
 
             {/* Transaction */}
             {order.txHash && (
-              <a href={`https://testnet.arcscan.app/tx/${order.txHash}`} target="_blank" rel="noreferrer"
+              <a href={`https://testnet.explorer.ritualfoundation.org/tx/${order.txHash}`} target="_blank" rel="noreferrer"
                 className="card p-3 flex items-center justify-between hover:bg-slate-50 transition-colors">
                 <div>
                   <p className="text-xs text-slate-400">Transaction</p>
@@ -203,7 +203,7 @@ export default function OrderTracking() {
             <div className="card p-4 bg-slate-50">
               <div className="flex justify-between">
                 <span className="text-sm font-bold text-slate-900">Total Paid</span>
-                <span className="text-lg font-extrabold text-blue-600">${order.total.toFixed(2)} USDC</span>
+                <span className="text-lg font-extrabold text-blue-600">${order.total.toFixed(2)} RITUAL</span>
               </div>
               <p className="text-xs text-slate-400 mt-1">Wallet: {order.customerWallet.slice(0, 10)}...{order.customerWallet.slice(-6)}</p>
             </div>
@@ -221,3 +221,5 @@ export default function OrderTracking() {
     </div>
   );
 }
+
+

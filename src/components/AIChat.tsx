@@ -41,7 +41,7 @@ export default function AIChat() {
           messages: [
             {
               role: 'system',
-              content: `You are a friendly AI assistant for Coffee House, a food and beverage ordering app that accepts USDC crypto payments on Arc Testnet. 
+              content: `You are a friendly AI assistant for Coffee House, a food and beverage ordering app that accepts RITUAL payments on Ritual. 
 
 Our menu includes:
 - Coffee: Espresso ($3.50), Americano ($4), Cappuccino ($5), Latte ($5.50), Mocha ($6), Cold Brew ($5), Caramel Macchiato ($6.25)
@@ -51,7 +51,7 @@ Our menu includes:
 - Drinks: Orange Juice ($4.50), Mango Smoothie ($6), Berry Blast ($6.50)
 - Desserts: Tiramisu ($6.50), Cheesecake ($5.50), Brownie ($4), Donut ($1.49)
 
-Payment: USDC on Arc Testnet (Chain ID 5042002). Delivery available with map-based address selection.
+Payment: RITUAL on Ritual (Chain ID 1979). Delivery available with map-based address selection.
 Keep responses short and helpful. Always suggest specific items with prices.`
             },
             ...messages.slice(-8), // last 8 messages for context
@@ -164,3 +164,5 @@ Keep responses short and helpful. Always suggest specific items with prices.`
     </>
   );
 }
+
+

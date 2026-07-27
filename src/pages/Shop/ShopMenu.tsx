@@ -200,8 +200,8 @@ export default function ShopMenu() {
           <div className="flex items-center gap-3">
             <img src="/logo.png" alt="" className="w-9 h-9 rounded-lg object-cover" />
             <div>
-              <h1 className="text-lg font-extrabold text-slate-900">COFFEE HOUSE</h1>
-              <p className="text-[9px] text-slate-400 uppercase tracking-[0.2em]">The Coffee of the World</p>
+              <h1 className="text-lg font-extrabold text-slate-900">THE DAILY CUP</h1>
+              <p className="text-[9px] text-slate-400 uppercase tracking-[0.2em]">Powered by Ritual</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -251,7 +251,7 @@ export default function ShopMenu() {
             <div className="p-4 border-t border-slate-100">
               <div className="flex justify-between mb-3">
                 <span className="text-sm">Total</span>
-                <span className="text-lg font-extrabold">${cartTotal.toFixed(2)} USDC</span>
+                <span className="text-lg font-extrabold">${cartTotal.toFixed(2)} RITUAL</span>
               </div>
               <button onClick={() => { setShowCart(false); navigate('/shop/delivery'); }} className="btn-primary w-full">Checkout</button>
             </div>
@@ -378,3 +378,5 @@ export default function ShopMenu() {
     </div>
   );
 }
+
+

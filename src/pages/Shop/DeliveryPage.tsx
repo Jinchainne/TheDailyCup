@@ -435,7 +435,7 @@ export default function DeliveryPage() {
             )}
             <div className="border-t border-slate-100 pt-2 flex justify-between">
               <span className="text-sm font-bold">Grand Total</span>
-              <span className="text-lg font-extrabold text-blue-600">${grandTotal.toFixed(2)} USDC</span>
+              <span className="text-lg font-extrabold text-blue-600">${grandTotal.toFixed(2)} RITUAL</span>
             </div>
           </div>
         </div>
@@ -447,3 +447,4 @@ export default function DeliveryPage() {
     </div>
   );
 }
+

@@ -125,13 +125,13 @@ export default function ShopOrders() {
                         </button>
                       )}
                       <div className="text-right">
-                        <span className="text-sm font-extrabold text-slate-900">${order.total.toFixed(2)} USDC</span>
+                        <span className="text-sm font-extrabold text-slate-900">${order.total.toFixed(2)} RITUAL</span>
                         {order.shippingFee > 0 && (
                           <p className="text-[10px] text-slate-400">incl. ${order.shippingFee.toFixed(2)} shipping</p>
                         )}
                       </div>
                       {order.txHash && (
-                        <a href={`https://testnet.arcscan.app/tx/${order.txHash}`} target="_blank" rel="noreferrer"
+                        <a href={`https://testnet.explorer.ritualfoundation.org/tx/${order.txHash}`} target="_blank" rel="noreferrer"
                           className="text-blue-500 hover:text-blue-700">
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
@@ -199,3 +199,5 @@ export default function ShopOrders() {
     </div>
   );
 }
+
+

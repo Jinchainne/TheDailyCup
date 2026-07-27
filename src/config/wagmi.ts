@@ -1,15 +1,16 @@
 import { http, createConfig } from 'wagmi';
 import { injected, coinbaseWallet } from 'wagmi/connectors';
-import { arcTestnet } from './chains';
+import { ritualTestnet } from './chains';
+import { RPC_HTTP_URL } from './network';
 
 export const config = createConfig({
-  chains: [arcTestnet],
+  chains: [ritualTestnet],
   connectors: [
     injected({ shimDisconnect: true }),
-    coinbaseWallet({ appName: 'Coffee House Shop' }),
+    coinbaseWallet({ appName: 'The Daily Cup Ritual' }),
   ],
   transports: {
-    [arcTestnet.id]: http('https://rpc.testnet.arc.network', {
+    [ritualTestnet.id]: http(RPC_HTTP_URL, {
       batch: { wait: 50 },
       retryCount: 3,
       retryDelay: 2000,
