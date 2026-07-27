@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useShop, type DeliveryAddress, calcShippingFeeFromConfig, getShippingConfig } from '../../hooks/useShop';
 import { ArrowLeft, MapPin, Navigation, Truck, Search, X, Loader2, Store, ChevronDown, ChevronUp } from 'lucide-react';
 import { STORE_LOCATIONS, type StoreLocation } from '../../data/storeLocations';
+import { formatCurrency } from '../../utils/format';
 
 const MAP_SCRIPT = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
 const MAP_CSS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
@@ -418,24 +419,24 @@ export default function DeliveryPage() {
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-slate-500">Items ({cartCount})</span>
-              <span className="font-semibold">${cartTotal.toFixed(2)}</span>
+              <span className="font-semibold">{formatCurrency(cartTotal)}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-slate-500 flex items-center gap-1"><Truck className="w-3 h-3" /> Shipping</span>
               {shippingFee === 0 ? (
                 <span className="font-semibold text-emerald-600">FREE</span>
               ) : (
-                <span className="font-semibold text-blue-600">${shippingFee.toFixed(2)}</span>
+                <span className="font-semibold text-blue-600">{formatCurrency(shippingFee)}</span>
               )}
             </div>
             {nearestStoreName && (
               <p className="text-[10px] text-slate-400">
-                Nearest store: {nearestStoreName} · {shippingFee === 0 ? 'Within free zone' : `${shippingConfig.freeRadiusKm}km free + $${shippingConfig.pricePerKm}/km`}
+                Nearest store: {nearestStoreName} · {shippingFee === 0 ? 'Within free zone' : `${shippingConfig.freeRadiusKm}km free + ${formatCurrency(shippingConfig.pricePerKm)}/km`}
               </p>
             )}
             <div className="border-t border-slate-100 pt-2 flex justify-between">
               <span className="text-sm font-bold">Grand Total</span>
-              <span className="text-lg font-extrabold text-blue-600">${grandTotal.toFixed(2)} RITUAL</span>
+              <span className="text-lg font-extrabold text-blue-600">{formatCurrency(grandTotal)}</span>
             </div>
           </div>
         </div>

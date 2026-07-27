@@ -1,11 +1,11 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-07-24T05:45:47.128Z",
+  "updatedAt": "2026-07-27T08:00:00.000Z",
   "products": [
     {
       "id": "sb1",
       "name": "Caffè Latte",
-      "price": 5.75,
+      "price": 0.35,
       "category": "Hot Coffee",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop",
@@ -15,7 +15,7 @@
     {
       "id": "sb2",
       "name": "Cappuccino",
-      "price": 5.45,
+      "price": 0.34,
       "category": "Hot Coffee",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=400&fit=crop",
@@ -24,7 +24,7 @@
     {
       "id": "sb3",
       "name": "Caramel Macchiato",
-      "price": 6.25,
+      "price": 0.38,
       "category": "Hot Coffee",
       "brand": "Starbucks",
       "image": "https://i.pinimg.com/736x/06/ed/b5/06edb5e88de8b3e7ef8ba18a7ef83d66.jpg",
@@ -33,7 +33,7 @@
     {
       "id": "sb4",
       "name": "Caffè Mocha",
-      "price": 5.95,
+      "price": 0.36,
       "category": "Hot Coffee",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400&h=400&fit=crop",
@@ -42,7 +42,7 @@
     {
       "id": "sb5",
       "name": "Flat White",
-      "price": 5.95,
+      "price": 0.36,
       "category": "Hot Coffee",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=400&h=400&fit=crop",
@@ -51,7 +51,7 @@
     {
       "id": "sb6",
       "name": "Blonde Vanilla Latte",
-      "price": 6.05,
+      "price": 0.37,
       "category": "Hot Coffee",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop",
@@ -60,7 +60,7 @@
     {
       "id": "sb7",
       "name": "Iced Brown Sugar Oatmilk Shaken Espresso",
-      "price": 6.75,
+      "price": 0.4,
       "category": "Cold Coffee",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400&h=400&fit=crop",
@@ -69,7 +69,7 @@
     {
       "id": "sb8",
       "name": "Cold Brew",
-      "price": 4.75,
+      "price": 0.3,
       "category": "Cold Coffee",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=400&fit=crop",
@@ -78,7 +78,7 @@
     {
       "id": "sb9",
       "name": "Iced Caramel Macchiato",
-      "price": 6.45,
+      "price": 0.39,
       "category": "Cold Coffee",
       "brand": "Starbucks",
       "image": "https://www.starbucks.co.nz/content/menu/0664253001647830363.jpg",
@@ -87,7 +87,7 @@
     {
       "id": "sb10",
       "name": "Mocha Frappuccino",
-      "price": 5.95,
+      "price": 0.36,
       "category": "Cold Coffee",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=400&fit=crop",
@@ -96,7 +96,7 @@
     {
       "id": "sb11",
       "name": "Matcha Latte",
-      "price": 5.75,
+      "price": 0.35,
       "category": "Tea",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=400&h=400&fit=crop",
@@ -105,7 +105,7 @@
     {
       "id": "sb12",
       "name": "Chai Latte",
-      "price": 5.45,
+      "price": 0.34,
       "category": "Tea",
       "brand": "Starbucks",
       "image": "https://cdn7.kiwilimon.com/recetaimagen/40439/960x640/53801.jpg.jpg",
@@ -114,7 +114,7 @@
     {
       "id": "sb13",
       "name": "Pineapple Passionfruit Refresher",
-      "price": 5.25,
+      "price": 0.33,
       "category": "Refreshers",
       "brand": "Starbucks",
       "image": "https://i.pinimg.com/736x/f3/36/34/f3363449fdf64548b7ed4877349a2223.jpg",
@@ -123,7 +123,7 @@
     {
       "id": "sb14",
       "name": "Butter Croissant",
-      "price": 3.75,
+      "price": 0.25,
       "category": "Bakery",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=400&h=400&fit=crop",
@@ -132,7 +132,7 @@
     {
       "id": "sb15",
       "name": "Chocolate Chip Cookie",
-      "price": 3.25,
+      "price": 0.22,
       "category": "Bakery",
       "brand": "Starbucks",
       "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=400&fit=crop",
@@ -141,7 +141,7 @@
     {
       "id": "mc1",
       "name": "Big Mac",
-      "price": 5.99,
+      "price": 0.36,
       "category": "Burgers",
       "brand": "McDonald's",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Big_Mac_hamburger.jpg/1280px-Big_Mac_hamburger.jpg",
@@ -150,7 +150,7 @@
     {
       "id": "mc2",
       "name": "Quarter Pounder with Cheese",
-      "price": 6.39,
+      "price": 0.39,
       "category": "Burgers",
       "brand": "McDonald's",
       "image": "https://static.wikia.nocookie.net/ronaldmcdonald/images/2/22/QuarterPounderCheeseDeluxe.jpg",
@@ -159,7 +159,7 @@
     {
       "id": "mc3",
       "name": "McChicken",
-      "price": 3.89,
+      "price": 0.25,
       "category": "Burgers",
       "brand": "McDonald's",
       "image": "https://i.pinimg.com/736x/93/c5/92/93c5922a35ffd3485c354cb9b849fb76.jpg",
@@ -168,7 +168,7 @@
     {
       "id": "mc4",
       "name": "Chicken McNuggets (10pc)",
-      "price": 5.99,
+      "price": 0.36,
       "category": "Chicken",
       "brand": "McDonald's",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/McDonalds-Chicken-McNuggets.jpg/1280px-McDonalds-Chicken-McNuggets.jpg",
@@ -177,7 +177,7 @@
     {
       "id": "mc5",
       "name": "World Famous Fries (Large)",
-      "price": 3.89,
+      "price": 0.25,
       "category": "Sides",
       "brand": "McDonald's",
       "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=400&fit=crop",
@@ -186,7 +186,7 @@
     {
       "id": "mc6",
       "name": "Egg McMuffin",
-      "price": 4.39,
+      "price": 0.28,
       "category": "Breakfast",
       "brand": "McDonald's",
       "image": "https://i.pinimg.com/736x/12/eb/90/12eb90051010fc5580b8bfdbb961d5e2.jpg",
@@ -195,7 +195,7 @@
     {
       "id": "mc7",
       "name": "Hotcakes",
-      "price": 4.19,
+      "price": 0.27,
       "category": "Breakfast",
       "brand": "McDonald's",
       "image": "(uploaded-image-needs-url)",
@@ -204,7 +204,7 @@
     {
       "id": "mc8",
       "name": "McFlurry with OREO",
-      "price": 4.39,
+      "price": 0.28,
       "category": "Desserts",
       "brand": "McDonald's",
       "image": "(uploaded-image-needs-url)",
@@ -213,7 +213,7 @@
     {
       "id": "mc9",
       "name": "Apple Pie",
-      "price": 1.99,
+      "price": 0.15,
       "category": "Desserts",
       "brand": "McDonald's",
       "image": "https://media.gettyimages.com/id/2180059955/photo/top-view-of-slice-of-traditional-european-apple-pie-with-topping-crumbles-called-streusel.jpg",
@@ -222,7 +222,7 @@
     {
       "id": "mc10",
       "name": "Coca-Cola (Large)",
-      "price": 2.19,
+      "price": 0.16,
       "category": "Drinks",
       "brand": "McDonald's",
       "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=400&fit=crop",
@@ -231,7 +231,7 @@
     {
       "id": "mc11",
       "name": "McCafé Iced Coffee",
-      "price": 2.99,
+      "price": 0.21,
       "category": "Cold Coffee",
       "brand": "McDonald's",
       "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=400&fit=crop",
@@ -240,7 +240,7 @@
     {
       "id": "mc12",
       "name": "Onion Rings",
-      "price": 3.29,
+      "price": 0.22,
       "category": "Sides",
       "brand": "McDonald's",
       "image": "(uploaded-image-needs-url)",
@@ -249,7 +249,7 @@
     {
       "id": "dk1",
       "name": "Original Blend Coffee",
-      "price": 2.59,
+      "price": 0.18,
       "category": "Hot Coffee",
       "brand": "Dunkin'",
       "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=400&fit=crop",
@@ -258,7 +258,7 @@
     {
       "id": "dk2",
       "name": "Caramel Iced Coffee",
-      "price": 3.59,
+      "price": 0.24,
       "category": "Cold Coffee",
       "brand": "Dunkin'",
       "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400&h=400&fit=crop",
@@ -267,7 +267,7 @@
     {
       "id": "dk3",
       "name": "Butter Pecan Iced Coffee",
-      "price": 3.59,
+      "price": 0.24,
       "category": "Cold Coffee",
       "brand": "Dunkin'",
       "image": "(uploaded-image-needs-url)",
@@ -276,7 +276,7 @@
     {
       "id": "dk4",
       "name": "Matcha Latte",
-      "price": 4.59,
+      "price": 0.29,
       "category": "Tea",
       "brand": "Dunkin'",
       "image": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=400&h=400&fit=crop",
@@ -285,7 +285,7 @@
     {
       "id": "dk5",
       "name": "Glazed Donut",
-      "price": 1.49,
+      "price": 0.13,
       "category": "Bakery",
       "brand": "Dunkin'",
       "image": "(uploaded-image-needs-url)",
@@ -294,7 +294,7 @@
     {
       "id": "dk6",
       "name": "Chocolate Frosted Donut",
-      "price": 1.69,
+      "price": 0.14,
       "category": "Bakery",
       "brand": "Dunkin'",
       "image": "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=400&fit=crop",
@@ -303,7 +303,7 @@
     {
       "id": "dk7",
       "name": "Bacon Egg & Cheese",
-      "price": 4.79,
+      "price": 0.3,
       "category": "Breakfast",
       "brand": "Dunkin'",
       "image": "https://i.pinimg.com/originals/7a/dc/11/7adc11022b7b2fc3e31108b00aee737b.jpg",
@@ -312,7 +312,7 @@
     {
       "id": "dk8",
       "name": "Blueberry Muffin",
-      "price": 2.59,
+      "price": 0.18,
       "category": "Bakery",
       "brand": "Dunkin'",
       "image": "https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=400&h=400&fit=crop",
@@ -321,7 +321,7 @@
     {
       "id": "dk9",
       "name": "Hash Browns",
-      "price": 1.69,
+      "price": 0.14,
       "category": "Sides",
       "brand": "Dunkin'",
       "image": "https://img.povar.ru/mobile/14/25/ff/60/kartofelnii_hashbraun-317630.jpg",
@@ -330,7 +330,7 @@
     {
       "id": "jb1",
       "name": "Chickenjoy (2pc)",
-      "price": 7.99,
+      "price": 0.47,
       "category": "Chicken",
       "brand": "Jollibee",
       "image": "https://www.sixsistersstuff.com/wp-content/uploads/2025/05/Crispy-Fried-Chicken.jpg",
@@ -339,7 +339,7 @@
     {
       "id": "jb2",
       "name": "Jolly Spaghetti",
-      "price": 5.49,
+      "price": 0.34,
       "category": "Pasta",
       "brand": "Jollibee",
       "image": "https://assets.bonappetit.com/photos/65569a687039e628a5be8dac/1:1/w_2560,c_limit/20231005-1223-HOWWEHOLIDAY-3112.jpg",
@@ -348,7 +348,7 @@
     {
       "id": "jb3",
       "name": "Yumburger",
-      "price": 2.99,
+      "price": 0.21,
       "category": "Burgers",
       "brand": "Jollibee",
       "image": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=400&fit=crop",
@@ -357,7 +357,7 @@
     {
       "id": "jb4",
       "name": "Chickenjoy Bucket (6pc)",
-      "price": 17.99,
+      "price": 1,
       "category": "Chicken",
       "brand": "Jollibee",
       "image": "(uploaded-image-needs-url)",
@@ -366,7 +366,7 @@
     {
       "id": "jb5",
       "name": "Palabok Fiesta",
-      "price": 6.49,
+      "price": 0.39,
       "category": "Pasta",
       "brand": "Jollibee",
       "image": "(uploaded-image-needs-url)",
@@ -375,7 +375,7 @@
     {
       "id": "jb6",
       "name": "Peach Mango Pie",
-      "price": 1.99,
+      "price": 0.15,
       "category": "Desserts",
       "brand": "Jollibee",
       "image": "https://marleysmenu.com/wp-content/uploads/2021/05/Peach-Mango-Pie-overhead-shot-of-slice.jpg",
@@ -384,7 +384,7 @@
     {
       "id": "jb7",
       "name": "Jolly Crispy Fries",
-      "price": 2.79,
+      "price": 0.19,
       "category": "Sides",
       "brand": "Jollibee",
       "image": "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=400&h=400&fit=crop",
@@ -393,7 +393,7 @@
     {
       "id": "ph1",
       "name": "Pepperoni Pizza (Personal)",
-      "price": 7.49,
+      "price": 0.44,
       "category": "Pizza",
       "brand": "Pizza Hut",
       "image": "https://i.pinimg.com/736x/51/c7/24/51c724d28c8154d93c9e3c8719b8f233.jpg",
@@ -402,7 +402,7 @@
     {
       "id": "ph2",
       "name": "Margherita Pizza (Personal)",
-      "price": 6.99,
+      "price": 0.42,
       "category": "Pizza",
       "brand": "Pizza Hut",
       "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=400&fit=crop",
@@ -411,7 +411,7 @@
     {
       "id": "ph3",
       "name": "Garlic Bread",
-      "price": 3.99,
+      "price": 0.26,
       "category": "Sides",
       "brand": "Pizza Hut",
       "image": "https://i.pinimg.com/736x/ac/61/a0/ac61a01ca04b5752faf8ef242308f5b5.jpg",
@@ -420,7 +420,7 @@
     {
       "id": "sw1",
       "name": "Italian B.M.T.",
-      "price": 7.49,
+      "price": 0.44,
       "category": "Sandwiches",
       "brand": "Subway",
       "image": "https://cdn.iportal.ru/news/longreads/72782213/images/tild6432-3731-4131-b165-343836353661__1_.png",
@@ -429,7 +429,7 @@
     {
       "id": "sw2",
       "name": "Turkey Breast Sub",
-      "price": 6.99,
+      "price": 0.42,
       "category": "Sandwiches",
       "brand": "Subway",
       "image": "https://cdn.thefreshmancook.com/wp-content/uploads/2024/07/Copy-of-Copy-of-Thefreshmancook-2024-07-18T015550.885.jpg",
@@ -438,7 +438,7 @@
     {
       "id": "sw3",
       "name": "Chicken Teriyaki Sub",
-      "price": 7.99,
+      "price": 0.47,
       "category": "Sandwiches",
       "brand": "Subway",
       "image": "https://i.pinimg.com/736x/4e/29/3d/4e293d27dae5d8c82c27fb1a6e89b60d.jpg",
@@ -447,7 +447,7 @@
     {
       "id": "sw4",
       "name": "Cookie (Chocolate Chip)",
-      "price": 1.29,
+      "price": 0.12,
       "category": "Bakery",
       "brand": "Subway",
       "image": "https://i.pinimg.com/736x/fb/66/68/fb66684a706084a33ba7effa556a0e0e.jpg",
@@ -456,7 +456,7 @@
     {
       "id": "ss1",
       "name": "ShackBurger",
-      "price": 7.79,
+      "price": 0.46,
       "category": "Burgers",
       "brand": "Shake Shack",
       "image": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=400&fit=crop",
@@ -465,7 +465,7 @@
     {
       "id": "ss2",
       "name": "Chicken Shack",
-      "price": 7.99,
+      "price": 0.47,
       "category": "Chicken",
       "brand": "Shake Shack",
       "image": "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=400&fit=crop",
@@ -474,7 +474,7 @@
     {
       "id": "ss3",
       "name": "Cheese Fries",
-      "price": 4.99,
+      "price": 0.31,
       "category": "Sides",
       "brand": "Shake Shack",
       "image": "https://upload.wikimedia.org/wikipedia/commons/0/03/Shake_shack_cheese_fries.jpg",
@@ -483,7 +483,7 @@
     {
       "id": "ss4",
       "name": "Vanilla Shake",
-      "price": 5.99,
+      "price": 0.36,
       "category": "Drinks",
       "brand": "Shake Shack",
       "image": "https://i.pinimg.com/736x/5d/38/12/5d3812da799e06b6a75bbd6a3b0cd5b5.jpg",
@@ -492,7 +492,7 @@
     {
       "id": "ss5",
       "name": "Chocolate Shake",
-      "price": 5.99,
+      "price": 0.36,
       "category": "Drinks",
       "brand": "Shake Shack",
       "image": "https://recipes.net/wp-content/uploads/2021/10/chocolate-milkshake-recipes.jpg",
@@ -501,7 +501,7 @@
     {
       "id": "cb1",
       "name": "Vanilla Latte",
-      "price": 5.75,
+      "price": 0.35,
       "category": "Hot Coffee",
       "brand": "Coffee Bean",
       "image": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400&h=400&fit=crop",
@@ -510,7 +510,7 @@
     {
       "id": "cb2",
       "name": "Ice Blended Mocha",
-      "price": 6.25,
+      "price": 0.38,
       "category": "Cold Coffee",
       "brand": "Coffee Bean",
       "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=400&fit=crop",
@@ -519,7 +519,7 @@
     {
       "id": "cb3",
       "name": "Black tea",
-      "price": 3.5,
+      "price": 0.23,
       "category": "Tea",
       "brand": "Coffee Bean",
       "image": "(uploaded-image-needs-url)",
@@ -528,7 +528,7 @@
     {
       "id": "cb4",
       "name": "Tiramisu",
-      "price": 6.5,
+      "price": 0.39,
       "category": "Desserts",
       "brand": "Coffee Bean",
       "image": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&h=400&fit=crop",
@@ -537,7 +537,7 @@
     {
       "id": "cb5",
       "name": "Cinnamon Roll",
-      "price": 4.25,
+      "price": 0.27,
       "category": "Bakery",
       "brand": "Coffee Bean",
       "image": "https://i.pinimg.com/736x/b7/3c/0d/b73c0dde3cdfa355cab0574af8f0a4e2.jpg",
@@ -546,7 +546,7 @@
     {
       "id": "js1",
       "name": "Fresh Orange Juice",
-      "price": 4.5,
+      "price": 0.29,
       "category": "Juice",
       "brand": "Fresh Bar",
       "image": "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=400&fit=crop",
@@ -555,7 +555,7 @@
     {
       "id": "js2",
       "name": "Mango Tropical Smoothie",
-      "price": 6,
+      "price": 0.36,
       "category": "Juice",
       "brand": "Fresh Bar",
       "image": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&h=400&fit=crop",
@@ -564,7 +564,7 @@
     {
       "id": "js3",
       "name": "Berry Antioxidant Blast",
-      "price": 6.5,
+      "price": 0.39,
       "category": "Juice",
       "brand": "Fresh Bar",
       "image": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=400&fit=crop",
@@ -573,7 +573,7 @@
     {
       "id": "js4",
       "name": "Green Detox Smoothie",
-      "price": 6.5,
+      "price": 0.39,
       "category": "Juice",
       "brand": "Fresh Bar",
       "image": "https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=400&h=400&fit=crop",
@@ -582,7 +582,7 @@
     {
       "id": "js5",
       "name": "Lemon Mint Cooler",
-      "price": 4,
+      "price": 0.26,
       "category": "Juice",
       "brand": "Fresh Bar",
       "image": "https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=400&h=400&fit=crop",
@@ -591,7 +591,7 @@
     {
       "id": "js6",
       "name": "Bubble Milk Tea",
-      "price": 5,
+      "price": 0.31,
       "category": "Tea",
       "brand": "Fresh Bar",
       "image": "https://images.unsplash.com/photo-1558857563-b371033873b8?w=400&h=400&fit=crop",
@@ -600,7 +600,7 @@
     {
       "id": "js7",
       "name": "Thai Iced Tea",
-      "price": 4.5,
+      "price": 0.29,
       "category": "Tea",
       "brand": "Fresh Bar",
       "image": "https://i.pinimg.com/736x/8a/17/33/8a17334f13ad2e94fe959f3b43113030.jpg",
@@ -609,7 +609,7 @@
     {
       "id": "vn1",
       "name": "Phở Bò Tái",
-      "price": 6.5,
+      "price": 0.39,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "(uploaded-image-needs-url)",
@@ -618,7 +618,7 @@
     {
       "id": "vn2",
       "name": "Phở Bò Chín",
-      "price": 6.5,
+      "price": 0.39,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "https://images.unsplash.com/photo-1576577445504-6af96477db52?w=400&h=400&fit=crop",
@@ -627,7 +627,7 @@
     {
       "id": "vn3",
       "name": "Phở Gà",
-      "price": 5.95,
+      "price": 0.36,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "https://i.pinimg.com/736x/9c/43/fa/9c43fa3321a2e4fc4d00e5edce461713.jpg",
@@ -636,7 +636,7 @@
     {
       "id": "vn4",
       "name": "Bún Bò Huế",
-      "price": 7.25,
+      "price": 0.43,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "https://s3-eu-west-1.amazonaws.com/tscmediumimages/2021/03/14/601e7e748b62b23b3e44d06f/1615766123-7999604ea26bc34b76-61597906.jpeg",
@@ -645,7 +645,7 @@
     {
       "id": "vn5",
       "name": "Bún Riêu Cua",
-      "price": 6.75,
+      "price": 0.4,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400&h=400&fit=crop",
@@ -654,7 +654,7 @@
     {
       "id": "vn6",
       "name": "Bún Chả Hà Nội",
-      "price": 7.5,
+      "price": 0.44,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "https://i.pinimg.com/736x/18/66/5e/18665ec9fd5f18f0d2f4bd9c433caef5.jpg",
@@ -663,7 +663,7 @@
     {
       "id": "vn7",
       "name": "Bún Đậu Mắm Tôm",
-      "price": 7.95,
+      "price": 0.47,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "https://i.pinimg.com/474x/71/1e/4b/711e4b4c402be172a9d06df5acedbc03.jpg",
@@ -672,7 +672,7 @@
     {
       "id": "vn8",
       "name": "Bánh Canh Cua",
-      "price": 6.95,
+      "price": 0.42,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&h=400&fit=crop",
@@ -681,7 +681,7 @@
     {
       "id": "vn23",
       "name": "Bò Kho",
-      "price": 7.5,
+      "price": 0.44,
       "category": "Pho & Noodles",
       "brand": "Phở Việt",
       "image": "(uploaded-image-needs-url)",
@@ -690,7 +690,7 @@
     {
       "id": "vn9",
       "name": "Cơm Tấm Sườn Nướng",
-      "price": 7.5,
+      "price": 0.44,
       "category": "Rice",
       "brand": "Cơm Việt",
       "image": "https://i.pinimg.com/736x/16/65/ef/1665efab31e1490abb0bf93fe5b51e80.jpg",
@@ -699,7 +699,7 @@
     {
       "id": "vn10",
       "name": "Cơm Gà Hội An",
-      "price": 6.95,
+      "price": 0.42,
       "category": "Rice",
       "brand": "Cơm Việt",
       "image": "https://i.pinimg.com/736x/98/ab/2b/98ab2bd374887074f162ae5a503f638f.jpg",
@@ -708,7 +708,7 @@
     {
       "id": "vn11",
       "name": "Cơm Chiên Dương Châu",
-      "price": 6.5,
+      "price": 0.39,
       "category": "Rice",
       "brand": "Cơm Việt",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Chinese_fried_rice_by_stu_spivack_in_Cleveland%2C_OH.jpg/1280px-Chinese_fried_rice_by_stu_spivack_in_Cleveland%2C_OH.jpg",
@@ -717,7 +717,7 @@
     {
       "id": "vn12",
       "name": "Cơm Sườn Bì Chả",
-      "price": 8.25,
+      "price": 0.48,
       "category": "Rice",
       "brand": "Cơm Việt",
       "image": "https://i.pinimg.com/736x/0f/c5/13/0fc51309dc5c31bdcfff8ad6edde3467.jpg",
@@ -726,7 +726,7 @@
     {
       "id": "vn21",
       "name": "Lẩu Thái",
-      "price": 15.95,
+      "price": 0.89,
       "category": "Hotpot",
       "brand": "Quán Việt",
       "image": "(uploaded-image-needs-url)",
@@ -735,7 +735,7 @@
     {
       "id": "vn22",
       "name": "Lẩu Bò Nhúng Dấm",
-      "price": 14.5,
+      "price": 0.82,
       "category": "Hotpot",
       "brand": "Quán Việt",
       "image": "https://i.pinimg.com/736x/ff/c3/43/ffc3437ec341096b524cdaee975aab05.jpg",
@@ -744,7 +744,7 @@
     {
       "id": "vn24",
       "name": "Cà Phê Sữa Đá",
-      "price": 3.5,
+      "price": 0.23,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
       "image": "(uploaded-image-needs-url)",
@@ -753,7 +753,7 @@
     {
       "id": "vn25",
       "name": "Cà Phê Đen Đá",
-      "price": 2.75,
+      "price": 0.19,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
       "image": "(uploaded-image-needs-url)",
@@ -762,7 +762,7 @@
     {
       "id": "vn26",
       "name": "Bạc Xỉu",
-      "price": 3.75,
+      "price": 0.25,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
       "image": "https://i.pinimg.com/736x/6b/a8/0b/6ba80bd900b87d1e6538f776e6dc124c.jpg",
@@ -771,7 +771,7 @@
     {
       "id": "vn27",
       "name": "Trà Đá",
-      "price": 1,
+      "price": 0.1,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
       "image": "https://1phutsaigon.vn/wp-content/uploads/2023/11/dia-chi-tra-chanh-gia-tay-o-sai-gon-2.jpg",
@@ -780,7 +780,7 @@
     {
       "id": "vn28",
       "name": "Sinh Tố Bơ",
-      "price": 4.5,
+      "price": 0.29,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
       "image": "https://img.povar.ru/mobile/79/35/52/23/smuzi_s_avokado_i_shpinatom-582426.jpg",
@@ -789,7 +789,7 @@
     {
       "id": "vn29",
       "name": "Chè Ba Màu",
-      "price": 3.5,
+      "price": 0.23,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
       "image": "https://static.vinwonders.com/production/vietnamese-three-color-dessert-banner.jpg",
@@ -798,7 +798,7 @@
     {
       "id": "vn30",
       "name": "Nước Mía",
-      "price": 2,
+      "price": 0.15,
       "category": "Viet Drinks",
       "brand": "Cà Phê Việt",
       "image": "https://www.awesomecuisine.com/wp-content/uploads/2018/06/sugar_cane_juice.jpg",
@@ -807,7 +807,7 @@
     {
       "id": "vn31",
       "name": "Chè Đậu Đỏ",
-      "price": 3,
+      "price": 0.21,
       "category": "Viet Desserts",
       "brand": "Quán Việt",
       "image": "https://i.pinimg.com/originals/4f/1f/c8/4f1fc81b01efb6440bedd9f2f967da88.jpg",
@@ -816,7 +816,7 @@
     {
       "id": "vn32",
       "name": "Bánh Flan (Caramen)",
-      "price": 2.5,
+      "price": 0.18,
       "category": "Viet Desserts",
       "brand": "Quán Việt",
       "image": "https://i.pinimg.com/736x/06/b5/43/06b543c35ea7a3393f7c0f89728d106a.jpg",
@@ -825,7 +825,7 @@
     {
       "id": "vn33",
       "name": "Kem Chuoi",
-      "price": 2.75,
+      "price": 0.19,
       "category": "Viet Desserts",
       "brand": "Quan Viet",
       "image": "https://i.pinimg.com/736x/ac/07/1c/ac071c420967a304c4c2f07a326cd610.jpg",

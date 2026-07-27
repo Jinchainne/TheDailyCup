@@ -40,25 +40,31 @@ interface SocialCtx {
 }
 
 const SocialContext = createContext<SocialCtx | null>(null);
+const WISHLIST_STORAGE_KEY = 'thedailycup_wishlist';
+const LEGACY_WISHLIST_STORAGE_KEY = 'coffeehouse_wishlist';
+const COMMENTS_STORAGE_KEY = 'thedailycup_comments';
+const LEGACY_COMMENTS_STORAGE_KEY = 'coffeehouse_comments';
+const ORDER_LOGS_STORAGE_KEY = 'thedailycup_orderlogs';
+const LEGACY_ORDER_LOGS_STORAGE_KEY = 'coffeehouse_orderlogs';
 
 export function SocialProvider({ children }: { children: ReactNode }) {
   const [wishlist, setWishlist] = useState<string[]>(() => {
     try {
-      const saved = localStorage.getItem('coffeehouse_wishlist');
+      const saved = localStorage.getItem(WISHLIST_STORAGE_KEY) || localStorage.getItem(LEGACY_WISHLIST_STORAGE_KEY);
       return saved ? JSON.parse(saved) : [];
     } catch { return []; }
   });
 
   const [comments, setComments] = useState<Comment[]>(() => {
     try {
-      const saved = localStorage.getItem('coffeehouse_comments');
+      const saved = localStorage.getItem(COMMENTS_STORAGE_KEY) || localStorage.getItem(LEGACY_COMMENTS_STORAGE_KEY);
       return saved ? JSON.parse(saved) : getDefaultComments();
     } catch { return getDefaultComments(); }
   });
 
   const [orderLogs, setOrderLogs] = useState<OrderLog[]>(() => {
     try {
-      const saved = localStorage.getItem('coffeehouse_orderlogs');
+      const saved = localStorage.getItem(ORDER_LOGS_STORAGE_KEY) || localStorage.getItem(LEGACY_ORDER_LOGS_STORAGE_KEY);
       return saved ? JSON.parse(saved) : getDefaultLogs();
     } catch { return getDefaultLogs(); }
   });
@@ -67,7 +73,7 @@ export function SocialProvider({ children }: { children: ReactNode }) {
     setWishlist(prev => {
       const exists = prev.includes(productId);
       const updated = exists ? prev.filter(id => id !== productId) : [...prev, productId];
-      localStorage.setItem('coffeehouse_wishlist', JSON.stringify(updated));
+      localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(updated));
       return updated;
     });
   }, []);
@@ -83,7 +89,7 @@ export function SocialProvider({ children }: { children: ReactNode }) {
     };
     setComments(prev => {
       const updated = [comment, ...prev];
-      localStorage.setItem('coffeehouse_comments', JSON.stringify(updated));
+      localStorage.setItem(COMMENTS_STORAGE_KEY, JSON.stringify(updated));
       return updated;
     });
   }, []);
@@ -102,7 +108,7 @@ export function SocialProvider({ children }: { children: ReactNode }) {
     const entry: OrderLog = { ...log, id: `LOG-${Date.now().toString(36)}`, timestamp: Date.now() };
     setOrderLogs(prev => {
       const updated = [entry, ...prev];
-      localStorage.setItem('coffeehouse_orderlogs', JSON.stringify(updated));
+      localStorage.setItem(ORDER_LOGS_STORAGE_KEY, JSON.stringify(updated));
       return updated;
     });
   }, []);

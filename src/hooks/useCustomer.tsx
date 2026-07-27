@@ -58,11 +58,12 @@ interface CustomerCtx {
 
 const CustomerContext = createContext<CustomerCtx | null>(null);
 
-const STORAGE_KEY = 'coffeehouse_customers';
+const STORAGE_KEY = 'thedailycup_customers';
+const LEGACY_STORAGE_KEY = 'coffeehouse_customers';
 
 function loadCustomers(): Record<string, CustomerProfile> {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
     return saved ? JSON.parse(saved) : {};
   } catch {
     return {};
@@ -123,7 +124,7 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
     const totalSpent = walletOrders
       .filter(o => o.status !== 'cancelled' && o.status !== 'refunded')
       .reduce((sum, o) => sum + o.total, 0);
-    // 1 loyalty point per $1 spent
+    // 1 loyalty point per 1 RITUAL spent
     const loyaltyPoints = Math.floor(totalSpent);
 
     if (customers[key]) {

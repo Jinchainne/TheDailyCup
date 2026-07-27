@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useShop } from '../../hooks/useShop';
 import { Search, Package, Clock, Check, ChefHat, Truck, XCircle, MapPin, ExternalLink, Copy } from 'lucide-react';
+import { formatCurrency } from '../../utils/format';
 
 const STATUS_STEPS = [
   { key: 'confirmed', label: 'Confirmed', icon: Check, color: 'emerald' },
@@ -60,7 +61,7 @@ export default function OrderTracking() {
                 value={code}
                 onChange={e => { setCode(e.target.value.toUpperCase()); setError(''); }}
                 onKeyDown={e => { if (e.key === 'Enter') handleSearch(); }}
-                placeholder="Enter code (e.g. ARX-K7M2P)"
+                placeholder="Enter code (e.g. TDC-K7M2P)"
                 className="pl-10 w-full font-mono"
               />
             </div>
@@ -161,15 +162,15 @@ export default function OrderTracking() {
                     <img src={item.product.image} alt={item.product.name} className="w-10 h-10 rounded-lg object-cover" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-slate-900 truncate">{item.product.name}</p>
-                      <p className="text-xs text-slate-400">×{item.quantity} · ${item.product.price.toFixed(2)} each</p>
+                      <p className="text-xs text-slate-400">×{item.quantity} · {formatCurrency(item.unitPrice || item.product.price)} each</p>
                     </div>
-                    <span className="text-sm font-bold">${(item.product.price * item.quantity).toFixed(2)}</span>
+                    <span className="text-sm font-bold">{formatCurrency((item.unitPrice || item.product.price) * item.quantity)}</span>
                   </div>
                 ))}
               </div>
               <div className="border-t border-slate-100 mt-3 pt-3 flex justify-between">
-                <span className="text-xs text-slate-500">Shipping: ${order.shippingFee.toFixed(2)}</span>
-                <span className="text-sm font-extrabold text-blue-600">${order.total.toFixed(2)} RITUAL</span>
+                <span className="text-xs text-slate-500">Shipping: {formatCurrency(order.shippingFee)}</span>
+                <span className="text-sm font-extrabold text-blue-600">{formatCurrency(order.total)}</span>
               </div>
             </div>
 
@@ -203,7 +204,7 @@ export default function OrderTracking() {
             <div className="card p-4 bg-slate-50">
               <div className="flex justify-between">
                 <span className="text-sm font-bold text-slate-900">Total Paid</span>
-                <span className="text-lg font-extrabold text-blue-600">${order.total.toFixed(2)} RITUAL</span>
+                <span className="text-lg font-extrabold text-blue-600">{formatCurrency(order.total)}</span>
               </div>
               <p className="text-xs text-slate-400 mt-1">Wallet: {order.customerWallet.slice(0, 10)}...{order.customerWallet.slice(-6)}</p>
             </div>

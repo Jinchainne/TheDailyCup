@@ -26,7 +26,7 @@ export default function ShopCheckout() {
   const [promoMsg, setPromoMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const [delivery, setDelivery] = useState<DeliveryAddress | null>(null);
-  const [shippingFee, setShippingFee] = useState(1.5);
+  const [shippingFee, setShippingFee] = useState(0.08);
 
   useEffect(() => {
     try {
@@ -156,7 +156,7 @@ export default function ShopCheckout() {
                       <div className="flex items-center gap-1.5 mt-0.5">
                         {item.selectedSize && <span className="text-[10px] px-1.5 py-0.5 bg-slate-100 rounded text-slate-500">{item.selectedSize}</span>}
                         {item.selectedTemp && <span className="text-[10px] px-1.5 py-0.5 bg-slate-100 rounded text-slate-500">{item.selectedTemp}</span>}
-                        <span className="text-xs text-slate-400">${(item.unitPrice || item.product.price).toFixed(2)} each</span>
+                        <span className="text-xs text-slate-400">{formatCurrency(item.unitPrice || item.product.price)} each</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -168,7 +168,7 @@ export default function ShopCheckout() {
                         <Plus className="w-3 h-3 text-blue-600" />
                       </button>
                     </div>
-                    <span className="text-sm font-bold text-slate-900 w-16 text-right">${((item.unitPrice || item.product.price) * item.quantity).toFixed(2)}</span>
+                    <span className="text-sm font-bold text-slate-900 w-20 text-right">{formatCurrency((item.unitPrice || item.product.price) * item.quantity)}</span>
                     <button onClick={() => removeFromCart(item.product.id)} className="text-slate-300 hover:text-red-500">
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -226,27 +226,27 @@ export default function ShopCheckout() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Subtotal</span>
-                  <span className="font-semibold">${cartTotal.toFixed(2)}</span>
+                  <span className="font-semibold">{formatCurrency(cartTotal)}</span>
                 </div>
                 {effectiveDiscount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-500 flex items-center gap-1"><Tag className="w-3 h-3" /> Discount ({promoCode})</span>
-                    <span className="text-emerald-600 font-semibold">-${effectiveDiscount.toFixed(2)}</span>
+                    <span className="text-emerald-600 font-semibold">-{formatCurrency(effectiveDiscount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500 flex items-center gap-1"><Truck className="w-3 h-3" /> Shipping</span>
                   <span className={`font-semibold ${effectiveShipping === 0 ? 'text-emerald-600' : 'text-blue-600'}`}>
-                    {effectiveShipping === 0 ? 'FREE' : `$${effectiveShipping.toFixed(2)}`}
+                    {effectiveShipping === 0 ? 'FREE' : formatCurrency(effectiveShipping)}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Network Fee</span>
-                  <span className="text-emerald-600 font-semibold">~$0.01</span>
+                  <span className="text-emerald-600 font-semibold">~0.01 {CURRENCY_SYMBOL}</span>
                 </div>
                 <div className="border-t border-slate-100 pt-2 mt-2 flex justify-between">
                   <span className="text-sm font-bold text-slate-900">Total</span>
-                  <span className="text-lg font-extrabold text-blue-600">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}</span>
+                  <span className="text-lg font-extrabold text-blue-600">{formatCurrency(grandTotal)}</span>
                 </div>
               </div>
             </div>
@@ -292,7 +292,7 @@ export default function ShopCheckout() {
               <div className="mt-4 space-y-2">
                 <div className="flex items-center justify-between bg-white rounded-xl p-2.5">
                   <span className="text-xs text-slate-500">Amount</span>
-                  <span className="text-sm font-bold text-blue-600">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}</span>
+                  <span className="text-sm font-bold text-blue-600">{formatCurrency(grandTotal)}</span>
                 </div>
                 <div className="flex items-center justify-between bg-white rounded-xl p-2.5">
                   <span className="text-xs text-slate-500">Network</span>
@@ -317,7 +317,7 @@ export default function ShopCheckout() {
             </div>
 
             <button onClick={handlePay} disabled={insufficientBalance || cartTotal <= 0} className="btn-primary w-full">
-              Pay ${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}
+              Pay {formatCurrency(grandTotal)}
             </button>
           </div>
         )}
@@ -396,7 +396,7 @@ export default function ShopCheckout() {
               </div>
 
               <div className="px-6 pb-2 text-center">
-                <p className="text-xs text-slate-400 mb-2">Send <span className="font-bold text-slate-900">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}</span> to:</p>
+                <p className="text-xs text-slate-400 mb-2">Send <span className="font-bold text-slate-900">{formatCurrency(grandTotal)}</span> to:</p>
                 <p className="text-[11px] text-slate-400 mb-1">Only send <span className="font-semibold">Ritual</span> assets to this address</p>
               </div>
 

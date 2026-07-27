@@ -73,7 +73,7 @@ export default function POSCheckout() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const [delivery, setDelivery] = useState<DeliveryAddress | null>(null);
-  const [shippingFee, setShippingFee] = useState(1.5);
+  const [shippingFee, setShippingFee] = useState(0.08);
   const effectiveShipping = promoCode === 'FREESHIP' ? 0 : shippingFee;
   const effectiveDiscount = promoCode === 'FREESHIP' ? 0 : promoDiscount;
   const grandTotal = cartTotal - effectiveDiscount + effectiveShipping;
@@ -254,7 +254,7 @@ export default function POSCheckout() {
                         <span className="text-xs text-slate-400">x{item.quantity}</span>
                       </div>
                     </div>
-                    <span className="text-sm font-bold">${((item.unitPrice || item.product.price) * item.quantity).toFixed(2)}</span>
+                    <span className="text-sm font-bold">{formatCurrency((item.unitPrice || item.product.price) * item.quantity)}</span>
                   </div>
                 ))}
               </div>
@@ -302,23 +302,23 @@ export default function POSCheckout() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Subtotal</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+                  <span>{formatCurrency(cartTotal)}</span>
                 </div>
                 {effectiveDiscount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-500 flex items-center gap-1"><Tag className="w-3 h-3" /> Discount ({promoCode})</span>
-                    <span className="text-emerald-600">-${effectiveDiscount.toFixed(2)}</span>
+                    <span className="text-emerald-600">-{formatCurrency(effectiveDiscount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500 flex items-center gap-1"><Truck className="w-3 h-3" /> Shipping</span>
                   <span className={effectiveShipping === 0 ? 'text-emerald-600' : 'text-blue-600'}>
-                    {effectiveShipping === 0 ? 'FREE' : `$${effectiveShipping.toFixed(2)}`}
+                    {effectiveShipping === 0 ? 'FREE' : formatCurrency(effectiveShipping)}
                   </span>
                 </div>
                 <div className="border-t border-slate-100 pt-2 flex justify-between">
                   <span className="font-bold">Total</span>
-                  <span className="text-xl font-extrabold text-blue-600">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}</span>
+                  <span className="text-xl font-extrabold text-blue-600">{formatCurrency(grandTotal)}</span>
                 </div>
               </div>
             </div>
@@ -336,7 +336,7 @@ export default function POSCheckout() {
             {isConnected ? (
               <div className="space-y-3">
                 <button onClick={handleWalletPay} disabled={grandTotal > balance} className="btn-primary w-full h-14 text-lg">
-                  <Wallet className="w-5 h-5" /> Pay ${grandTotal.toFixed(2)} {CURRENCY_SYMBOL} from Wallet
+                  <Wallet className="w-5 h-5" /> Pay {formatCurrency(grandTotal)} from Wallet
                 </button>
                 <button onClick={startPayment} className="btn-secondary w-full h-12">
                   <QrCode className="w-4 h-4" /> Or Scan QR Code to Pay
@@ -369,7 +369,7 @@ export default function POSCheckout() {
               </div>
 
               <div className="mt-6">
-                <p className="text-4xl font-extrabold text-slate-900">${grandTotal.toFixed(2)}</p>
+                <p className="text-4xl font-extrabold text-slate-900">{formatCurrency(grandTotal)}</p>
                 <p className="text-sm text-slate-400">{CURRENCY_SYMBOL} on Ritual</p>
               </div>
 
@@ -401,7 +401,7 @@ export default function POSCheckout() {
                     <Check className="w-8 h-8 text-emerald-600" />
                   </div>
                   <p className="text-lg font-extrabold text-emerald-900">Payment Confirmed!</p>
-                  <p className="text-sm text-emerald-600">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL} received</p>
+                  <p className="text-sm text-emerald-600">{formatCurrency(grandTotal)} received</p>
                 </>
               )}
               {paymentStatus === 'timeout' && (
@@ -429,7 +429,7 @@ export default function POSCheckout() {
                   <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-3" />
                   <p className="text-sm font-bold text-blue-900">Waiting for wallet...</p>
                   <p className="text-xs text-blue-600 mt-1">Confirm the {CURRENCY_SYMBOL} transfer in your wallet</p>
-                  <p className="text-lg font-extrabold text-slate-900 mt-3">${grandTotal.toFixed(2)} {CURRENCY_SYMBOL}</p>
+                  <p className="text-lg font-extrabold text-slate-900 mt-3">{formatCurrency(grandTotal)}</p>
                 </div>
               )}
               {sendError && (

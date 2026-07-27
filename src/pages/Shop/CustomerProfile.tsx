@@ -8,6 +8,7 @@ import {
   X, RotateCcw, MapPin, Receipt
 } from 'lucide-react';
 import PaymentReceipt from '../../components/PaymentReceipt';
+import { formatCurrency } from '../../utils/format';
 
 const TIER_ICONS = { Bronze: Shield, Silver: Star, Gold: Crown };
 const TIER_COLORS: Record<string, { gradient: string; text: string; bg: string; border: string; ring: string }> = {
@@ -131,7 +132,7 @@ export default function CustomerProfile() {
                 <p className="text-[10px] text-slate-400 font-medium">Orders</p>
               </div>
               <div className="bg-slate-50 rounded-xl p-3 text-center">
-                <p className="text-lg font-extrabold text-slate-900">${(customer?.totalSpent ?? 0).toFixed(2)}</p>
+                <p className="text-lg font-extrabold text-slate-900">{formatCurrency(customer?.totalSpent ?? 0)}</p>
                 <p className="text-[10px] text-slate-400 font-medium">Total Spent</p>
               </div>
               <div className="bg-slate-50 rounded-xl p-3 text-center">
@@ -275,7 +276,7 @@ export default function CustomerProfile() {
                           <span className="flex-1 text-xs text-slate-700 truncate">{item.product.name}</span>
                           <span className="text-[10px] text-slate-400">×{item.quantity}</span>
                           <span className="text-xs font-semibold text-slate-900">
-                            ${((item.unitPrice || item.product.price) * item.quantity).toFixed(2)}
+                            {formatCurrency((item.unitPrice || item.product.price) * item.quantity)}
                           </span>
                         </div>
                       ))}
@@ -308,7 +309,7 @@ export default function CustomerProfile() {
                             <Receipt className="w-3 h-3" /> Receipt
                           </button>
                         )}
-                        <span className="text-sm font-extrabold text-slate-900">${order.total.toFixed(2)}</span>
+                        <span className="text-sm font-extrabold text-slate-900">{formatCurrency(order.total)}</span>
                         {order.txHash && (
                           <a
                             href={`https://testnet.explorer.ritualfoundation.app/tx/${order.txHash}`}

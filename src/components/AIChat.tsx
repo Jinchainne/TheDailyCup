@@ -33,16 +33,11 @@ export default function AIChat() {
           role: 'system',
           content: `You are a friendly AI assistant for The Daily Cup, a food and beverage app that accepts RITUAL payments on Ritual.
 
-Our menu includes:
-- Coffee: Espresso ($3.50), Americano ($4), Cappuccino ($5), Latte ($5.50), Mocha ($6), Cold Brew ($5), Caramel Macchiato ($6.25)
-- Tea: Green Tea ($3), Earl Grey ($3.50), Matcha Latte ($5.50), Chai Latte ($5.45), Bubble Tea ($5)
-- Food: Big Mac ($5.99), Quarter Pounder ($6.39), Chicken McNuggets ($5.99), ShackBurger ($7.79)
-- Vietnamese: Pho Bo ($6.50), Bun Bo Hue ($7.25), Bun Rieu ($6.75), Com Tam ($7.50), Lau Thai ($15.95)
-- Drinks: Orange Juice ($4.50), Mango Smoothie ($6), Berry Blast ($6.50)
-- Desserts: Tiramisu ($6.50), Cheesecake ($5.50), Brownie ($4), Donut ($1.49)
+Our menu includes coffee, tea, burgers, pizza, Vietnamese dishes, desserts, and juice.
+Menu prices now range from 0.10 to 1.00 RITUAL depending on the item, with simple drinks and bakery items at the low end and premium platters or hotpot at the high end.
 
 Payment: RITUAL on Ritual Testnet (Chain ID 1979). Delivery is available with map-based address selection.
-Keep responses short and helpful. Always suggest specific items with prices.`
+Keep responses short and helpful. Always suggest specific items with prices in RITUAL.`
         },
         ...messages.slice(-8),
         { role: 'user', content: userMsg }

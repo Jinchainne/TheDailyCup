@@ -4,6 +4,7 @@ import { useShop } from '../../hooks/useShop';
 import { useSocial } from '../../hooks/useSocial';
 import { useAccount } from 'wagmi';
 import { ShoppingBag, Plus, Minus, Search, ShoppingCart, X, Heart, Star, Clock } from 'lucide-react';
+import { formatCurrency } from '../../utils/format';
 
 const CATEGORY_LIST = [
   { name: 'All', icon: '🍽️' },
@@ -109,7 +110,7 @@ function ProductCard({ product, cartItem, onAdd, onRemove, onRecentlyViewed }: a
                     : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
                 }`}
               >
-                {size.label}{size.priceAdd > 0 ? ` +$${size.priceAdd.toFixed(2)}` : ''}
+                {size.label}{size.priceAdd > 0 ? ` +${formatCurrency(size.priceAdd)}` : ''}
               </button>
             ))}
           </div>
@@ -145,7 +146,7 @@ function ProductCard({ product, cartItem, onAdd, onRemove, onRecentlyViewed }: a
           </div>
         )}
         <div className="flex items-center justify-between">
-          <span className="text-base font-extrabold text-red-600">${displayPrice.toFixed(2)}</span>
+          <span className="text-base font-extrabold text-red-600">{formatCurrency(displayPrice)}</span>
           {cartItem ? (
             <div className="flex items-center gap-1">
               <button onClick={(e) => { e.stopPropagation(); onRemove(product.id); }}
@@ -239,9 +240,9 @@ export default function ShopMenu() {
                       {item.selectedSize && <span className="text-slate-400"> ({item.selectedSize})</span>}
                       {item.selectedTemp && <span className="text-slate-400"> · {item.selectedTemp}</span>}
                     </p>
-                    <p className="text-[11px] text-slate-400">${(item.unitPrice || item.product.price).toFixed(2)} x {item.quantity}</p>
+                    <p className="text-[11px] text-slate-400">{formatCurrency(item.unitPrice || item.product.price)} x {item.quantity}</p>
                   </div>
-                  <span className="text-xs font-bold">${((item.unitPrice || item.product.price) * item.quantity).toFixed(2)}</span>
+                  <span className="text-xs font-bold">{formatCurrency((item.unitPrice || item.product.price) * item.quantity)}</span>
                   <button onClick={() => removeFromCart(item.product.id)} className="text-slate-300 hover:text-red-500">
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -251,7 +252,7 @@ export default function ShopMenu() {
             <div className="p-4 border-t border-slate-100">
               <div className="flex justify-between mb-3">
                 <span className="text-sm">Total</span>
-                <span className="text-lg font-extrabold">${cartTotal.toFixed(2)} RITUAL</span>
+                <span className="text-lg font-extrabold">{formatCurrency(cartTotal)}</span>
               </div>
               <button onClick={() => { setShowCart(false); navigate('/shop/delivery'); }} className="btn-primary w-full">Checkout</button>
             </div>
@@ -292,12 +293,12 @@ export default function ShopMenu() {
                       {item.selectedSize && <span className="text-slate-400"> ({item.selectedSize})</span>}
                     </span>
                     <span className="text-slate-400 ml-2">x{item.quantity}</span>
-                    <span className="font-bold ml-2">${((item.unitPrice || item.product.price) * item.quantity).toFixed(2)}</span>
+                    <span className="font-bold ml-2">{formatCurrency((item.unitPrice || item.product.price) * item.quantity)}</span>
                   </div>
                 ))}
                 <div className="border-t border-slate-200 mt-2 pt-2 flex justify-between">
                   <span className="text-xs font-medium">Total</span>
-                  <span className="text-sm font-extrabold text-amber-700">${cartTotal.toFixed(2)}</span>
+                  <span className="text-sm font-extrabold text-amber-700">{formatCurrency(cartTotal)}</span>
                 </div>
                 <button onClick={() => navigate('/shop/delivery')} className="w-full bg-slate-900 text-white text-xs font-bold py-2 rounded-lg mt-2 hover:bg-slate-800">Checkout</button>
               </div>
@@ -371,7 +372,7 @@ export default function ShopMenu() {
           <button onClick={() => navigate('/shop/delivery')}
             className="w-full bg-slate-900 text-white h-12 rounded-xl flex items-center justify-between px-5 font-bold text-sm">
             <span className="flex items-center gap-2"><ShoppingCart className="w-4 h-4" /> {cartCount} items</span>
-            <span>${cartTotal.toFixed(2)} - Checkout</span>
+            <span>{formatCurrency(cartTotal)} - Checkout</span>
           </button>
         </div>
       )}

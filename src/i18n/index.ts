@@ -243,11 +243,12 @@ const translations: Translations = {
   },
 };
 
-const STORAGE_KEY = 'coffeehouse_lang';
+const STORAGE_KEY = 'thedailycup_lang';
+const LEGACY_STORAGE_KEY = 'coffeehouse_lang';
 
 function getStoredLang(): LangCode {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
     if (stored && LANGUAGES.find(l => l.code === stored)) return stored as LangCode;
   } catch {}
   return 'en';

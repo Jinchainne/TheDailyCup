@@ -66,6 +66,10 @@ interface AgentCtx {
 }
 
 const AgentContext = createContext<AgentCtx | null>(null);
+const AGENTS_STORAGE_KEY = 'thedailycup_agents';
+const LEGACY_AGENTS_STORAGE_KEY = 'coffeehouse_agents';
+const NANO_STORAGE_KEY = 'thedailycup_nano';
+const LEGACY_NANO_STORAGE_KEY = 'coffeehouse_nano';
 
 // Demo data so dashboard shows real activity on first load
 function getDefaultAgents(): Agent[] {
@@ -155,7 +159,7 @@ function getDefaultNanoPayments(): NanoPayment[] {
 export function AgentProvider({ children }: { children: ReactNode }) {
   const [agents, setAgents] = useState<Agent[]>(() => {
     try {
-      const saved = localStorage.getItem('coffeehouse_agents');
+      const saved = localStorage.getItem(AGENTS_STORAGE_KEY) || localStorage.getItem(LEGACY_AGENTS_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         return parsed.length > 0 ? parsed : getDefaultAgents();
@@ -166,7 +170,7 @@ export function AgentProvider({ children }: { children: ReactNode }) {
 
   const [nanoPayments, setNanoPayments] = useState<NanoPayment[]>(() => {
     try {
-      const saved = localStorage.getItem('coffeehouse_nano');
+      const saved = localStorage.getItem(NANO_STORAGE_KEY) || localStorage.getItem(LEGACY_NANO_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         return parsed.length > 0 ? parsed : getDefaultNanoPayments();
@@ -177,7 +181,7 @@ export function AgentProvider({ children }: { children: ReactNode }) {
 
   const saveAgents = (updated: Agent[]) => {
     setAgents(updated);
-    localStorage.setItem('coffeehouse_agents', JSON.stringify(updated));
+    localStorage.setItem(AGENTS_STORAGE_KEY, JSON.stringify(updated));
   };
 
   const addDecision = useCallback((agentId: string, decision: Omit<AgentDecision, 'id' | 'timestamp'>) => {
@@ -206,7 +210,7 @@ export function AgentProvider({ children }: { children: ReactNode }) {
     };
     setNanoPayments(prev => {
       const updated = [payment, ...prev];
-      localStorage.setItem('coffeehouse_nano', JSON.stringify(updated));
+      localStorage.setItem(NANO_STORAGE_KEY, JSON.stringify(updated));
       return updated;
     });
     addTransaction({ from, to, amount, currency: 'RITUAL', type: 'nanopayment', description: service, status: 'confirmed' });

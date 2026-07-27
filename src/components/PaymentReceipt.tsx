@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { MERCHANT_ADDRESS } from '../hooks/useShop';
 import type { Order } from '../hooks/useShop';
 import { CHAIN_ID, CURRENCY_SYMBOL, EXPLORER_URL } from '../config/network';
+import { formatCurrency } from '../utils/format';
 
 interface Props {
   order: Order;
@@ -21,7 +22,7 @@ export default function PaymentReceipt({ order, txHash, onClose, onTrack }: Prop
     setTimeout(() => setCopied(''), 2000);
   };
 
-  const subtotal = order.items.reduce((s, i) => s + i.product.price * i.quantity, 0);
+  const subtotal = order.items.reduce((s, i) => s + (i.unitPrice || i.product.price) * i.quantity, 0);
   const date = new Date(order.timestamp);
   const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   const timeStr = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -83,8 +84,8 @@ export default function PaymentReceipt({ order, txHash, onClose, onTrack }: Prop
                   <tr key={idx} className="border-b border-slate-50 last:border-0">
                     <td className="py-2 text-slate-800 font-medium">{item.product.name}</td>
                     <td className="py-2 text-center text-slate-600">{item.quantity}</td>
-                    <td className="py-2 text-right text-slate-500">${item.product.price.toFixed(2)}</td>
-                    <td className="py-2 text-right font-semibold text-slate-900">${(item.product.price * item.quantity).toFixed(2)}</td>
+                    <td className="py-2 text-right text-slate-500">{formatCurrency(item.unitPrice || item.product.price)}</td>
+                    <td className="py-2 text-right font-semibold text-slate-900">{formatCurrency((item.unitPrice || item.product.price) * item.quantity)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -95,12 +96,12 @@ export default function PaymentReceipt({ order, txHash, onClose, onTrack }: Prop
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between">
                 <span className="text-slate-400">Subtotal</span>
-                <span className="text-slate-700">${subtotal.toFixed(2)}</span>
+                <span className="text-slate-700">{formatCurrency(subtotal)}</span>
               </div>
               {order.shippingFee > 0 && (
                 <div className="flex justify-between">
                   <span className="text-slate-400">Shipping</span>
-                  <span className="text-slate-700">${order.shippingFee.toFixed(2)}</span>
+                  <span className="text-slate-700">{formatCurrency(order.shippingFee)}</span>
                 </div>
               )}
               <div className="flex justify-between">
@@ -109,7 +110,7 @@ export default function PaymentReceipt({ order, txHash, onClose, onTrack }: Prop
               </div>
               <div className="border-t border-slate-200 pt-2 mt-2 flex justify-between">
                 <span className="text-sm font-bold text-slate-900">Total Paid</span>
-                <span className="text-lg font-extrabold text-emerald-600">${order.total.toFixed(2)} {CURRENCY_SYMBOL}</span>
+                <span className="text-lg font-extrabold text-emerald-600">{formatCurrency(order.total)}</span>
               </div>
             </div>
           </div>

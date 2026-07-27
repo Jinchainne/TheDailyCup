@@ -19,8 +19,10 @@ export interface POSLog {
   txHash?: string;
 }
 
-const CONFIG_KEY = 'coffeehouse_pos_config';
-const LOGS_KEY = 'coffeehouse_pos_logs';
+const CONFIG_KEY = 'thedailycup_pos_config';
+const LEGACY_CONFIG_KEY = 'coffeehouse_pos_config';
+const LOGS_KEY = 'thedailycup_pos_logs';
+const LEGACY_LOGS_KEY = 'coffeehouse_pos_logs';
 const MAX_LOGS = 200;
 
 const defaultConfig: POSConfig = {
@@ -35,7 +37,7 @@ const defaultConfig: POSConfig = {
 
 export function getPOSConfig(): POSConfig {
   try {
-    const raw = localStorage.getItem(CONFIG_KEY);
+    const raw = localStorage.getItem(CONFIG_KEY) || localStorage.getItem(LEGACY_CONFIG_KEY);
     if (raw) {
       return { ...defaultConfig, ...JSON.parse(raw) };
     }
@@ -80,7 +82,7 @@ export async function testConnection(
 
 export function getPOSLogs(): POSLog[] {
   try {
-    const raw = localStorage.getItem(LOGS_KEY);
+    const raw = localStorage.getItem(LOGS_KEY) || localStorage.getItem(LEGACY_LOGS_KEY);
     if (raw) {
       return JSON.parse(raw) as POSLog[];
     }

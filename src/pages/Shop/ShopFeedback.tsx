@@ -88,7 +88,7 @@ export default function ShopFeedback() {
                 className="w-full h-12 px-4 rounded-lg border border-slate-200 text-sm font-medium bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-100 outline-none">
                 <option value="">-- Choose a product --</option>
                 {products.map(p => (
-                  <option key={p.id} value={p.id}>{p.name} (${p.price.toFixed(2)})</option>
+                  <option key={p.id} value={p.id}>{p.name} ({p.price.toFixed(2)} RITUAL)</option>
                 ))}
               </select>
             </div>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useShop } from '../../hooks/useShop';
 import { ExternalLink, Clock, Check, X, ShoppingBag, Coffee, MapPin, Truck, Package, ChefHat, Receipt, RotateCcw } from 'lucide-react';
 import PaymentReceipt from '../../components/PaymentReceipt';
+import { formatCurrency } from '../../utils/format';
 
 export default function ShopOrders() {
   const navigate = useNavigate();
@@ -72,7 +73,7 @@ export default function ShopOrders() {
                           </div>
                         </div>
                         <span className="text-xs text-slate-400">×{item.quantity}</span>
-                        <span className="text-xs font-semibold">${((item.unitPrice || item.product.price) * item.quantity).toFixed(2)}</span>
+                        <span className="text-xs font-semibold">{formatCurrency((item.unitPrice || item.product.price) * item.quantity)}</span>
                       </div>
                     ))}
                   </div>
@@ -125,9 +126,9 @@ export default function ShopOrders() {
                         </button>
                       )}
                       <div className="text-right">
-                        <span className="text-sm font-extrabold text-slate-900">${order.total.toFixed(2)} RITUAL</span>
+                        <span className="text-sm font-extrabold text-slate-900">{formatCurrency(order.total)}</span>
                         {order.shippingFee > 0 && (
-                          <p className="text-[10px] text-slate-400">incl. ${order.shippingFee.toFixed(2)} shipping</p>
+                          <p className="text-[10px] text-slate-400">incl. {formatCurrency(order.shippingFee)} shipping</p>
                         )}
                       </div>
                       {order.txHash && (
