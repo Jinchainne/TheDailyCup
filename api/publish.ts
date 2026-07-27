@@ -45,6 +45,10 @@ async function githubJson(url: string, init?: RequestInit) {
 
 async function fetchCurrentProductsFile() {
   const getUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+  return fetchRepoFile(getUrl);
+}
+
+async function fetchRepoFile(getUrl: string) {
   const { resp, data } = await githubJson(getUrl, { method: 'GET' });
 
   let sha: string | undefined;
@@ -68,7 +72,7 @@ async function fetchCurrentProductsFile() {
   return { getUrl, sha, productsById };
 }
 
-async function uploadImageAsset(product: PublishProduct, updatedAt: string): Promise<string> {
+async function uploadImageAsset(product: PublishProduct, updatedAt: string, maxAttempts = 3): Promise<string> {
   const rawImage = typeof product.image === 'string' ? product.image : '';
   const parsed = parseDataUri(rawImage);
   if (!parsed) return rawImage;
@@ -78,22 +82,39 @@ async function uploadImageAsset(product: PublishProduct, updatedAt: string): Pro
   const assetName = `${sanitizeName(product.id || 'product')}-${stamp}.${extension}`;
   const assetPath = `${IMAGE_UPLOADS_DIR}/${assetName}`;
   const assetUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${assetPath}`;
+  let lastError = `Failed to upload image for ${product.id}`;
 
-  const uploadPayload = {
-    message: `admin: upload image for ${product.id} - ${updatedAt}`,
-    content: parsed.content,
-  };
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const { sha } = await fetchRepoFile(assetUrl);
+    const uploadPayload = {
+      message: `admin: upload image for ${product.id} - ${updatedAt}`,
+      content: parsed.content,
+      ...(sha ? { sha } : {}),
+    };
 
-  const { resp, data } = await githubJson(assetUrl, {
-    method: 'PUT',
-    body: JSON.stringify(uploadPayload),
-  });
+    const { resp, data } = await githubJson(assetUrl, {
+      method: 'PUT',
+      body: JSON.stringify(uploadPayload),
+    });
 
-  if (!resp.ok) {
-    throw new Error(data.message || `Failed to upload image for ${product.id}`);
+    if (resp.ok) {
+      return `/uploads/products/${assetName}`;
+    }
+
+    lastError = data.message || `Failed to upload image for ${product.id}`;
+    const shouldRetry =
+      resp.status === 409 ||
+      /expected/i.test(lastError) ||
+      /sha/i.test(lastError);
+
+    if (!shouldRetry || attempt === maxAttempts) {
+      throw new Error(lastError);
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 400 * attempt));
   }
 
-  return `/uploads/products/${assetName}`;
+  throw new Error(lastError);
 }
 
 async function updateProductsFile(
@@ -159,7 +180,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const updatedAt = new Date().toISOString();
     let { getUrl, sha, productsById: existingProductsById } = await fetchCurrentProductsFile();
 
-    const normalizedProducts = await Promise.all(products.map(async (product: PublishProduct) => {
+    const normalizedProducts: PublishProduct[] = [];
+
+    for (const product of products as PublishProduct[]) {
       const existing = existingProductsById.get(product.id);
       const image = typeof product.image === 'string' ? product.image : '';
       const shouldReuseExistingImage =
@@ -175,11 +198,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         normalizedImage = existing?.image || image || 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop';
       }
 
-      return {
+      normalizedProducts.push({
         ...product,
         image: normalizedImage,
-      };
-    }));
+      });
+    }
 
     // Uploading image files creates repo commits, so fetch the latest products.json SHA again
     // before updating it to avoid "is at ... but expected ..." conflicts.
