@@ -86,7 +86,7 @@ export default function AdminLogin() {
               <Coffee className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-white font-extrabold text-xl">Coffee House</h2>
+              <h2 className="text-white font-extrabold text-xl">The Daily Cup</h2>
               <p className="text-blue-300 text-xs">Admin Panel</p>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function AdminLogin() {
             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center">
               <Coffee className="w-5 h-5 text-white" />
             </div>
-            <h2 className="font-extrabold text-slate-900 text-lg">Coffee House Admin</h2>
+            <h2 className="font-extrabold text-slate-900 text-lg">The Daily Cup Admin</h2>
           </div>
 
           <h2 className="text-2xl font-extrabold text-slate-900 mb-1">Welcome back</h2>
@@ -230,3 +230,4 @@ export default function AdminLogin() {
     </div>
   );
 }
+

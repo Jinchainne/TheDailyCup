@@ -493,3 +493,4 @@ export function useShop() {
   if (!ctx) throw new Error('useShop must be used within ShopProvider');
   return ctx;
 }
+

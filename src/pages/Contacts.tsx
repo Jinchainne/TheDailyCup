@@ -69,7 +69,7 @@ export default function Contacts() {
             <div className="p-12 text-center">
               <UserPlus className="w-10 h-10 text-slate-200 mx-auto mb-3" />
               <p className="text-sm text-slate-400">No contacts yet</p>
-              <p className="text-xs text-slate-300 mt-1">Add contacts to quickly send USDC</p>
+              <p className="text-xs text-slate-300 mt-1">Add contacts to quickly send RITUAL</p>
             </div>
           ) : filtered.map(c => (
             <div key={c.id} className="flex items-center gap-3 p-4 hover:bg-slate-50 transition-colors">
@@ -96,3 +96,4 @@ export default function Contacts() {
     </div>
   );
 }
+

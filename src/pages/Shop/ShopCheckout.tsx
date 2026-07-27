@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 import { useShop, MERCHANT_ADDRESS, generateOrderCode, type DeliveryAddress } from '../../hooks/useShop';
 import { useAgent } from '../../hooks/useAgent';
-import { useSendUSDC, useUSDCBalance } from '../../hooks/useOnChain';
+import { useSendRitual, useRitualBalance } from '../../hooks/useOnChain';
 import { formatCurrency, shortenAddress } from '../../utils/format';
 import { CHAIN_ID, CURRENCY_SYMBOL } from '../../config/network';
 import WalletConnect from '../../components/WalletConnect';
@@ -15,8 +15,8 @@ export default function ShopCheckout() {
   const { isConnected, address: walletAddress } = useAccount();
   const navigate = useNavigate();
   const { cart, cartTotal, cartCount, updateQuantity, removeFromCart, clearCart, saveOrder, updateOrderStatus, orders, promoCode, promoDiscount, applyPromo, removePromo } = useShop();
-  const { balance } = useUSDCBalance();
-  const { send, hash, isPending, isConfirming, isSuccess, error: sendError } = useSendUSDC();
+  const { balance } = useRitualBalance();
+  const { send, hash, isPending, isConfirming, isSuccess, error: sendError } = useSendRitual();
   const { processOrder, dispatchDelivery } = useAgent();
   const [step, setStep] = useState<'review' | 'pay' | 'done'>('review');
   const [orderId, setOrderId] = useState('');
@@ -425,3 +425,5 @@ export default function ShopCheckout() {
     </div>
   );
 }
+
+

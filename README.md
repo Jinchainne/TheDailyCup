@@ -34,5 +34,6 @@ npm run preview
 
 ## Notes
 
-- The checkout flow now uses native Ritual settlement instead of the older Arc/USDC setup.
+- The checkout flow now uses native Ritual settlement instead of the older Arc/RITUAL setup.
 - Some legacy internal helper modules still keep older naming for compatibility, but the main storefront flow, onboarding, wallet UX, and Ritual Lab are aligned with Ritual.
+

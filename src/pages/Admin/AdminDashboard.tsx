@@ -72,7 +72,7 @@ export default function AdminDashboard() {
             </div>
             <div>
               <h1 className="text-lg font-bold">Admin Panel</h1>
-              <p className="text-xs text-slate-400">Coffee House Management</p>
+              <p className="text-xs text-slate-400">The Daily Cup Management</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -1114,7 +1114,7 @@ function ShippingSettingsTab() {
         <p className="text-sm text-slate-700 font-mono">
           if distance {'>'} {config.freeRadiusKm}km → min(${config.maxFee}, (distance - {config.freeRadiusKm}) × ${config.pricePerKm})
         </p>
-        <p className="text-[10px] text-slate-400 mt-2">Distance calculated from customer to nearest COFFEE HOUSE store (63 locations nationwide)</p>
+        <p className="text-[10px] text-slate-400 mt-2">Distance calculated from customer to nearest THE DAILY CUP store (63 locations nationwide)</p>
       </div>
     </div>
   );
@@ -1131,7 +1131,7 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
     const backup = {
       version: '1.0',
       exportedAt: new Date().toISOString(),
-      shopName: 'Coffee House',
+      shopName: 'The Daily Cup',
       products: JSON.parse(localStorage.getItem('arcbank_products') || '[]'),
       orders: JSON.parse(localStorage.getItem('arcbank_orders') || '[]'),
       finances: JSON.parse(localStorage.getItem('arcbank_finances') || '[]'),
@@ -1409,4 +1409,5 @@ function getCategoryRevenue(orders: any[]): [string, number][] {
   });
   return Object.entries(catMap).sort((a, b) => b[1] - a[1]).slice(0, 8);
 }
+
 

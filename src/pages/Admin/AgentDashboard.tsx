@@ -128,7 +128,7 @@ export function AdminAgentPanel() {
   // ═══════ AI CONTEXT ═══════
   const buildContext = () => {
     const a = analysis;
-    return `You are a senior business analyst and accountant for Coffee House cafe. You have FULL access to all business data.
+    return `You are a senior business analyst and accountant for The Daily Cup cafe. You have FULL access to all business data.
 
 === ORDER SUMMARY ===
 Total orders: ${a.totalOrders} (${a.validOrders} valid, ${a.cancelledOrders.length} cancelled)
@@ -548,3 +548,4 @@ function MetricCard({ icon: Icon, label, value, sub, color }: { icon: any; label
     </div>
   );
 }
+

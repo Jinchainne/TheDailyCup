@@ -9,7 +9,7 @@ export interface Transaction {
   id: string;
   type: 'send' | 'receive' | 'split' | 'remit';
   amount: number;
-  currency: 'USDC' | 'EURC';
+  currency: 'RITUAL' | 'RITUAL';
   to: string;
   from: string;
   status: 'completed' | 'pending' | 'failed';
@@ -23,7 +23,7 @@ export interface SplitGroup {
   name: string;
   members: Contact[];
   totalExpenses: number;
-  currency: 'USDC' | 'EURC';
+  currency: 'RITUAL' | 'RITUAL';
   createdAt: number;
 }
 
@@ -39,8 +39,8 @@ export interface SplitExpense {
 
 export interface RemitTransfer {
   id: string;
-  fromCurrency: 'USDC' | 'EURC';
-  toCurrency: 'USDC' | 'EURC';
+  fromCurrency: 'RITUAL' | 'RITUAL';
+  toCurrency: 'RITUAL' | 'RITUAL';
   fromAmount: number;
   toAmount: number;
   recipient: string;
@@ -49,3 +49,4 @@ export interface RemitTransfer {
   timestamp: number;
   rate: number;
 }
+

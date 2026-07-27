@@ -355,3 +355,4 @@ function getDefaultFinances(): FinanceEntry[] {
     { id: 'f12', type: 'income', category: 'Tips', description: 'Customer tips', amount: 15.00, date: d(0), note: 'Tips' },
   ];
 }
+

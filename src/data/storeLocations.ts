@@ -1,4 +1,4 @@
-// 63 COFFEE HOUSE store locations across Vietnam
+// 63 THE DAILY CUP store locations across Vietnam
 export interface StoreLocation {
   province: string;
   address: string;
@@ -71,3 +71,4 @@ export const STORE_LOCATIONS: StoreLocation[] = [
   { province: 'Vĩnh Phúc', address: 'số 10 Nguyễn Tất Thành, Phường Tích Sơn, TP Vĩnh Yên', lat: 21.3097, lng: 105.6042 },
   { province: 'Yên Bái', address: 'số 45 Đinh Liệt, Phường Đồng Tâm, TP Yên Bái', lat: 21.7168, lng: 104.9033 },
 ];
+

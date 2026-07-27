@@ -95,7 +95,7 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
 
 /**
  * Calculate shipping fee between a store and a destination.
- * Base fee: 0.50 USDC + 0.10 USDC per km (straight-line), capped at 5.00 USDC.
+ * Base fee: 0.50 RITUAL + 0.10 RITUAL per km (straight-line), capped at 5.00 RITUAL.
  */
 export function calcShippingFee(
   storeLat: number,
@@ -111,3 +111,4 @@ export function calcShippingFee(
   const fee = BASE_FEE + PER_KM * distanceKm;
   return Math.min(fee, MAX_FEE);
 }
+

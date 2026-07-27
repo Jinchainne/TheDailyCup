@@ -73,7 +73,7 @@ export default function RemitHistory() {
                     <p className="text-[10px] text-slate-400">Received</p>
                     <p className="text-sm font-bold text-emerald-600">{r.toAmount.toLocaleString()} {r.toCurrency}</p>
                   </div>
-                  <a href={`https://testnet.arcscan.app/tx/${r.txHash}`} target="_blank" rel="noreferrer"
+                  <a href={`https://explorer.ritualfoundation.org/tx/${r.txHash}`} target="_blank" rel="noreferrer"
                     className="text-[10px] text-blue-500 hover:underline flex items-center gap-0.5">
                     Tx <ExternalLink className="w-3 h-3" />
                   </a>
@@ -86,3 +86,4 @@ export default function RemitHistory() {
     </div>
   );
 }
+

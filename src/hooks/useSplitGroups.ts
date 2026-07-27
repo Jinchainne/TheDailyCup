@@ -45,3 +45,4 @@ export function useSplitGroups() {
 
   return { groups, expenses, addGroup, addExpense, getGroupExpenses, getGroupTotal };
 }
+

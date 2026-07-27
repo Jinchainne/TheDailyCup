@@ -148,15 +148,16 @@ function getDefaultLogs(): OrderLog[] {
   const h = (hours: number) => now - hours * 3600000;
   const m = (mins: number) => now - mins * 60000;
   return [
-    { id: 'LOG-1', orderId: 'ORD-M1K2P', event: 'created', details: 'Order created with 2 items, total $11.91 USDC', walletAddress: '0x3637...34bD', amount: 11.91, timestamp: h(2) },
-    { id: 'LOG-2', orderId: 'ORD-M1K2P', event: 'payment_sent', details: 'QR payment initiated, waiting for USDC transfer', walletAddress: '0x3637...34bD', amount: 11.91, timestamp: h(2) },
-    { id: 'LOG-3', orderId: 'ORD-M1K2P', event: 'payment_confirmed', details: 'USDC payment detected on blockchain, amount matches', txHash: '0xabc123...', amount: 11.91, timestamp: h(2) },
+    { id: 'LOG-1', orderId: 'ORD-M1K2P', event: 'created', details: 'Order created with 2 items, total $11.91 RITUAL', walletAddress: '0x3637...34bD', amount: 11.91, timestamp: h(2) },
+    { id: 'LOG-2', orderId: 'ORD-M1K2P', event: 'payment_sent', details: 'QR payment initiated, waiting for RITUAL transfer', walletAddress: '0x3637...34bD', amount: 11.91, timestamp: h(2) },
+    { id: 'LOG-3', orderId: 'ORD-M1K2P', event: 'payment_confirmed', details: 'RITUAL payment detected on blockchain, amount matches', txHash: '0xabc123...', amount: 11.91, timestamp: h(2) },
     { id: 'LOG-4', orderId: 'ORD-M1K2P', event: 'preparing', details: 'Order is being prepared by kitchen', timestamp: h(2) },
     { id: 'LOG-5', orderId: 'ORD-M1K2P', event: 'shipping', details: 'Order dispatched for delivery', timestamp: h(1) },
     { id: 'LOG-6', orderId: 'ORD-M1K2P', event: 'delivered', details: 'Order delivered successfully to customer', timestamp: m(45) },
-    { id: 'LOG-7', orderId: 'ORD-N2L3Q', event: 'created', details: 'Order created with 1 item, total $7.50 USDC', walletAddress: '0xAb58...9c9B', amount: 7.50, timestamp: h(5) },
+    { id: 'LOG-7', orderId: 'ORD-N2L3Q', event: 'created', details: 'Order created with 1 item, total $7.50 RITUAL', walletAddress: '0xAb58...9c9B', amount: 7.50, timestamp: h(5) },
     { id: 'LOG-8', orderId: 'ORD-N2L3Q', event: 'payment_sent', details: 'QR payment initiated', walletAddress: '0xAb58...9c9B', amount: 7.50, timestamp: h(5) },
-    { id: 'LOG-9', orderId: 'ORD-N2L3Q', event: 'payment_failed', details: 'Payment timeout - no USDC received within 10 minutes', amount: 7.50, timestamp: h(4) },
+    { id: 'LOG-9', orderId: 'ORD-N2L3Q', event: 'payment_failed', details: 'Payment timeout - no RITUAL received within 10 minutes', amount: 7.50, timestamp: h(4) },
     { id: 'LOG-10', orderId: 'ORD-N2L3Q', event: 'cancelled', details: 'Order cancelled due to payment failure', timestamp: h(4) },
   ];
 }
+

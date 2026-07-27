@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 import { useShop, MERCHANT_ADDRESS, generateOrderCode, type DeliveryAddress } from '../../hooks/useShop';
 import { useAgent } from '../../hooks/useAgent';
-import { useSendUSDC, useUSDCBalance } from '../../hooks/useOnChain';
+import { useSendRitual, useRitualBalance } from '../../hooks/useOnChain';
 import { formatCurrency } from '../../utils/format';
 import { CHAIN_ID, CURRENCY_SYMBOL, RPC_HTTP_URL } from '../../config/network';
 import WalletConnect from '../../components/WalletConnect';
@@ -56,8 +56,8 @@ export default function POSCheckout() {
   const { isConnected, address: walletAddress } = useAccount();
   const { cart, cartTotal, cartCount, clearCart, saveOrder, updateOrderStatus, orders, promoCode, promoDiscount, applyPromo, removePromo } = useShop();
   const { processOrder, dispatchDelivery } = useAgent();
-  const { send, hash, isSuccess, error: sendError } = useSendUSDC();
-  const { balance } = useUSDCBalance();
+  const { send, hash, isSuccess, error: sendError } = useSendRitual();
+  const { balance } = useRitualBalance();
   const [step, setStep] = useState<'review' | 'qr' | 'wallet-pay' | 'done'>('review');
   const [, setOrderIdState] = useState('');
   const orderIdRef = useRef('');
@@ -460,3 +460,5 @@ export default function POSCheckout() {
     </div>
   );
 }
+
+

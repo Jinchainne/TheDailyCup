@@ -209,3 +209,4 @@ export default function PaymentReceipt({ order, txHash, onClose, onTrack }: Prop
     </div>
   );
 }
+

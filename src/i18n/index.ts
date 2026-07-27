@@ -35,7 +35,7 @@ const T: Record<string, string> = {
   // Footer
   'footer.shop': 'Shop', 'footer.payment': 'Payment', 'footer.resources': 'Resources',
   'footer.menu': 'Menu', 'footer.myOrders': 'My Orders', 'footer.trackOrder': 'Track Order',
-  'footer.copyright': '© 2026 Coffee House. All rights reserved. Built on Ritual.',
+  'footer.copyright': '© 2026 The Daily Cup. All rights reserved. Built on Ritual.',
   // Share
   'share.title': 'Share', 'share.facebook': 'Facebook', 'share.zalo': 'Zalo',
   'share.twitter': 'Twitter / X', 'share.copyLink': 'Copy Link', 'share.copied': 'Link copied!',
@@ -69,7 +69,7 @@ const translations: Translations = {
     'shop.promoCode': 'Mã giảm giá', 'shop.apply': 'Áp dụng', 'shop.remove': 'Xóa',
     'footer.shop': 'Cửa Hàng', 'footer.payment': 'Thanh Toán', 'footer.resources': 'Tài Nguyên',
     'footer.menu': 'Thực Đơn', 'footer.myOrders': 'Đơn Hàng Của Tôi', 'footer.trackOrder': 'Theo Dõi Đơn',
-    'footer.copyright': '© 2026 Coffee House. Mọi quyền được bảo lưu.',
+    'footer.copyright': '© 2026 The Daily Cup. Mọi quyền được bảo lưu.',
     'share.title': 'Chia sẻ', 'share.facebook': 'Facebook', 'share.zalo': 'Zalo',
     'share.twitter': 'Twitter / X', 'share.copyLink': 'Sao chép liên kết', 'share.copied': 'Đã sao chép!',
     'general.connectWallet': 'Kết Nối Ví', 'general.disconnect': 'Ngắt Kết Nối',
@@ -93,7 +93,7 @@ const translations: Translations = {
     'banner.official': '官方电商网站 · ', 'banner.payWith': '使用 RITUAL 在 Ritual 测试网支付',
     'general.connectWallet': '连接钱包', 'general.loading': '加载中...',
     'feedback.title': '客户评价', 'feedback.write': '写评价', 'feedback.submit': '提交评价',
-    'footer.copyright': '© 2026 Coffee House. 保留所有权利。',
+    'footer.copyright': '© 2026 The Daily Cup. 保留所有权利。',
   },
   ja: {
     'nav.menu': 'メニュー', 'nav.orders': '注文', 'nav.track': '追跡', 'nav.feedback': 'レビュー',
@@ -106,7 +106,7 @@ const translations: Translations = {
     'banner.official': '公式ECサイト · ', 'banner.payWith': 'RitualテストネットでRITUAL決済',
     'general.connectWallet': 'ウォレット接続', 'general.loading': '読み込み中...',
     'feedback.title': 'お客様の声', 'feedback.write': 'レビューを書く', 'feedback.submit': '送信',
-    'footer.copyright': '© 2026 Coffee House. All rights reserved.',
+    'footer.copyright': '© 2026 The Daily Cup. All rights reserved.',
   },
   ko: {
     'nav.menu': '메뉴', 'nav.orders': '주문', 'nav.track': '추적', 'nav.feedback': '리뷰',
@@ -119,7 +119,7 @@ const translations: Translations = {
     'banner.official': '공식 전자상거래 사이트 · ', 'banner.payWith': 'Ritual 테스트넷에서 RITUAL 결제',
     'general.connectWallet': '지갑 연결', 'general.loading': '로딩 중...',
     'feedback.title': '고객 리뷰', 'feedback.write': '리뷰 작성', 'feedback.submit': '제출',
-    'footer.copyright': '© 2026 Coffee House. All rights reserved.',
+    'footer.copyright': '© 2026 The Daily Cup. All rights reserved.',
   },
   th: {
     'nav.menu': 'เมนู', 'nav.orders': 'คำสั่งซื้อ', 'nav.track': 'ติดตาม', 'nav.feedback': 'รีวิว',
@@ -131,7 +131,7 @@ const translations: Translations = {
     'banner.official': 'เว็บไซต์อีคอมเมิร์ซอย่างเป็นทางการ · ', 'banner.payWith': 'ชำระด้วย RITUAL บน Ritual',
     'general.connectWallet': 'เชื่อมต่อกระเป๋า', 'general.loading': 'กำลังโหลด...',
     'feedback.title': 'รีวิวจากลูกค้า', 'feedback.write': 'เขียนรีวิว', 'feedback.submit': 'ส่งรีวิว',
-    'footer.copyright': '© 2026 Coffee House. สงวนลิขสิทธิ์',
+    'footer.copyright': '© 2026 The Daily Cup. สงวนลิขสิทธิ์',
   },
   id: {
     'nav.menu': 'Menu', 'nav.orders': 'Pesanan', 'nav.track': 'Lacak', 'nav.feedback': 'Ulasan',
@@ -143,7 +143,7 @@ const translations: Translations = {
     'banner.official': 'Situs e-commerce resmi · ', 'banner.payWith': 'Bayar dengan RITUAL di Ritual',
     'general.connectWallet': 'Hubungkan Dompet', 'general.loading': 'Memuat...',
     'feedback.title': 'Ulasan Pelanggan', 'feedback.write': 'Tulis Ulasan', 'feedback.submit': 'Kirim',
-    'footer.copyright': '© 2026 Coffee House. Hak cipta dilindungi.',
+    'footer.copyright': '© 2026 The Daily Cup. Hak cipta dilindungi.',
   },
   es: {
     'nav.menu': 'Menú', 'nav.orders': 'Pedidos', 'nav.track': 'Rastrear', 'nav.feedback': 'Reseñas',
@@ -155,7 +155,7 @@ const translations: Translations = {
     'banner.official': 'Sitio de comercio electrónico oficial · ', 'banner.payWith': 'Paga con RITUAL en Ritual',
     'general.connectWallet': 'Conectar Billetera', 'general.loading': 'Cargando...',
     'feedback.title': 'Opiniones de Clientes', 'feedback.write': 'Escribir Reseña', 'feedback.submit': 'Enviar',
-    'footer.copyright': '© 2026 Coffee House. Todos los derechos reservados.',
+    'footer.copyright': '© 2026 The Daily Cup. Todos los derechos reservados.',
   },
   fr: {
     'nav.menu': 'Menu', 'nav.orders': 'Commandes', 'nav.track': 'Suivi', 'nav.feedback': 'Avis',
@@ -167,7 +167,7 @@ const translations: Translations = {
     'banner.official': 'Site e-commerce officiel · ', 'banner.payWith': 'Payez en RITUAL sur Ritual',
     'general.connectWallet': 'Connecter le Portefeuille', 'general.loading': 'Chargement...',
     'feedback.title': 'Avis Clients', 'feedback.write': 'Écrire un Avis', 'feedback.submit': 'Envoyer',
-    'footer.copyright': '© 2026 Coffee House. Tous droits réservés.',
+    'footer.copyright': '© 2026 The Daily Cup. Tous droits réservés.',
   },
   pt: {
     'nav.menu': 'Cardápio', 'nav.orders': 'Pedidos', 'nav.track': 'Rastrear', 'nav.feedback': 'Avaliações',
@@ -179,7 +179,7 @@ const translations: Translations = {
     'banner.official': 'Site de e-commerce oficial · ', 'banner.payWith': 'Pague com RITUAL na Ritual',
     'general.connectWallet': 'Conectar Carteira', 'general.loading': 'Carregando...',
     'feedback.title': 'Avaliações de Clientes', 'feedback.write': 'Escrever Avaliação', 'feedback.submit': 'Enviar',
-    'footer.copyright': '© 2026 Coffee House. Todos os direitos reservados.',
+    'footer.copyright': '© 2026 The Daily Cup. Todos os direitos reservados.',
   },
   ar: {
     'nav.menu': 'القائمة', 'nav.orders': 'الطلبات', 'nav.track': 'التتبع', 'nav.feedback': 'التقييمات',
@@ -191,7 +191,7 @@ const translations: Translations = {
     'banner.official': 'الموقع الرسمي للتجارة الإلكترونية · ', 'banner.payWith': 'ادفع بـ RITUAL على Ritual',
     'general.connectWallet': 'ربط المحفظة', 'general.loading': 'جاري التحميل...',
     'feedback.title': 'آراء العملاء', 'feedback.write': 'اكتب تقييم', 'feedback.submit': 'إرسال',
-    'footer.copyright': '© 2026 Coffee House. جميع الحقوق محفوظة.',
+    'footer.copyright': '© 2026 The Daily Cup. جميع الحقوق محفوظة.',
   },
   hi: {
     'nav.menu': 'मेन्यू', 'nav.orders': 'ऑर्डर', 'nav.track': 'ट्रैक', 'nav.feedback': 'समीक्षा',
@@ -203,7 +203,7 @@ const translations: Translations = {
     'banner.official': 'आधिकारिक ई-कॉमर्स साइट · ', 'banner.payWith': 'Ritual पर RITUAL से भुगतान करें',
     'general.connectWallet': 'वॉलेट कनेक्ट करें', 'general.loading': 'लोड हो रहा है...',
     'feedback.title': 'ग्राहक समीक्षा', 'feedback.write': 'समीक्षा लिखें', 'feedback.submit': 'भेजें',
-    'footer.copyright': '© 2026 Coffee House. सर्वाधिकार सुरक्षित.',
+    'footer.copyright': '© 2026 The Daily Cup. सर्वाधिकार सुरक्षित.',
   },
   de: {
     'nav.menu': 'Speisekarte', 'nav.orders': 'Bestellungen', 'nav.track': 'Verfolgen', 'nav.feedback': 'Bewertungen',
@@ -215,7 +215,7 @@ const translations: Translations = {
     'banner.official': 'Offizielle E-Commerce-Seite · ', 'banner.payWith': 'Bezahlen mit RITUAL auf Ritual',
     'general.connectWallet': 'Wallet verbinden', 'general.loading': 'Laden...',
     'feedback.title': 'Kundenbewertungen', 'feedback.write': 'Bewertung schreiben', 'feedback.submit': 'Absenden',
-    'footer.copyright': '© 2026 Coffee House. Alle Rechte vorbehalten.',
+    'footer.copyright': '© 2026 The Daily Cup. Alle Rechte vorbehalten.',
   },
   ru: {
     'nav.menu': 'Меню', 'nav.orders': 'Заказы', 'nav.track': 'Отследить', 'nav.feedback': 'Отзывы',
@@ -227,7 +227,7 @@ const translations: Translations = {
     'banner.official': 'Официальный сайт · ', 'banner.payWith': 'Оплата RITUAL в Ritual',
     'general.connectWallet': 'Подключить кошелёк', 'general.loading': 'Загрузка...',
     'feedback.title': 'Отзывы клиентов', 'feedback.write': 'Написать отзыв', 'feedback.submit': 'Отправить',
-    'footer.copyright': '© 2026 Coffee House. Все права защищены.',
+    'footer.copyright': '© 2026 The Daily Cup. Все права защищены.',
   },
   ms: {
     'nav.menu': 'Menu', 'nav.orders': 'Pesanan', 'nav.track': 'Jejak', 'nav.feedback': 'Ulasan',
@@ -239,7 +239,7 @@ const translations: Translations = {
     'banner.official': 'Laman e-dagang rasmi · ', 'banner.payWith': 'Bayar dengan RITUAL di Ritual',
     'general.connectWallet': 'Sambung Dompet', 'general.loading': 'Memuatkan...',
     'feedback.title': 'Ulasan Pelanggan', 'feedback.write': 'Tulis Ulasan', 'feedback.submit': 'Hantar',
-    'footer.copyright': '© 2026 Coffee House. Hak cipta terpelihara.',
+    'footer.copyright': '© 2026 The Daily Cup. Hak cipta terpelihara.',
   },
 };
 
@@ -276,5 +276,6 @@ export function useTranslation() {
 
   return { t, lang, setLang, toggleLang };
 }
+
 
 

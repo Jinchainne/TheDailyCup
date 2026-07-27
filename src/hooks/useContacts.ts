@@ -27,3 +27,4 @@ export function useContacts() {
 
   return { contacts, addContact, removeContact };
 }
+

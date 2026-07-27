@@ -1,5 +1,5 @@
 import { useSplitGroups } from '../../hooks/useSplitGroups';
-import { useSendUSDC } from '../../hooks/useOnChain';
+import { useSendRitual } from '../../hooks/useOnChain';
 import { useAccount } from 'wagmi';
 import { formatCurrency, formatTime } from '../../utils/format';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { Users, Plus, Receipt, Wallet, Check, ExternalLink, Clock } from 'lucide
 export default function SplitGroups() {
   const { groups, expenses, getGroupTotal } = useSplitGroups();
   const { isConnected } = useAccount();
-  const { hash, isPending, isConfirming, isSuccess } = useSendUSDC();
+  const { hash, isPending, isConfirming, isSuccess } = useSendRitual();
   const navigate = useNavigate();
 
 
@@ -23,7 +23,7 @@ export default function SplitGroups() {
           <div className="card p-8 text-center max-w-md mx-auto">
             <Wallet className="w-12 h-12 text-slate-300 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-slate-900 mb-2">Connect Wallet</h3>
-            <p className="text-sm text-slate-500 mb-5">Connect to manage split groups and settle on Arc Testnet.</p>
+            <p className="text-sm text-slate-500 mb-5">Connect to manage split groups and settle on Ritual testnet.</p>
             <WalletConnect />
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function SplitGroups() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl font-extrabold text-slate-900">Split Groups</h1>
-            <p className="text-sm text-slate-400">Manage shared expenses — settle on-chain with USDC</p>
+            <p className="text-sm text-slate-400">Manage shared expenses — settle on-chain with RITUAL</p>
           </div>
           <button onClick={() => navigate('/split/new')} className="btn-primary">
             <Plus className="w-4 h-4" /> New Group
@@ -48,12 +48,12 @@ export default function SplitGroups() {
         {(isPending || isConfirming || isSuccess) && (
           <div className={`card p-4 mb-4 border-2 ${isSuccess ? 'border-emerald-200 bg-emerald-50' : 'border-blue-200 bg-blue-50'}`}>
             {isPending && <p className="text-sm text-blue-900 font-medium">⏳ Confirm settlement in MetaMask...</p>}
-            {isConfirming && <p className="text-sm text-blue-900 font-medium">⏳ Confirming on Arc Testnet...</p>}
+            {isConfirming && <p className="text-sm text-blue-900 font-medium">⏳ Confirming on Ritual testnet...</p>}
             {isSuccess && (
               <div className="flex items-center gap-2">
                 <Check className="w-5 h-5 text-emerald-500" />
                 <p className="text-sm text-emerald-900 font-medium">Settlement confirmed!</p>
-                {hash && <a href={`https://testnet.arcscan.app/tx/${hash}`} target="_blank" rel="noreferrer" className="text-xs text-emerald-600 hover:underline flex items-center gap-1">View <ExternalLink className="w-3 h-3" /></a>}
+                {hash && <a href={`https://explorer.ritualfoundation.org/tx/${hash}`} target="_blank" rel="noreferrer" className="text-xs text-emerald-600 hover:underline flex items-center gap-1">View <ExternalLink className="w-3 h-3" /></a>}
               </div>
             )}
           </div>
@@ -154,3 +154,5 @@ export default function SplitGroups() {
     </div>
   );
 }
+
+

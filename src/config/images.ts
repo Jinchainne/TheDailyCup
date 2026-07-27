@@ -14,3 +14,4 @@ export const IMAGES = {
   news4: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80',
   about: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80',
 };
+

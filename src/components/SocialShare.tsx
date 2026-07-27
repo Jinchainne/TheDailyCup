@@ -24,7 +24,7 @@ export default function SocialShare() {
   const [copied, setCopied] = useState(false);
 
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
-  const shareTitle = 'COFFEE HOUSE — The Coffee of the World';
+  const shareTitle = 'THE DAILY CUP — The Coffee of the World';
 
   const handleCopy = useCallback(async () => {
     try {
@@ -108,3 +108,4 @@ export default function SocialShare() {
     </div>
   );
 }
+

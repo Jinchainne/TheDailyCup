@@ -12,7 +12,7 @@ interface Message {
 export default function AIChat() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Welcome to Coffee House! I can help you find menu items, check prices, recommend dishes, or answer questions about ordering. What would you like?' }
+    { role: 'assistant', content: 'Welcome to The Daily Cup! I can help you find menu items, check prices, recommend dishes, or answer questions about ordering. What would you like?' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -41,7 +41,7 @@ export default function AIChat() {
           messages: [
             {
               role: 'system',
-              content: `You are a friendly AI assistant for Coffee House, a food and beverage ordering app that accepts RITUAL payments on Ritual. 
+              content: `You are a friendly AI assistant for The Daily Cup, a food and beverage ordering app that accepts RITUAL payments on Ritual. 
 
 Our menu includes:
 - Coffee: Espresso ($3.50), Americano ($4), Cappuccino ($5), Latte ($5.50), Mocha ($6), Cold Brew ($5), Caramel Macchiato ($6.25)
@@ -164,5 +164,6 @@ Keep responses short and helpful. Always suggest specific items with prices.`
     </>
   );
 }
+
 
 

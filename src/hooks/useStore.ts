@@ -11,19 +11,19 @@ const MOCK_CONTACTS: Contact[] = [
 ];
 
 const MOCK_TRANSACTIONS: Transaction[] = [
-  { id: '1', type: 'receive', amount: 250.00, currency: 'USDC', from: 'Alice Chen', to: 'You', status: 'completed', timestamp: Date.now() - 300000, hash: '0xabc123', memo: 'Dinner split' },
-  { id: '2', type: 'send', amount: 500.00, currency: 'USDC', from: 'You', to: 'Bob Martinez', status: 'completed', timestamp: Date.now() - 3600000, hash: '0xdef456', memo: 'Monthly rent' },
-  { id: '3', type: 'split', amount: 85.50, currency: 'USDC', from: 'You', to: 'Group: Team Lunch', status: 'completed', timestamp: Date.now() - 7200000, hash: '0xghi789' },
-  { id: '4', type: 'send', amount: 1200.00, currency: 'USDC', from: 'You', to: 'Carol Wang', status: 'pending', timestamp: Date.now() - 10800000, hash: '0xjkl012', memo: 'Freelance payment' },
-  { id: '5', type: 'remit', amount: 950.00, currency: 'USDC', from: 'You', to: 'David Kim (UK)', status: 'completed', timestamp: Date.now() - 86400000, hash: '0xmno345' },
-  { id: '6', type: 'receive', amount: 320.00, currency: 'USDC', from: 'Emma Johnson', to: 'You', status: 'completed', timestamp: Date.now() - 172800000, hash: '0xpqr678' },
-  { id: '7', type: 'send', amount: 45.00, currency: 'USDC', from: 'You', to: 'Alice Chen', status: 'completed', timestamp: Date.now() - 259200000, hash: '0xstu901', memo: 'Coffee run' },
+  { id: '1', type: 'receive', amount: 250.00, currency: 'RITUAL', from: 'Alice Chen', to: 'You', status: 'completed', timestamp: Date.now() - 300000, hash: '0xabc123', memo: 'Dinner split' },
+  { id: '2', type: 'send', amount: 500.00, currency: 'RITUAL', from: 'You', to: 'Bob Martinez', status: 'completed', timestamp: Date.now() - 3600000, hash: '0xdef456', memo: 'Monthly rent' },
+  { id: '3', type: 'split', amount: 85.50, currency: 'RITUAL', from: 'You', to: 'Group: Team Lunch', status: 'completed', timestamp: Date.now() - 7200000, hash: '0xghi789' },
+  { id: '4', type: 'send', amount: 1200.00, currency: 'RITUAL', from: 'You', to: 'Carol Wang', status: 'pending', timestamp: Date.now() - 10800000, hash: '0xjkl012', memo: 'Freelance payment' },
+  { id: '5', type: 'remit', amount: 950.00, currency: 'RITUAL', from: 'You', to: 'David Kim (UK)', status: 'completed', timestamp: Date.now() - 86400000, hash: '0xmno345' },
+  { id: '6', type: 'receive', amount: 320.00, currency: 'RITUAL', from: 'Emma Johnson', to: 'You', status: 'completed', timestamp: Date.now() - 172800000, hash: '0xpqr678' },
+  { id: '7', type: 'send', amount: 45.00, currency: 'RITUAL', from: 'You', to: 'Alice Chen', status: 'completed', timestamp: Date.now() - 259200000, hash: '0xstu901', memo: 'Coffee run' },
 ];
 
 const MOCK_GROUPS: SplitGroup[] = [
-  { id: '1', name: 'Team Lunch', members: [MOCK_CONTACTS[0], MOCK_CONTACTS[1], MOCK_CONTACTS[2]], totalExpenses: 256.50, currency: 'USDC', createdAt: Date.now() - 604800000 },
-  { id: '2', name: 'Weekend Trip', members: [MOCK_CONTACTS[0], MOCK_CONTACTS[3], MOCK_CONTACTS[4]], totalExpenses: 1200.00, currency: 'USDC', createdAt: Date.now() - 1209600000 },
-  { id: '3', name: 'Office Supplies', members: [MOCK_CONTACTS[1], MOCK_CONTACTS[2]], totalExpenses: 89.99, currency: 'USDC', createdAt: Date.now() - 2592000000 },
+  { id: '1', name: 'Team Lunch', members: [MOCK_CONTACTS[0], MOCK_CONTACTS[1], MOCK_CONTACTS[2]], totalExpenses: 256.50, currency: 'RITUAL', createdAt: Date.now() - 604800000 },
+  { id: '2', name: 'Weekend Trip', members: [MOCK_CONTACTS[0], MOCK_CONTACTS[3], MOCK_CONTACTS[4]], totalExpenses: 1200.00, currency: 'RITUAL', createdAt: Date.now() - 1209600000 },
+  { id: '3', name: 'Office Supplies', members: [MOCK_CONTACTS[1], MOCK_CONTACTS[2]], totalExpenses: 89.99, currency: 'RITUAL', createdAt: Date.now() - 2592000000 },
 ];
 
 const MOCK_SPLIT_EXPENSES: SplitExpense[] = [
@@ -35,9 +35,9 @@ const MOCK_SPLIT_EXPENSES: SplitExpense[] = [
 ];
 
 const MOCK_REMITS: RemitTransfer[] = [
-  { id: '1', fromCurrency: 'USDC', toCurrency: 'EURC', fromAmount: 500, toAmount: 458.50, recipient: 'David Kim', recipientCountry: 'United Kingdom', status: 'completed', timestamp: Date.now() - 86400000, rate: 0.917 },
-  { id: '2', fromCurrency: 'USDC', toCurrency: 'USDC', fromAmount: 1000, toAmount: 997.50, recipient: 'Emma Johnson', recipientCountry: 'United States', status: 'completed', timestamp: Date.now() - 604800000, rate: 0.9975 },
-  { id: '3', fromCurrency: 'USDC', toCurrency: 'EURC', fromAmount: 250, toAmount: 229.13, recipient: 'Alice Chen', recipientCountry: 'Germany', status: 'pending', timestamp: Date.now() - 3600000, rate: 0.9165 },
+  { id: '1', fromCurrency: 'RITUAL', toCurrency: 'RITUAL', fromAmount: 500, toAmount: 458.50, recipient: 'David Kim', recipientCountry: 'United Kingdom', status: 'completed', timestamp: Date.now() - 86400000, rate: 0.917 },
+  { id: '2', fromCurrency: 'RITUAL', toCurrency: 'RITUAL', fromAmount: 1000, toAmount: 997.50, recipient: 'Emma Johnson', recipientCountry: 'United States', status: 'completed', timestamp: Date.now() - 604800000, rate: 0.9975 },
+  { id: '3', fromCurrency: 'RITUAL', toCurrency: 'RITUAL', fromAmount: 250, toAmount: 229.13, recipient: 'Alice Chen', recipientCountry: 'Germany', status: 'pending', timestamp: Date.now() - 3600000, rate: 0.9165 },
 ];
 
 export function useStore() {
@@ -48,12 +48,12 @@ export function useStore() {
   const [expenses] = useState<SplitExpense[]>(MOCK_SPLIT_EXPENSES);
   const [remits, setRemits] = useState<RemitTransfer[]>(MOCK_REMITS);
 
-  const sendUSDC = useCallback(async (to: string, amount: number, memo?: string) => {
+  const sendRITUAL = useCallback(async (to: string, amount: number, memo?: string) => {
     const tx: Transaction = {
       id: generateId(),
       type: 'send',
       amount,
-      currency: 'USDC',
+      currency: 'RITUAL',
       from: 'You',
       to,
       status: 'pending',
@@ -70,8 +70,8 @@ export function useStore() {
   const createRemit = useCallback(async (_from: string, to: string, amount: number, rate: number, country: string) => {
     const remit: RemitTransfer = {
       id: generateId(),
-      fromCurrency: 'USDC',
-      toCurrency: 'EURC',
+      fromCurrency: 'RITUAL',
+      toCurrency: 'RITUAL',
       fromAmount: amount,
       toAmount: parseFloat((amount * rate).toFixed(2)),
       recipient: to,
@@ -86,5 +86,6 @@ export function useStore() {
     return remit;
   }, []);
 
-  return { balance, transactions, contacts, groups, expenses, remits, sendUSDC, createRemit };
+  return { balance, transactions, contacts, groups, expenses, remits, sendRITUAL, createRemit };
 }
+

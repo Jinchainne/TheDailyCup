@@ -36,7 +36,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-14">
           {/* Logo with real coffee image */}
           <NavLink to="/shop" className="flex items-center gap-2.5 flex-shrink-0">
-            <img src="/logo.png" alt="Coffee House" className="w-9 h-9 rounded-xl object-cover shadow-md" />
+            <img src="/logo.png" alt="The Daily Cup" className="w-9 h-9 rounded-xl object-cover shadow-md" />
             <div className="hidden sm:block">
               <h1 className="text-sm font-extrabold text-slate-900 leading-tight tracking-tight">THE DAILY CUP</h1>
               <p className="text-[8px] text-slate-400 uppercase tracking-[0.2em]">Powered by Ritual</p>
@@ -122,3 +122,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

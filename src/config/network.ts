@@ -13,3 +13,4 @@ export const DOCS_URL = 'https://docs.ritualfoundation.org';
 export const SKILLS_URL = 'https://skills.ritualfoundation.org';
 export const CHAIN_DESCRIPTION =
   'Ritual is an AI-native L1 where smart contracts can think, act, and settle with native RITUAL.';
+

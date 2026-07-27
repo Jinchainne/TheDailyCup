@@ -1,7 +1,7 @@
 import { useStore } from '../../hooks/useStore';
 import { useToast } from '../../components/UI';
 import { formatCurrency } from '../../utils/format';
-import { useSendUSDC } from '../../hooks/useOnChain';
+import { useSendRitual } from '../../hooks/useOnChain';
 import { useAccount } from 'wagmi';
 import WalletConnect from '../../components/WalletConnect';
 
@@ -23,7 +23,7 @@ const COUNTRIES = [
 export default function RemitTransfer() {
   const { contacts } = useStore();
   const { isConnected } = useAccount();
-  const { send: sendUSDC, hash, isPending: txPending, isConfirming: txConfirming, isSuccess: txSuccess } = useSendUSDC();
+  const { send: sendRITUAL, hash, isPending: txPending, isConfirming: txConfirming, isSuccess: txSuccess } = useSendRitual();
   const { showToast, ToastUI } = useToast();
   const [amount, setAmount] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
@@ -43,7 +43,7 @@ export default function RemitTransfer() {
       <div className="bg-white min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
           <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Cross-Border Transfer</h1>
-          <p className="text-sm text-slate-400 mb-8">Send USDC worldwide on Arc Testnet</p>
+          <p className="text-sm text-slate-400 mb-8">Send RITUAL worldwide on Ritual testnet</p>
           <div className="card p-8 text-center max-w-md mx-auto">
             <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-slate-900 mb-2">Connect Wallet First</h3>
@@ -59,7 +59,7 @@ export default function RemitTransfer() {
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Cross-Border Transfer</h1>
-        <p className="text-sm text-slate-400 mb-6">Send USDC/EURC worldwide on Arc Testnet — real-time FX rates</p>
+        <p className="text-sm text-slate-400 mb-6">Send RITUAL/RITUAL worldwide on Ritual testnet — real-time FX rates</p>
 
         <div className="max-w-lg mx-auto space-y-4">
           {/* Live FX Rate Banner */}
@@ -70,7 +70,7 @@ export default function RemitTransfer() {
               </div>
               <div>
                 <p className="text-xs font-semibold text-slate-900">Live Exchange Rate</p>
-                <p className="text-[11px] text-slate-500">1 USDC = {selectedCountry.rate} {selectedCountry.currency} · Source: open.er-api.com (live)</p>
+                <p className="text-[11px] text-slate-500">1 RITUAL = {selectedCountry.rate} {selectedCountry.currency} · Source: open.er-api.com (live)</p>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function RemitTransfer() {
                 placeholder="0.00" className="text-2xl font-bold flex-1 !border-0 !bg-slate-50" />
               <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 rounded-xl">
                 <span className="text-sm">🇺🇸</span>
-                <span className="text-sm font-bold text-blue-600">USDC</span>
+                <span className="text-sm font-bold text-blue-600">RITUAL</span>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function RemitTransfer() {
                   <span className="text-lg">{c.flag}</span>
                   <div>
                     <p className="text-xs font-semibold text-slate-900">{c.name}</p>
-                    <p className="text-[10px] text-slate-400">1 USDC = {c.rate} {c.currency}</p>
+                    <p className="text-[10px] text-slate-400">1 RITUAL = {c.rate} {c.currency}</p>
                   </div>
                 </button>
               ))}
@@ -138,7 +138,7 @@ export default function RemitTransfer() {
                 <input
                   value={recipient.startsWith('0x') && !contacts.find(c => c.address === recipient) ? recipient : ''}
                   onChange={e => setRecipient(e.target.value)}
-                  placeholder="0x... paste any Arc Testnet address"
+                  placeholder="0x... paste any Ritual testnet address"
                   className="font-mono text-sm"
                 />
               </div>
@@ -158,8 +158,8 @@ export default function RemitTransfer() {
             <div className="card p-4">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Transfer Summary</h3>
               <div className="space-y-2">
-                <div className="flex justify-between"><span className="text-xs text-slate-500">You send</span><span className="text-sm font-bold text-slate-900">{formatCurrency(parseFloat(amount))} USDC</span></div>
-                <div className="flex justify-between"><span className="text-xs text-slate-500">Exchange rate</span><span className="text-sm text-slate-700">1 USDC = {selectedCountry.rate} {selectedCountry.currency}</span></div>
+                <div className="flex justify-between"><span className="text-xs text-slate-500">You send</span><span className="text-sm font-bold text-slate-900">{formatCurrency(parseFloat(amount))} RITUAL</span></div>
+                <div className="flex justify-between"><span className="text-xs text-slate-500">Exchange rate</span><span className="text-sm text-slate-700">1 RITUAL = {selectedCountry.rate} {selectedCountry.currency}</span></div>
                 <div className="flex justify-between"><span className="text-xs text-slate-500">Network fee</span><span className="text-sm text-emerald-600">~${fee}</span></div>
                 <div className="border-t border-slate-100 pt-2 flex justify-between">
                   <span className="text-xs font-semibold text-slate-900">Recipient gets</span>
@@ -168,7 +168,7 @@ export default function RemitTransfer() {
                 <div className="flex items-center gap-4 mt-2 pt-2 border-t border-slate-100">
                   <span className="flex items-center gap-1 text-[10px] text-slate-400"><Zap className="w-3 h-3" /> Instant</span>
                   <span className="flex items-center gap-1 text-[10px] text-slate-400"><Clock className="w-3 h-3" /> &lt;1s finality</span>
-                  <span className="flex items-center gap-1 text-[10px] text-slate-400"><Shield className="w-3 h-3" /> Arc L1</span>
+                  <span className="flex items-center gap-1 text-[10px] text-slate-400"><Shield className="w-3 h-3" /> Ritual</span>
                 </div>
               </div>
             </div>
@@ -178,9 +178,9 @@ export default function RemitTransfer() {
           {(isPending || isConfirming || isSuccess) && (
             <div className={`card p-4 border-2 ${isSuccess ? 'border-emerald-200 bg-emerald-50' : 'border-blue-200 bg-blue-50'}`}>
               {isPending && <div className="flex items-center gap-2"><div className="animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" /><span className="text-sm text-blue-900 font-medium">Confirm in wallet...</span></div>}
-              {isConfirming && <div className="flex items-center gap-2"><div className="animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" /><span className="text-sm text-blue-900 font-medium">Confirming on Arc Testnet...</span></div>}
+              {isConfirming && <div className="flex items-center gap-2"><div className="animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" /><span className="text-sm text-blue-900 font-medium">Confirming on Ritual testnet...</span></div>}
               {isSuccess && <div className="flex items-center gap-2"><span className="text-emerald-500">✓</span><span className="text-sm text-emerald-900 font-medium">Transfer confirmed!</span>
-                {hash && <a href={`https://testnet.arcscan.app/tx/${hash}`} target="_blank" rel="noreferrer" className="text-xs text-emerald-600 hover:underline flex items-center gap-1">View <ExternalLink className="w-3 h-3" /></a>}
+                {hash && <a href={`https://explorer.ritualfoundation.org/tx/${hash}`} target="_blank" rel="noreferrer" className="text-xs text-emerald-600 hover:underline flex items-center gap-1">View <ExternalLink className="w-3 h-3" /></a>}
               </div>}
             </div>
           )}
@@ -188,7 +188,7 @@ export default function RemitTransfer() {
           {/* Send Button */}
           <button onClick={() => {
             if (!recipient) { showToast('Select a recipient', 'error'); return; }
-            sendUSDC(recipient, amount);
+            sendRITUAL(recipient, amount);
           }} disabled={!amount || !recipient || isPending || isConfirming} className="btn-primary w-full text-base py-4">
             {isPending ? '⏳ Confirm in wallet...' : isConfirming ? '⏳ Confirming...' : <><Globe className="w-5 h-5" /> Send International Transfer</>}
           </button>
@@ -198,3 +198,5 @@ export default function RemitTransfer() {
     </div>
   );
 }
+
+

@@ -202,7 +202,7 @@ export default function MarketTrends() {
 
   const exportReport = () => {
     if (!trendReport) return;
-    const reportText = `Market Trend Report - Coffee House
+    const reportText = `Market Trend Report - The Daily Cup
 Generated: ${new Date(trendReport.generatedAt).toLocaleString()}
 
 ═══════════════════════════════════════
@@ -844,3 +844,4 @@ Powered by MiMo AI Market Analyzer
     </div>
   );
 }
+

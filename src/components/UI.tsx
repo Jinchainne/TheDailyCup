@@ -43,9 +43,9 @@ export function SuccessModal({ open, onClose, txHash, amount, to }: { open: bool
         <p className="text-lg font-semibold text-blue-600 mb-1">{amount}</p>
         <p className="text-sm text-slate-500 mb-5">to {to}</p>
         {txHash && (
-          <a href={`https://testnet.arcscan.app/tx/${txHash}`} target="_blank" rel="noreferrer"
+          <a href={`https://explorer.ritualfoundation.org/tx/${txHash}`} target="_blank" rel="noreferrer"
             className="text-xs text-blue-500 hover:text-blue-600 font-mono break-all underline">
-            View on ArcScan → {txHash.slice(0, 18)}...
+            View on Ritual Explorer → {txHash.slice(0, 18)}...
           </a>
         )}
         <button onClick={onClose} className="btn-primary w-full mt-6">Done</button>
@@ -72,3 +72,4 @@ export function useToast() {
   ) : null;
   return { showToast, ToastUI };
 }
+

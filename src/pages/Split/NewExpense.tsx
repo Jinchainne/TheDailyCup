@@ -86,7 +86,7 @@ export default function NewExpense() {
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <h1 className="text-2xl font-extrabold text-slate-900 mb-1">New Expense / Group</h1>
-        <p className="text-sm text-slate-400 mb-6">Track expenses and split bills on Arc Testnet</p>
+        <p className="text-sm text-slate-400 mb-6">Track expenses and split bills on Ritual testnet</p>
 
         {/* Tab switcher */}
         <div className="tab-bar mb-6 max-w-xs">
@@ -115,7 +115,7 @@ export default function NewExpense() {
                   </div>
                   <div className="relative">
                     <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="0.00 USDC" className="pl-11 text-lg font-bold" />
+                    <input type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="0.00 RITUAL" className="pl-11 text-lg font-bold" />
                   </div>
                   <div>
                     <label className="text-[11px] text-slate-500 mb-1 block">Paid by</label>
@@ -197,3 +197,4 @@ export default function NewExpense() {
 function Wallet(props: any) {
   return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>;
 }
+

@@ -33,7 +33,7 @@ export interface AgentTransaction {
   from: string;
   to: string;
   amount: number;
-  currency: 'USDC';
+  currency: 'RITUAL';
   type: 'nanopayment' | 'settlement' | 'service_fee' | 'delivery_fee';
   description: string;
   status: 'pending' | 'confirmed' | 'failed';
@@ -81,13 +81,13 @@ function getDefaultAgents(): Agent[] {
       wallet: { address: '0xA1B2...order', balance: 49.97, label: 'Order Processing Wallet' },
       status: 'active',
       decisions: [
-        { id: 'D-1', agentId: 'agent-order', type: 'risk_check', description: 'Analyzing order of 2 items worth $11.91 USDC', signal: 'Order total: $11.91, Items: Caffè Latte, Butter Croissant', result: 'Approved: within normal range', confidence: 95, timestamp: m(15) },
-        { id: 'D-2', agentId: 'agent-order', type: 'risk_check', description: 'Analyzing order of 1 item worth $7.50 USDC', signal: 'Order total: $7.50, Items: Cơm Tấm Sườn Nướng', result: 'Approved: within normal range', confidence: 97, timestamp: m(45) },
-        { id: 'D-3', agentId: 'agent-order', type: 'risk_check', description: 'Analyzing order of 3 items worth $24.50 USDC', signal: 'Order total: $24.50, Items: Phở Bò Tái, Bún Bò Huế, Cà Phê Sữa Đá', result: 'Approved: within normal range', confidence: 93, timestamp: h(2) },
+        { id: 'D-1', agentId: 'agent-order', type: 'risk_check', description: 'Analyzing order of 2 items worth $11.91 RITUAL', signal: 'Order total: $11.91, Items: Caffè Latte, Butter Croissant', result: 'Approved: within normal range', confidence: 95, timestamp: m(15) },
+        { id: 'D-2', agentId: 'agent-order', type: 'risk_check', description: 'Analyzing order of 1 item worth $7.50 RITUAL', signal: 'Order total: $7.50, Items: Cơm Tấm Sườn Nướng', result: 'Approved: within normal range', confidence: 97, timestamp: m(45) },
+        { id: 'D-3', agentId: 'agent-order', type: 'risk_check', description: 'Analyzing order of 3 items worth $24.50 RITUAL', signal: 'Order total: $24.50, Items: Phở Bò Tái, Bún Bò Huế, Cà Phê Sữa Đá', result: 'Approved: within normal range', confidence: 93, timestamp: h(2) },
       ],
       transactions: [
-        { id: 'TX-1', from: 'agent-order', to: 'agent-merchant', amount: 0.01, currency: 'USDC', type: 'nanopayment', description: 'Order processing fee', status: 'confirmed', txHash: '0xabc123...', timestamp: m(15) },
-        { id: 'TX-2', from: 'agent-order', to: 'agent-merchant', amount: 0.01, currency: 'USDC', type: 'nanopayment', description: 'Order processing fee', status: 'confirmed', txHash: '0xdef456...', timestamp: m(45) },
+        { id: 'TX-1', from: 'agent-order', to: 'agent-merchant', amount: 0.01, currency: 'RITUAL', type: 'nanopayment', description: 'Order processing fee', status: 'confirmed', txHash: '0xabc123...', timestamp: m(15) },
+        { id: 'TX-2', from: 'agent-order', to: 'agent-merchant', amount: 0.01, currency: 'RITUAL', type: 'nanopayment', description: 'Order processing fee', status: 'confirmed', txHash: '0xdef456...', timestamp: m(45) },
       ],
       createdAt: h(24),
     },
@@ -98,13 +98,13 @@ function getDefaultAgents(): Agent[] {
       wallet: { address: '0xC3D4...merch', balance: 500.04, label: 'Merchant Settlement Wallet' },
       status: 'active',
       decisions: [
-        { id: 'D-4', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $11.91 USDC for order', signal: 'Payment received: $11.91 USDC from customer wallet', result: 'Payment confirmed on Arc Testnet, order queued for preparation', confidence: 99, timestamp: m(14) },
-        { id: 'D-5', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $7.50 USDC for order', signal: 'Payment received: $7.50 USDC from customer wallet', result: 'Payment confirmed on Arc Testnet, order queued for preparation', confidence: 99, timestamp: m(44) },
-        { id: 'D-6', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $24.50 USDC for order', signal: 'Payment received: $24.50 USDC from customer wallet', result: 'Payment confirmed on Arc Testnet, order dispatched', confidence: 99, timestamp: h(2) },
+        { id: 'D-4', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $11.91 RITUAL for order', signal: 'Payment received: $11.91 RITUAL from customer wallet', result: 'Payment confirmed on Ritual testnet, order queued for preparation', confidence: 99, timestamp: m(14) },
+        { id: 'D-5', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $7.50 RITUAL for order', signal: 'Payment received: $7.50 RITUAL from customer wallet', result: 'Payment confirmed on Ritual testnet, order queued for preparation', confidence: 99, timestamp: m(44) },
+        { id: 'D-6', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $24.50 RITUAL for order', signal: 'Payment received: $24.50 RITUAL from customer wallet', result: 'Payment confirmed on Ritual testnet, order dispatched', confidence: 99, timestamp: h(2) },
       ],
       transactions: [
-        { id: 'TX-3', from: 'agent-merchant', to: 'agent-ai', amount: 0.005, currency: 'USDC', type: 'nanopayment', description: 'AI recommendation service', status: 'confirmed', timestamp: m(14) },
-        { id: 'TX-4', from: 'agent-merchant', to: 'agent-delivery', amount: 0.50, currency: 'USDC', type: 'delivery_fee', description: 'Delivery dispatch fee', status: 'confirmed', timestamp: m(13) },
+        { id: 'TX-3', from: 'agent-merchant', to: 'agent-ai', amount: 0.005, currency: 'RITUAL', type: 'nanopayment', description: 'AI recommendation service', status: 'confirmed', timestamp: m(14) },
+        { id: 'TX-4', from: 'agent-merchant', to: 'agent-delivery', amount: 0.50, currency: 'RITUAL', type: 'delivery_fee', description: 'Delivery dispatch fee', status: 'confirmed', timestamp: m(13) },
       ],
       createdAt: h(24),
     },
@@ -119,7 +119,7 @@ function getDefaultAgents(): Agent[] {
         { id: 'D-8', agentId: 'agent-delivery', type: 'routing', description: 'Routing delivery for order ORD-N2L3Q', signal: 'Delivery address: District 7, Ho Chi Minh City', result: 'Delivery dispatched, ETA 30 minutes', confidence: 88, timestamp: m(43) },
       ],
       transactions: [
-        { id: 'TX-5', from: 'agent-merchant', to: 'agent-delivery', amount: 0.50, currency: 'USDC', type: 'delivery_fee', description: 'Delivery dispatch fee', status: 'confirmed', timestamp: m(13) },
+        { id: 'TX-5', from: 'agent-merchant', to: 'agent-delivery', amount: 0.50, currency: 'RITUAL', type: 'delivery_fee', description: 'Delivery dispatch fee', status: 'confirmed', timestamp: m(13) },
       ],
       createdAt: h(24),
     },
@@ -134,7 +134,7 @@ function getDefaultAgents(): Agent[] {
         { id: 'D-10', agentId: 'agent-ai', type: 'recommendation', description: 'Suggesting complementary items for Vietnamese food', signal: 'Cart contains: Phở Bò Tái, Bún Bò Huế', result: 'Recommendation: Add Cà Phê Sữa Đá for authentic experience', confidence: 88, timestamp: h(2) },
       ],
       transactions: [
-        { id: 'TX-6', from: 'agent-merchant', to: 'agent-ai', amount: 0.005, currency: 'USDC', type: 'nanopayment', description: 'AI recommendation service', status: 'confirmed', timestamp: m(14) },
+        { id: 'TX-6', from: 'agent-merchant', to: 'agent-ai', amount: 0.005, currency: 'RITUAL', type: 'nanopayment', description: 'AI recommendation service', status: 'confirmed', timestamp: m(14) },
       ],
       createdAt: h(24),
     },
@@ -209,13 +209,13 @@ export function AgentProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('coffeehouse_nano', JSON.stringify(updated));
       return updated;
     });
-    addTransaction({ from, to, amount, currency: 'USDC', type: 'nanopayment', description: service, status: 'confirmed' });
+    addTransaction({ from, to, amount, currency: 'RITUAL', type: 'nanopayment', description: service, status: 'confirmed' });
   }, [addTransaction]);
 
   const processOrder = useCallback((orderItems: string[], total: number) => {
     addDecision('agent-order', {
       agentId: 'agent-order', type: 'risk_check',
-      description: `Analyzing order of ${orderItems.length} items worth $${total.toFixed(2)} USDC`,
+      description: `Analyzing order of ${orderItems.length} items worth $${total.toFixed(2)} RITUAL`,
       signal: `Order total: $${total.toFixed(2)}, Items: ${orderItems.join(', ')}`,
       result: total > 100 ? 'Flagged: high-value order, require confirmation' : 'Approved: within normal range',
       confidence: total > 100 ? 75 : 95,
@@ -229,9 +229,9 @@ export function AgentProvider({ children }: { children: ReactNode }) {
     });
     addDecision('agent-merchant', {
       agentId: 'agent-merchant', type: 'settlement',
-      description: `Settling payment of $${total.toFixed(2)} USDC for order`,
-      signal: `Payment received: $${total.toFixed(2)} USDC from customer wallet`,
-      result: 'Payment confirmed on Arc Testnet, order queued for preparation',
+      description: `Settling payment of $${total.toFixed(2)} RITUAL for order`,
+      signal: `Payment received: $${total.toFixed(2)} RITUAL from customer wallet`,
+      result: 'Payment confirmed on Ritual testnet, order queued for preparation',
       confidence: 99,
     });
     sendNanoPayment('agent-order', 'agent-merchant', 0.01, 'Order processing fee');
@@ -239,12 +239,12 @@ export function AgentProvider({ children }: { children: ReactNode }) {
   }, [addDecision, sendNanoPayment]);
 
   const settlePayment = useCallback((fromAgent: string, toAgent: string, amount: number, desc: string) => {
-    addTransaction({ from: fromAgent, to: toAgent, amount, currency: 'USDC', type: 'settlement', description: desc, status: 'confirmed' });
+    addTransaction({ from: fromAgent, to: toAgent, amount, currency: 'RITUAL', type: 'settlement', description: desc, status: 'confirmed' });
     addDecision(fromAgent, {
       agentId: fromAgent, type: 'payment',
-      description: `Settling $${amount.toFixed(4)} USDC to ${toAgent}`,
+      description: `Settling $${amount.toFixed(4)} RITUAL to ${toAgent}`,
       signal: `Settlement request: ${desc}`,
-      result: 'Transaction confirmed on Arc Testnet', confidence: 99,
+      result: 'Transaction confirmed on Ritual testnet', confidence: 99,
     });
   }, [addTransaction, addDecision]);
 
@@ -280,3 +280,4 @@ export function useAgent() {
   if (!ctx) throw new Error('useAgent must be used within AgentProvider');
   return ctx;
 }
+

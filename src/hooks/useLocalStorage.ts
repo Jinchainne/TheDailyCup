@@ -18,3 +18,4 @@ export function useLocalStorage<T>(key: string, defaultValue: T): [T, (val: T | 
 
   return [value, setValue];
 }
+

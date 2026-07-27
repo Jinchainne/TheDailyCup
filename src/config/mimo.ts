@@ -20,13 +20,13 @@ export async function chatWithMimo(messages: MimoMessage[]): Promise<string> {
       messages: [
         {
           role: 'system',
-          content: `You are COFFEE HOUSE AI Assistant — a smart, helpful AI built into a coffee shop app on Arc Testnet. You help users with:
+          content: `You are THE DAILY CUP AI Assistant — a smart, helpful AI built into a coffee shop app on Ritual testnet. You help users with:
 - Financial advice and spending insights
 - Transaction explanations and summaries  
 - Budget planning and savings tips
 - Cross-border remittance guidance
 - Bill splitting calculations
-- USDC/stablecoin education
+- RITUAL/stablecoin education
 
 Always respond in English. Be concise, friendly, and professional. Use emojis sparingly. When asked about transactions or balances, remind users to connect their wallet for real-time data.`
         },
@@ -41,3 +41,4 @@ Always respond in English. Be concise, friendly, and professional. Use emojis sp
   const content = data.choices?.[0]?.message?.content || data.choices?.[0]?.message?.reasoning_content || 'Sorry, I could not process your request.';
   return content;
 }
+

@@ -155,7 +155,7 @@ export default function RevenueReport() {
 
   // CSV Export
   const handleExportCSV = useCallback(() => {
-    const header = ['Order ID', 'Code', 'Date', 'Time', 'Status', 'Items', 'Subtotal', 'Shipping', 'Total (USDC)', 'Customer', 'Delivery Address', 'Tx Hash'];
+    const header = ['Order ID', 'Code', 'Date', 'Time', 'Status', 'Items', 'Subtotal', 'Shipping', 'Total (RITUAL)', 'Customer', 'Delivery Address', 'Tx Hash'];
     const rows = filteredOrders.map(o => [
       o.id,
       o.code,
@@ -176,7 +176,7 @@ export default function RevenueReport() {
   }, [filteredOrders, range, useCustomRange, dateFrom, dateTo]);
 
   const handleExportTopProductsCSV = useCallback(() => {
-    const header = ['Product', 'Quantity Sold', 'Revenue (USDC)'];
+    const header = ['Product', 'Quantity Sold', 'Revenue (RITUAL)'];
     const rows = topProducts.map(p => [p.name, p.qty.toString(), p.revenue.toFixed(2)]);
     downloadCSV('top_products.csv', toCSV([header, ...rows]));
   }, [topProducts]);
@@ -405,3 +405,4 @@ export default function RevenueReport() {
     </div>
   );
 }
+

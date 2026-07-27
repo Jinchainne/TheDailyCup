@@ -217,3 +217,4 @@ export function useCustomer() {
   if (!ctx) throw new Error('useCustomer must be used within CustomerProvider');
   return ctx;
 }
+

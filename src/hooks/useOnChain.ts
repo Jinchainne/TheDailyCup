@@ -1,13 +1,9 @@
-import {
-  useBalance,
-  useSendTransaction,
-  useWaitForTransactionReceipt,
-} from 'wagmi';
+import { useBalance, useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { formatUnits, parseEther } from 'viem';
 import { useAccount } from 'wagmi';
 import { CURRENCY_SYMBOL } from '../config/network';
 
-function useRitualBalanceInternal() {
+export function useRitualBalance() {
   const { address } = useAccount();
   const { data, isLoading, refetch } = useBalance({
     address,
@@ -23,29 +19,7 @@ function useRitualBalanceInternal() {
   };
 }
 
-export function useRitualBalance() {
-  return useRitualBalanceInternal();
-}
-
-export function useNativeBalance() {
-  return useRitualBalanceInternal();
-}
-
-export function useUSDCBalance() {
-  return useRitualBalanceInternal();
-}
-
-export function useEURCBalance() {
-  return {
-    balance: 0,
-    raw: 0n,
-    symbol: 'EURC',
-    isLoading: false,
-    refetch: async () => ({ data: undefined }),
-  };
-}
-
-function useSendRitualInternal() {
+export function useSendRitual() {
   const { sendTransaction, data: hash, isPending, error } = useSendTransaction();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
 
@@ -59,14 +33,3 @@ function useSendRitualInternal() {
   return { send, hash, isPending, isConfirming, isSuccess, error };
 }
 
-export function useSendRitual() {
-  return useSendRitualInternal();
-}
-
-export function useSendUSDC() {
-  return useSendRitualInternal();
-}
-
-export function useSendEURC() {
-  return useSendRitualInternal();
-}
