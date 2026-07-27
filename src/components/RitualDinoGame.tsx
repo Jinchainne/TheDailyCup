@@ -98,6 +98,17 @@ export default function RitualDinoGame() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const isTypingTarget =
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLSelectElement ||
+        target?.isContentEditable;
+
+      if (isTypingTarget) {
+        return;
+      }
+
       if (event.code === 'Space' || event.code === 'ArrowUp') {
         event.preventDefault();
         jump();
