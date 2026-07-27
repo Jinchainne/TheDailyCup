@@ -17,6 +17,9 @@ const GAME_HEIGHT = 220;
 const PLAYER_LEFT = 56;
 const BASE_SPEED = 5.5;
 const MAX_SPEED = 11;
+const HITBOX_INSET_X = 3;
+const HITBOX_INSET_TOP = 2;
+const HITBOX_INSET_BOTTOM = 4;
 
 export default function RitualDinoGame() {
   const [running, setRunning] = useState(false);
@@ -155,9 +158,10 @@ export default function RitualDinoGame() {
         ];
       }
 
-      const playerRight = PLAYER_LEFT + PLAYER_SIZE;
-      const playerBottom = GAME_HEIGHT - GROUND_HEIGHT;
-      const playerTop = playerBottom - PLAYER_SIZE - playerYRef.current;
+      const playerLeft = PLAYER_LEFT + HITBOX_INSET_X;
+      const playerRight = PLAYER_LEFT + PLAYER_SIZE - HITBOX_INSET_X;
+      const playerBottom = GAME_HEIGHT - GROUND_HEIGHT - playerYRef.current - HITBOX_INSET_BOTTOM;
+      const playerTop = playerBottom - PLAYER_SIZE + HITBOX_INSET_TOP;
 
       const collided = nextObstacles.some(ob => {
         const obLeft = ob.x;
@@ -165,7 +169,7 @@ export default function RitualDinoGame() {
         const obBottom = GAME_HEIGHT - GROUND_HEIGHT;
         const obTop = obBottom - ob.height;
 
-        return playerRight > obLeft && PLAYER_LEFT < obRight && playerBottom > obTop && playerTop < obBottom;
+        return playerRight > obLeft && playerLeft < obRight && playerBottom > obTop && playerTop < obBottom;
       });
 
       obstaclesRef.current = nextObstacles;
