@@ -1,5 +1,7 @@
 # TheDailyCup
 
+![The Daily Cup Logo](public/logo.png)
+
 Ritual-first cafe and merchant demo built with React, Vite, TypeScript, Wagmi, and Viem.
 
 ## What it includes
