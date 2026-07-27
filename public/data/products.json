@@ -198,7 +198,7 @@
       "price": 0.27,
       "category": "Breakfast",
       "brand": "McDonald's",
-      "image": "(uploaded-image-needs-url)",
+      "image": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=400&h=400&fit=crop",
       "description": "Three golden brown, fluffy hotcakes served with butter and syrup"
     },
     {
@@ -207,7 +207,7 @@
       "price": 0.28,
       "category": "Desserts",
       "brand": "McDonald's",
-      "image": "(uploaded-image-needs-url)",
+      "image": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=400&fit=crop",
       "description": "Vanilla soft serve blended with OREO cookie pieces"
     },
     {

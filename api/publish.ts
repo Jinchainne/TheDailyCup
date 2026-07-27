@@ -31,16 +31,44 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     let sha: string | undefined;
+    let existingProductsById = new Map<string, { image?: string }>();
     if (getResp.ok) {
       const fileData = await getResp.json();
       sha = fileData.sha;
+      try {
+        const decoded = Buffer.from(fileData.content, 'base64').toString('utf8');
+        const parsed = JSON.parse(decoded);
+        if (Array.isArray(parsed?.products)) {
+          existingProductsById = new Map(
+            parsed.products.map((product: { id: string; image?: string }) => [product.id, product])
+          );
+        }
+      } catch {
+        // keep publishing even if the previous file cannot be parsed
+      }
     }
+
+    const normalizedProducts = products.map((product: { id: string; image?: string; [key: string]: unknown }) => {
+      const existing = existingProductsById.get(product.id);
+      const image = typeof product.image === 'string' ? product.image : '';
+      const shouldReuseExistingImage =
+        !image ||
+        image === '(uploaded-image-needs-url)' ||
+        image.startsWith('data:');
+
+      return {
+        ...product,
+        image: shouldReuseExistingImage
+          ? existing?.image || image || 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop'
+          : image,
+      };
+    });
 
     // Prepare the JSON content
     const content = JSON.stringify({
       version: '1.0',
       updatedAt,
-      products: products,
+      products: normalizedProducts,
     }, null, 2);
 
     // Commit the file
