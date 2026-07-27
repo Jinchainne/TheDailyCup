@@ -96,6 +96,51 @@ async function uploadImageAsset(product: PublishProduct, updatedAt: string): Pro
   return `/uploads/products/${assetName}`;
 }
 
+async function updateProductsFile(
+  getUrl: string,
+  products: PublishProduct[],
+  updatedAt: string,
+  maxAttempts = 3
+) {
+  let lastError = 'Unknown GitHub API error';
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const { sha } = await fetchCurrentProductsFile();
+    const content = JSON.stringify({
+      version: '1.0',
+      updatedAt,
+      products,
+    }, null, 2);
+
+    const { resp, data } = await githubJson(getUrl, {
+      method: 'PUT',
+      body: JSON.stringify({
+        message: `admin: update products (${products.length} items) - ${new Date().toISOString()}`,
+        content: Buffer.from(content).toString('base64'),
+        sha,
+      }),
+    });
+
+    if (resp.ok) {
+      return data;
+    }
+
+    lastError = data.message || 'GitHub API error';
+    const shouldRetry =
+      resp.status === 409 ||
+      /expected/i.test(lastError) ||
+      /sha/i.test(lastError);
+
+    if (!shouldRetry || attempt === maxAttempts) {
+      throw new Error(lastError);
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 400 * attempt));
+  }
+
+  throw new Error(lastError);
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -140,26 +185,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // before updating it to avoid "is at ... but expected ..." conflicts.
     ({ getUrl, sha } = await fetchCurrentProductsFile());
 
-    // Prepare the JSON content
-    const content = JSON.stringify({
-      version: '1.0',
-      updatedAt,
-      products: normalizedProducts,
-    }, null, 2);
-
-    // Commit the file
-    const { resp: putResp, data: result } = await githubJson(getUrl, {
-      method: 'PUT',
-      body: JSON.stringify({
-        message: `admin: update products (${products.length} items) - ${new Date().toISOString()}`,
-        content: Buffer.from(content).toString('base64'),
-        sha,
-      }),
-    });
-
-    if (!putResp.ok) {
-      return res.status(putResp.status).json({ error: result.message || 'GitHub API error' });
-    }
+    const result = await updateProductsFile(getUrl, normalizedProducts, updatedAt);
 
     return res.status(200).json({
       success: true,
