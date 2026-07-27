@@ -9,57 +9,89 @@ type Obstacle = {
 };
 
 const GRAVITY = 0.85;
-const JUMP_FORCE = -11.5;
+const JUMP_FORCE = 11.5;
 const GROUND_HEIGHT = 22;
 const PLAYER_SIZE = 26;
 const GAME_WIDTH = 640;
 const GAME_HEIGHT = 220;
+const PLAYER_LEFT = 56;
+const BASE_SPEED = 5.5;
+const MAX_SPEED = 11;
 
 export default function RitualDinoGame() {
   const [running, setRunning] = useState(false);
-  const [jumping, setJumping] = useState(false);
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(() => {
-    const saved = localStorage.getItem('ritual_dino_best');
+    if (typeof window === 'undefined') return 0;
+    const saved = window.localStorage.getItem('ritual_dino_best');
     return saved ? Number(saved) : 0;
   });
   const [playerY, setPlayerY] = useState(0);
-  const [velocityY, setVelocityY] = useState(0);
   const [obstacles, setObstacles] = useState<Obstacle[]>([]);
   const [gameOver, setGameOver] = useState(false);
 
   const rafRef = useRef<number | null>(null);
-  const tickRef = useRef<number>(0);
-  const spawnRef = useRef<number>(0);
-  const speedRef = useRef<number>(5.5);
+  const scoreRef = useRef(0);
+  const bestRef = useRef(best);
+  const playerYRef = useRef(0);
+  const velocityRef = useRef(0);
+  const obstaclesRef = useRef<Obstacle[]>([]);
+  const tickRef = useRef(0);
+  const spawnRef = useRef(0);
+  const runningRef = useRef(false);
+  const gameOverRef = useRef(false);
 
-  const restart = () => {
-    setRunning(true);
-    setJumping(false);
-    setScore(0);
-    setPlayerY(0);
-    setVelocityY(0);
-    setObstacles([]);
-    setGameOver(false);
+  const persistBest = (nextBest: number) => {
+    bestRef.current = nextBest;
+    setBest(nextBest);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('ritual_dino_best', String(nextBest));
+    }
+  };
+
+  const resetState = (startImmediately = true) => {
+    scoreRef.current = 0;
+    playerYRef.current = 0;
+    velocityRef.current = 0;
+    obstaclesRef.current = [];
     tickRef.current = 0;
     spawnRef.current = 0;
-    speedRef.current = 5.5;
+    runningRef.current = startImmediately;
+    gameOverRef.current = false;
+
+    setScore(0);
+    setPlayerY(0);
+    setObstacles([]);
+    setGameOver(false);
+    setRunning(startImmediately);
+  };
+
+  const restart = () => {
+    resetState(true);
+    velocityRef.current = JUMP_FORCE;
   };
 
   const jump = () => {
-    if (!running && !gameOver) {
-      setRunning(true);
-      return;
-    }
-    if (gameOver) {
+    if (gameOverRef.current) {
       restart();
       return;
     }
-    if (!jumping) {
-      setJumping(true);
-      setVelocityY(JUMP_FORCE);
+
+    const grounded = playerYRef.current <= 0.01;
+    if (!runningRef.current) {
+      resetState(true);
+      velocityRef.current = JUMP_FORCE;
+      return;
+    }
+
+    if (grounded) {
+      velocityRef.current = JUMP_FORCE;
     }
   };
+
+  useEffect(() => {
+    bestRef.current = best;
+  }, [best]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -68,89 +100,97 @@ export default function RitualDinoGame() {
         jump();
       }
     };
+
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  });
+  }, []);
 
   useEffect(() => {
-    if (!running || gameOver) return;
+    runningRef.current = running;
+    gameOverRef.current = gameOver;
+
+    if (!running || gameOver) {
+      if (rafRef.current) {
+        window.clearTimeout(rafRef.current);
+        rafRef.current = null;
+      }
+      return;
+    }
 
     const step = () => {
+      if (!runningRef.current || gameOverRef.current) return;
+
       tickRef.current += 1;
       spawnRef.current += 1;
-      speedRef.current = Math.min(11, 5.5 + tickRef.current / 350);
+      const speed = Math.min(MAX_SPEED, BASE_SPEED + tickRef.current / 350);
 
-      setScore(prev => {
-        const next = prev + 1;
-        if (next > best) {
-          setBest(next);
-          localStorage.setItem('ritual_dino_best', String(next));
-        }
-        return next;
+      scoreRef.current += 1;
+      setScore(scoreRef.current);
+
+      if (scoreRef.current > bestRef.current) {
+        persistBest(scoreRef.current);
+      }
+
+      velocityRef.current -= GRAVITY;
+      playerYRef.current = Math.max(0, playerYRef.current + velocityRef.current);
+      if (playerYRef.current === 0 && velocityRef.current < 0) {
+        velocityRef.current = 0;
+      }
+      setPlayerY(playerYRef.current);
+
+      let nextObstacles = obstaclesRef.current
+        .map(ob => ({ ...ob, x: ob.x - speed }))
+        .filter(ob => ob.x + ob.width > -20);
+
+      if (spawnRef.current > 70 + Math.random() * 45) {
+        spawnRef.current = 0;
+        nextObstacles = [
+          ...nextObstacles,
+          {
+            id: Date.now() + Math.random(),
+            x: GAME_WIDTH + 10,
+            width: 14 + Math.random() * 18,
+            height: 20 + Math.random() * 34,
+          },
+        ];
+      }
+
+      const playerRight = PLAYER_LEFT + PLAYER_SIZE;
+      const playerBottom = GAME_HEIGHT - GROUND_HEIGHT;
+      const playerTop = playerBottom - PLAYER_SIZE - playerYRef.current;
+
+      const collided = nextObstacles.some(ob => {
+        const obLeft = ob.x;
+        const obRight = ob.x + ob.width;
+        const obBottom = GAME_HEIGHT - GROUND_HEIGHT;
+        const obTop = obBottom - ob.height;
+
+        return playerRight > obLeft && PLAYER_LEFT < obRight && playerBottom > obTop && playerTop < obBottom;
       });
 
-      setPlayerY(prevY => {
-        const nextVelocity = velocityY + GRAVITY;
-        const nextY = prevY - nextVelocity;
+      obstaclesRef.current = nextObstacles;
+      setObstacles(nextObstacles);
 
-        if (nextY <= 0) {
-          setJumping(false);
-          setVelocityY(0);
-          return 0;
-        }
-
-        setVelocityY(nextVelocity);
-        return nextY;
-      });
-
-      setObstacles(prev => {
-        let next = prev
-          .map(ob => ({ ...ob, x: ob.x - speedRef.current }))
-          .filter(ob => ob.x + ob.width > -20);
-
-        if (spawnRef.current > 70 + Math.random() * 45) {
-          spawnRef.current = 0;
-          next = [
-            ...next,
-            {
-              id: Date.now() + Math.random(),
-              x: GAME_WIDTH + 10,
-              width: 14 + Math.random() * 18,
-              height: 20 + Math.random() * 34,
-            },
-          ];
-        }
-
-        const playerLeft = 56;
-        const playerRight = playerLeft + PLAYER_SIZE;
-        const playerBottom = GAME_HEIGHT - GROUND_HEIGHT;
-        const playerTop = playerBottom - PLAYER_SIZE - playerY;
-
-        const collided = next.some(ob => {
-          const obLeft = ob.x;
-          const obRight = ob.x + ob.width;
-          const obBottom = GAME_HEIGHT - GROUND_HEIGHT;
-          const obTop = obBottom - ob.height;
-
-          return playerRight > obLeft && playerLeft < obRight && playerBottom > obTop && playerTop < obBottom;
-        });
-
-        if (collided) {
-          setRunning(false);
-          setGameOver(true);
-        }
-
-        return next;
-      });
+      if (collided) {
+        runningRef.current = false;
+        gameOverRef.current = true;
+        setRunning(false);
+        setGameOver(true);
+        return;
+      }
 
       rafRef.current = window.setTimeout(step, 16) as unknown as number;
     };
 
-    step();
+    rafRef.current = window.setTimeout(step, 16) as unknown as number;
+
     return () => {
-      if (rafRef.current) window.clearTimeout(rafRef.current);
+      if (rafRef.current) {
+        window.clearTimeout(rafRef.current);
+        rafRef.current = null;
+      }
     };
-  }, [running, gameOver, velocityY, jumping, best]);
+  }, [running, gameOver]);
 
   const status = useMemo(() => {
     if (gameOver) return 'Connection lost. Dino still ships.';
@@ -175,6 +215,7 @@ export default function RitualDinoGame() {
       </div>
 
       <button
+        type="button"
         onClick={jump}
         className="relative block w-full overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(251,146,60,0.18),_transparent_40%),linear-gradient(180deg,_#0f172a,_#020617)]"
         style={{ height: GAME_HEIGHT }}
@@ -187,8 +228,8 @@ export default function RitualDinoGame() {
         <div className="absolute inset-x-0 bottom-0 h-[22px] bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-400" />
 
         <div
-          className="absolute left-14 flex items-end"
-          style={{ bottom: GROUND_HEIGHT + playerY, width: PLAYER_SIZE, height: PLAYER_SIZE }}
+          className="absolute flex items-end"
+          style={{ left: PLAYER_LEFT, bottom: GROUND_HEIGHT + playerY, width: PLAYER_SIZE, height: PLAYER_SIZE }}
         >
           <div className="relative h-[26px] w-[26px] rounded-[6px] border border-orange-300 bg-orange-400/90 shadow-[0_0_20px_rgba(251,146,60,0.35)]">
             <div className="absolute left-[6px] top-[7px] h-[4px] w-[4px] rounded-full bg-slate-950" />
@@ -217,4 +258,3 @@ export default function RitualDinoGame() {
     </div>
   );
 }
-
