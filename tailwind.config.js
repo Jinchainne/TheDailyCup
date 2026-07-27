@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        arc: {
+        ritual: {
           50: '#eff6ff',
           100: '#dbeafe',
           200: '#bfdbfe',

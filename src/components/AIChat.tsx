@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Send, Loader2, User } from 'lucide-react';
-
-const MIMO_API = 'https://api.xiaomimimo.com/v1/chat/completions';
-const MIMO_KEY = 'sk-szsjdjw70m8t5bwy8tgx4n0taa4egpnicnidvpt3im9exf3l';
+import { requestMimoChat } from '../lib/mimo';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -12,7 +10,7 @@ interface Message {
 export default function AIChat() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Welcome to The Daily Cup! I can help you find menu items, check prices, recommend dishes, or answer questions about ordering. What would you like?' }
+    { role: 'assistant', content: 'Welcome to The Daily Cup. I can help with menu picks, prices, recommendations, and ordering questions. What would you like to explore?' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -30,18 +28,10 @@ export default function AIChat() {
     setLoading(true);
 
     try {
-      const resp = await fetch(MIMO_API, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${MIMO_KEY}`,
-        },
-        body: JSON.stringify({
-          model: 'mimo-v2.5-pro',
-          messages: [
-            {
-              role: 'system',
-              content: `You are a friendly AI assistant for The Daily Cup, a food and beverage ordering app that accepts RITUAL payments on Ritual. 
+      const content = await requestMimoChat([
+        {
+          role: 'system',
+          content: `You are a friendly AI assistant for The Daily Cup, a food and beverage app that accepts RITUAL payments on Ritual.
 
 Our menu includes:
 - Coffee: Espresso ($3.50), Americano ($4), Cappuccino ($5), Latte ($5.50), Mocha ($6), Cold Brew ($5), Caramel Macchiato ($6.25)
@@ -51,21 +41,15 @@ Our menu includes:
 - Drinks: Orange Juice ($4.50), Mango Smoothie ($6), Berry Blast ($6.50)
 - Desserts: Tiramisu ($6.50), Cheesecake ($5.50), Brownie ($4), Donut ($1.49)
 
-Payment: RITUAL on Ritual (Chain ID 1979). Delivery available with map-based address selection.
+Payment: RITUAL on Ritual Testnet (Chain ID 1979). Delivery is available with map-based address selection.
 Keep responses short and helpful. Always suggest specific items with prices.`
-            },
-            ...messages.slice(-8), // last 8 messages for context
-            { role: 'user', content: userMsg }
-          ],
-          temperature: 0.7,
-          max_tokens: 400,
-        }),
-      });
-      const data = await resp.json();
-      const content = data.choices?.[0]?.message?.content || 'Sorry, I could not process that. Please try again.';
+        },
+        ...messages.slice(-8),
+        { role: 'user', content: userMsg }
+      ], { temperature: 0.7, maxTokens: 400 });
       setMessages(prev => [...prev, { role: 'assistant', content }]);
     } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Connection error. Please try again.' }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong while contacting the AI assistant. Please try again.' }]);
     } finally {
       setLoading(false);
     }
@@ -95,7 +79,7 @@ Keep responses short and helpful. Always suggest specific items with prices.`
               </div>
               <div>
                 <p className="text-sm font-bold">AI Assistant</p>
-                <p className="text-[10px] text-blue-100">Powered by AI · Always online</p>
+                <p className="text-[10px] text-blue-100">AI support for menu and checkout questions</p>
               </div>
             </div>
             <button onClick={() => setOpen(false)} className="p-1 hover:bg-white/20 rounded-lg transition-colors">
@@ -146,7 +130,7 @@ Keep responses short and helpful. Always suggest specific items with prices.`
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') sendMessage(); }}
-                placeholder="Ask about menu, prices, recommendations..."
+                placeholder="Ask about the menu, prices, or recommendations..."
                 className="flex-1 text-sm"
                 disabled={loading}
               />

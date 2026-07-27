@@ -47,7 +47,7 @@ export default function Receive() {
               <QRCodeSVG value={address} size={200} bgColor="#ffffff" fgColor="#0f172a" level="H" />
             </div>
             <h3 className="text-lg font-bold text-slate-900 mb-1">Your Wallet Address</h3>
-            <p className="text-xs text-slate-400 mb-4">On Ritual testnet (Chain ID: 1979)</p>
+            <p className="text-xs text-slate-400 mb-4">On Ritual Testnet (Chain ID: 1979)</p>
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-5">
               <p className="font-mono text-xs text-slate-600 break-all">{address}</p>
             </div>
@@ -66,7 +66,7 @@ export default function Receive() {
             <div className="card p-4 text-center">
               <QrIcon className="w-5 h-5 text-blue-500 mx-auto mb-2" />
               <p className="text-[11px] text-slate-400">Network</p>
-              <p className="text-sm font-semibold text-slate-900">Ritual testnet</p>
+              <p className="text-sm font-semibold text-slate-900">Ritual Testnet</p>
             </div>
           </div>
 
@@ -74,7 +74,7 @@ export default function Receive() {
             <p className="text-xs font-bold text-slate-900 mb-2">How to receive</p>
             <ol className="text-xs text-slate-500 space-y-2 list-decimal list-inside">
               <li>Share your wallet address or QR code with the sender</li>
-              <li>Sender transfers RITUAL on Ritual testnet</li>
+              <li>The sender transfers RITUAL on Ritual Testnet</li>
               <li>Transaction confirms in under 1 second</li>
               <li>Your balance updates automatically</li>
             </ol>

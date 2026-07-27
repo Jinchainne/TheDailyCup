@@ -80,9 +80,9 @@ export default function POSCheckout() {
 
   useEffect(() => {
     try {
-      const saved = sessionStorage.getItem('arcbank_delivery');
+      const saved = sessionStorage.getItem('thedailycup_delivery');
       if (saved) setDelivery(JSON.parse(saved));
-      const fee = sessionStorage.getItem('arcbank_shipping_fee');
+      const fee = sessionStorage.getItem('thedailycup_shipping_fee');
       if (fee) setShippingFee(parseFloat(fee));
     } catch {}
   }, []);
@@ -99,8 +99,8 @@ export default function POSCheckout() {
     processOrder(itemNames, grandTotal);
     if (delivery) dispatchDelivery(id, delivery.address);
     clearCart();
-    sessionStorage.removeItem('arcbank_delivery');
-    sessionStorage.removeItem('arcbank_shipping_fee');
+    sessionStorage.removeItem('thedailycup_delivery');
+    sessionStorage.removeItem('thedailycup_shipping_fee');
     if (delivery) {
       setTimeout(() => updateOrderStatus(id, 'preparing'), 5000);
       setTimeout(() => updateOrderStatus(id, 'shipping'), 15000);

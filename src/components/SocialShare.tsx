@@ -24,7 +24,7 @@ export default function SocialShare() {
   const [copied, setCopied] = useState(false);
 
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
-  const shareTitle = 'THE DAILY CUP — The Coffee of the World';
+  const shareTitle = 'The Daily Cup | Ritual-native cafe demo';
 
   const handleCopy = useCallback(async () => {
     try {
@@ -88,7 +88,7 @@ export default function SocialShare() {
             className="flex items-center gap-2.5 w-full px-3 py-2 text-xs font-medium text-slate-700 hover:bg-green-50 hover:text-green-600 rounded-lg transition-colors"
           >
             {copied ? <Check size={16} className="text-green-500" /> : <Link2 size={16} />}
-            {copied ? 'Copied!' : 'Copy Link'}
+            {copied ? 'Copied!' : 'Copy link'}
           </button>
         </div>
       )}

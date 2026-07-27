@@ -44,8 +44,8 @@ const SESSION_TIMEOUT_MS = 2 * 60 * 60 * 1000; // 2 hours
 const MAX_LOGIN_ATTEMPTS = 5;
 const COOLDOWN_DURATION_MS = 5 * 60 * 1000; // 5 minutes
 const ACTIVITY_CHECK_INTERVAL_MS = 30_000; // 30 seconds
-const RATE_LIMIT_STORAGE_KEY = 'arcbank_rate_limit';
-const LAST_ACTIVITY_STORAGE_KEY = 'arcbank_last_activity';
+const RATE_LIMIT_STORAGE_KEY = 'thedailycup_rate_limit';
+const LAST_ACTIVITY_STORAGE_KEY = 'thedailycup_last_activity';
 
 // --- SHA-256 hashing utility using Web Crypto API ---
 async function sha256(message: string): Promise<string> {
@@ -96,12 +96,12 @@ function saveLastActivity(ts: number) {
 
 export function AdminProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(() => {
-    return sessionStorage.getItem('arcbank_admin') === 'true';
+    return sessionStorage.getItem('thedailycup_admin') === 'true';
   });
 
   const [finances, setFinances] = useState<FinanceEntry[]>(() => {
     try {
-      const saved = localStorage.getItem('arcbank_finances');
+      const saved = localStorage.getItem('thedailycup_finances');
       return saved ? JSON.parse(saved) : getDefaultFinances();
     } catch { return getDefaultFinances(); }
   });
@@ -134,8 +134,8 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     if (elapsed > SESSION_TIMEOUT_MS) {
       // Session expired while away
       setIsAdmin(false);
-      sessionStorage.removeItem('arcbank_admin');
-      sessionStorage.removeItem('arcbank_admin_token');
+      sessionStorage.removeItem('thedailycup_admin');
+      sessionStorage.removeItem('thedailycup_admin_token');
       return;
     }
 
@@ -166,8 +166,8 @@ export function AdminProvider({ children }: { children: ReactNode }) {
       if (timeSince >= SESSION_TIMEOUT_MS) {
         // Auto-logout
         setIsAdmin(false);
-        sessionStorage.removeItem('arcbank_admin');
-        sessionStorage.removeItem('arcbank_admin_token');
+        sessionStorage.removeItem('thedailycup_admin');
+        sessionStorage.removeItem('thedailycup_admin_token');
         localStorage.removeItem(LAST_ACTIVITY_STORAGE_KEY);
       }
     }, ACTIVITY_CHECK_INTERVAL_MS);
@@ -226,7 +226,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         authenticated = true;
         // Store token if provided
         if (data.token) {
-          sessionStorage.setItem('arcbank_admin_token', data.token);
+          sessionStorage.setItem('thedailycup_admin_token', data.token);
         }
       }
     } catch {
@@ -242,9 +242,9 @@ export function AdminProvider({ children }: { children: ReactNode }) {
       saveRateLimit({ attempts: 0, cooldownUntil: 0 });
 
       setIsAdmin(true);
-      sessionStorage.setItem('arcbank_admin', 'true');
-      if (!sessionStorage.getItem('arcbank_admin_token')) {
-        sessionStorage.setItem('arcbank_admin_token', 'ok');
+      sessionStorage.setItem('thedailycup_admin', 'true');
+      if (!sessionStorage.getItem('thedailycup_admin_token')) {
+        sessionStorage.setItem('thedailycup_admin_token', 'ok');
       }
 
       // Record activity
@@ -285,8 +285,8 @@ export function AdminProvider({ children }: { children: ReactNode }) {
 
   const logout = useCallback(() => {
     setIsAdmin(false);
-    sessionStorage.removeItem('arcbank_admin');
-    sessionStorage.removeItem('arcbank_admin_token');
+    sessionStorage.removeItem('thedailycup_admin');
+    sessionStorage.removeItem('thedailycup_admin_token');
     localStorage.removeItem(LAST_ACTIVITY_STORAGE_KEY);
   }, []);
 
@@ -299,7 +299,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     setFinances(prev => {
       const newEntry = { ...entry, id: `FIN-${Date.now().toString(36)}` };
       const updated = [newEntry, ...prev];
-      localStorage.setItem('arcbank_finances', JSON.stringify(updated));
+      localStorage.setItem('thedailycup_finances', JSON.stringify(updated));
       return updated;
     });
   }, []);
@@ -307,7 +307,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const removeFinance = useCallback((id: string) => {
     setFinances(prev => {
       const updated = prev.filter(f => f.id !== id);
-      localStorage.setItem('arcbank_finances', JSON.stringify(updated));
+      localStorage.setItem('thedailycup_finances', JSON.stringify(updated));
       return updated;
     });
   }, []);

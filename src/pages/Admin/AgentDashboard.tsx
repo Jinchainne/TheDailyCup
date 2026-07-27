@@ -6,9 +6,7 @@ import {
   ShoppingCart, Package, AlertTriangle, CheckCircle, Clock, Truck,
   Brain, Sparkles, Users, FileText, Percent
 } from 'lucide-react';
-
-const MIMO_API = 'https://api.xiaomimimo.com/v1/chat/completions';
-const MIMO_KEY = 'sk-szsjdjw70m8t5bwy8tgx4n0taa4egpnicnidvpt3im9exf3l';
+import { requestMimoChat } from '../../lib/mimo';
 
 interface Message { role: 'user' | 'assistant'; content: string; timestamp: number; }
 
@@ -186,22 +184,11 @@ Respond as a professional business analyst and accountant. Be thorough, use bull
     setMessages(prev => [...prev, { role: 'user', content: text, timestamp: Date.now() }]);
     setLoading(true);
     try {
-      const resp = await fetch(MIMO_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${MIMO_KEY}` },
-        body: JSON.stringify({
-          model: 'mimo-v2.5-pro',
-          messages: [
-            { role: 'system', content: buildContext() },
-            ...messages.slice(-8).map(m => ({ role: m.role, content: m.content })),
-            { role: 'user', content: text }
-          ],
-          temperature: 0.3,
-          max_tokens: 800,
-        }),
-      });
-      const data = await resp.json();
-      const content = data.choices?.[0]?.message?.content || data.choices?.[0]?.message?.reasoning_content || 'Unable to analyze. Please try again.';
+      const content = await requestMimoChat([
+        { role: 'system', content: buildContext() },
+        ...messages.slice(-8).map(m => ({ role: m.role, content: m.content })),
+        { role: 'user', content: text }
+      ], { temperature: 0.3, maxTokens: 800 });
       setMessages(prev => [...prev, { role: 'assistant', content, timestamp: Date.now() }]);
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Connection error.', timestamp: Date.now() }]);

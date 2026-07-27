@@ -1125,16 +1125,16 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
   const [importing, setImporting] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [publishStatus, setPublishStatus] = useState<string | null>(null);
-  const [lastBackup, setLastBackup] = useState<string | null>(() => localStorage.getItem('arcbank_last_backup'));
+  const [lastBackup, setLastBackup] = useState<string | null>(() => localStorage.getItem('thedailycup_last_backup'));
 
   const exportBackup = () => {
     const backup = {
       version: '1.0',
       exportedAt: new Date().toISOString(),
       shopName: 'The Daily Cup',
-      products: JSON.parse(localStorage.getItem('arcbank_products') || '[]'),
-      orders: JSON.parse(localStorage.getItem('arcbank_orders') || '[]'),
-      finances: JSON.parse(localStorage.getItem('arcbank_finances') || '[]'),
+      products: JSON.parse(localStorage.getItem('thedailycup_products') || '[]'),
+      orders: JSON.parse(localStorage.getItem('thedailycup_orders') || '[]'),
+      finances: JSON.parse(localStorage.getItem('thedailycup_finances') || '[]'),
     };
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -1144,12 +1144,12 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
     a.click();
     URL.revokeObjectURL(url);
     const now = new Date().toLocaleString();
-    localStorage.setItem('arcbank_last_backup', now);
+    localStorage.setItem('thedailycup_last_backup', now);
     setLastBackup(now);
   };
 
   const exportCSV = () => {
-    const prods = JSON.parse(localStorage.getItem('arcbank_products') || '[]');
+    const prods = JSON.parse(localStorage.getItem('thedailycup_products') || '[]');
     const header = 'id,name,price,category,brand,description,image\n';
     const rows = prods.map((p: any) =>
       `"${p.id}","${p.name}",${p.price},"${p.category}","${p.brand}","${(p.description || '').replace(/"/g, '""')}","${p.image?.startsWith('data:') ? '(base64-image)' : p.image}"`
@@ -1183,9 +1183,9 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
           `This will REPLACE all current data. Continue?`;
         if (!window.confirm(confirmMsg)) { setImporting(false); return; }
 
-        localStorage.setItem('arcbank_products', JSON.stringify(data.products));
-        if (data.orders) localStorage.setItem('arcbank_orders', JSON.stringify(data.orders));
-        if (data.finances) localStorage.setItem('arcbank_finances', JSON.stringify(data.finances));
+        localStorage.setItem('thedailycup_products', JSON.stringify(data.products));
+        if (data.orders) localStorage.setItem('thedailycup_orders', JSON.stringify(data.orders));
+        if (data.finances) localStorage.setItem('thedailycup_finances', JSON.stringify(data.finances));
         alert('Backup restored successfully! The page will reload.');
         window.location.reload();
       } catch (err) {
@@ -1198,7 +1198,7 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
   };
 
   const publishToSite = async () => {
-    const prods = JSON.parse(localStorage.getItem('arcbank_products') || '[]');
+    const prods = JSON.parse(localStorage.getItem('thedailycup_products') || '[]');
     if (!prods.length) { alert('No products to publish'); return; }
     if (!window.confirm(`Publish ${prods.length} products to live site?\n\nThis will update https://coffeehouse-shop.vercel.app/shop for all visitors.`)) return;
 
@@ -1213,7 +1213,7 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
       const data = await resp.json();
       if (data.success) {
         setPublishStatus('Published! Changes will be live in ~30 seconds.');
-        localStorage.setItem('arcbank_last_publish', new Date().toLocaleString());
+        localStorage.setItem('thedailycup_last_publish', new Date().toLocaleString());
       } else {
         setPublishStatus('Error: ' + (data.error || 'Unknown error'));
       }
@@ -1323,7 +1323,7 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
           </div>
           <div className="text-center p-3 bg-slate-50 rounded-xl">
             <p className="text-2xl font-extrabold text-slate-900">
-              {JSON.parse(localStorage.getItem('arcbank_finances') || '[]').length}
+              {JSON.parse(localStorage.getItem('thedailycup_finances') || '[]').length}
             </p>
             <p className="text-xs text-slate-500">Finance Entries</p>
           </div>

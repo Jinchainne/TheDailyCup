@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO_OWNER = 'Jinchainne';
-const REPO_NAME = 'COFFEEHOUSE';
+const REPO_NAME = 'TheDailyCup';
 const FILE_PATH = 'public/data/products.json';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

@@ -75,7 +75,7 @@ function saveCustomers(customers: Record<string, CustomerProfile>) {
 
 function loadOrders(): Order[] {
   try {
-    const saved = localStorage.getItem('arcbank_orders');
+    const saved = localStorage.getItem('thedailycup_orders');
     return saved ? JSON.parse(saved) : [];
   } catch {
     return [];
@@ -166,7 +166,7 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
   const addOrder = useCallback((order: Order) => {
     setAllOrders(prev => {
       const updated = [order, ...prev];
-      localStorage.setItem('arcbank_orders', JSON.stringify(updated));
+      localStorage.setItem('thedailycup_orders', JSON.stringify(updated));
       return updated;
     });
     // Refresh customer stats

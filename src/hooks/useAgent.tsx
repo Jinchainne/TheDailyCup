@@ -98,9 +98,9 @@ function getDefaultAgents(): Agent[] {
       wallet: { address: '0xC3D4...merch', balance: 500.04, label: 'Merchant Settlement Wallet' },
       status: 'active',
       decisions: [
-        { id: 'D-4', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $11.91 RITUAL for order', signal: 'Payment received: $11.91 RITUAL from customer wallet', result: 'Payment confirmed on Ritual testnet, order queued for preparation', confidence: 99, timestamp: m(14) },
-        { id: 'D-5', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $7.50 RITUAL for order', signal: 'Payment received: $7.50 RITUAL from customer wallet', result: 'Payment confirmed on Ritual testnet, order queued for preparation', confidence: 99, timestamp: m(44) },
-        { id: 'D-6', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $24.50 RITUAL for order', signal: 'Payment received: $24.50 RITUAL from customer wallet', result: 'Payment confirmed on Ritual testnet, order dispatched', confidence: 99, timestamp: h(2) },
+        { id: 'D-4', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $11.91 RITUAL for order', signal: 'Payment received: $11.91 RITUAL from customer wallet', result: 'Payment confirmed on Ritual Testnet, order queued for preparation', confidence: 99, timestamp: m(14) },
+        { id: 'D-5', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $7.50 RITUAL for order', signal: 'Payment received: $7.50 RITUAL from customer wallet', result: 'Payment confirmed on Ritual Testnet, order queued for preparation', confidence: 99, timestamp: m(44) },
+        { id: 'D-6', agentId: 'agent-merchant', type: 'settlement', description: 'Settling payment of $24.50 RITUAL for order', signal: 'Payment received: $24.50 RITUAL from customer wallet', result: 'Payment confirmed on Ritual Testnet, order dispatched', confidence: 99, timestamp: h(2) },
       ],
       transactions: [
         { id: 'TX-3', from: 'agent-merchant', to: 'agent-ai', amount: 0.005, currency: 'RITUAL', type: 'nanopayment', description: 'AI recommendation service', status: 'confirmed', timestamp: m(14) },
@@ -231,7 +231,7 @@ export function AgentProvider({ children }: { children: ReactNode }) {
       agentId: 'agent-merchant', type: 'settlement',
       description: `Settling payment of $${total.toFixed(2)} RITUAL for order`,
       signal: `Payment received: $${total.toFixed(2)} RITUAL from customer wallet`,
-      result: 'Payment confirmed on Ritual testnet, order queued for preparation',
+      result: 'Payment confirmed on Ritual Testnet, order queued for preparation',
       confidence: 99,
     });
     sendNanoPayment('agent-order', 'agent-merchant', 0.01, 'Order processing fee');
@@ -244,7 +244,7 @@ export function AgentProvider({ children }: { children: ReactNode }) {
       agentId: fromAgent, type: 'payment',
       description: `Settling $${amount.toFixed(4)} RITUAL to ${toAgent}`,
       signal: `Settlement request: ${desc}`,
-      result: 'Transaction confirmed on Ritual testnet', confidence: 99,
+      result: 'Transaction confirmed on Ritual Testnet', confidence: 99,
     });
   }, [addTransaction, addDecision]);
 

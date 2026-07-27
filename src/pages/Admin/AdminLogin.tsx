@@ -21,9 +21,9 @@ export default function AdminLogin() {
   // Verify session is still valid on mount
   useEffect(() => {
     if (isAdmin) {
-      const token = sessionStorage.getItem('arcbank_admin_token');
+      const token = sessionStorage.getItem('thedailycup_admin_token');
       if (!token) {
-        sessionStorage.removeItem('arcbank_admin');
+        sessionStorage.removeItem('thedailycup_admin');
         window.location.reload();
         return;
       }

@@ -5,9 +5,7 @@ import {
   DollarSign, Package, Star, BarChart3, FileText, Download,
   RefreshCw, ChevronRight, Lightbulb, Target, Zap, Coffee
 } from 'lucide-react';
-
-const MIMO_API = 'https://api.xiaomimimo.com/v1/chat/completions';
-const MIMO_KEY = 'sk-szsjdjw70m8t5bwy8tgx4n0taa4egpnicnidvpt3im9exf3l';
+import { requestMimoChat } from '../../lib/mimo';
 
 interface TrendResult {
   category: string;
@@ -71,21 +69,10 @@ export default function MarketTrends() {
 
   const callMimo = async (prompt: string, systemContext?: string): Promise<string> => {
     try {
-      const resp = await fetch(MIMO_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${MIMO_KEY}` },
-        body: JSON.stringify({
-          model: 'mimo-v2.5-pro',
-          messages: [
-            { role: 'system', content: systemContext || 'You are a market research analyst specializing in food & beverage industry. Provide detailed, actionable insights.' },
-            { role: 'user', content: prompt }
-          ],
-          temperature: 0.4,
-          max_tokens: 1200,
-        }),
-      });
-      const data = await resp.json();
-      return data.choices?.[0]?.message?.reasoning_content || data.choices?.[0]?.message?.content || 'Unable to analyze. Please try again.';
+      return await requestMimoChat([
+        { role: 'system', content: systemContext || 'You are a market research analyst specializing in the food and beverage industry. Provide detailed, actionable insights.' },
+        { role: 'user', content: prompt }
+      ], { temperature: 0.4, maxTokens: 1200 });
     } catch {
       throw new Error('Failed to connect to AI service');
     }
@@ -226,7 +213,7 @@ MARKET GAPS & OPPORTUNITIES
 ${trendReport.marketGaps.map((g, i) => `${i + 1}. ${g}`).join('\n')}
 
 ───────────────────────────────────────
-Powered by MiMo AI Market Analyzer
+Powered by The Daily Cup AI market analyzer
 `;
 
     const blob = new Blob([reportText], { type: 'text/plain' });

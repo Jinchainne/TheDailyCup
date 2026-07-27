@@ -8,11 +8,7 @@ import {
   ShoppingBag, Crown, UserCheck, UserMinus,
   BarChart3, ThumbsUp, ThumbsDown, Sparkles
 } from 'lucide-react';
-
-// ─── MiMo API config ───
-const MIMO_API = 'https://api.xiaomimimo.com/v1/chat/completions';
-const MIMO_KEY = 'sk-szsjdjw70m8t5bwy8tgx4n0taa4egpnicnidvpt3im9exf3l';
-const MIMO_MODEL = 'mimo-v2.5-pro';
+import { requestMimoChat } from '../../lib/mimo';
 
 // ─── Interfaces ───
 interface CustomerSegment {
@@ -203,7 +199,7 @@ ${analytics.ratingDist.map((c, i) => `${i + 1} star: ${c} reviews`).join('\n')}
 **Products Needing Improvement (low rated):**
 ${analytics.lowRated.length > 0 ? analytics.lowRated.map(p => `- ${p.name}: ${p.avgRating.toFixed(1)}★ (${p.reviewCount} reviews)`).join('\n') : 'None identified'}
 
-**Customer Favorites (high rated):**
+    **Customer Favorites (high rated):**
 ${analytics.highRated.length > 0 ? analytics.highRated.map(p => `- ${p.name}: ${p.avgRating.toFixed(1)}★ (${p.reviewCount} reviews)`).join('\n') : 'None identified'}
 
 Please provide:
@@ -214,32 +210,15 @@ Please provide:
 5. Cross-selling opportunities based on order patterns`;
 
     try {
-      const res = await fetch(MIMO_API, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${MIMO_KEY}`,
+      const content = await requestMimoChat([
+        {
+          role: 'system',
+          content: 'You are a business analytics AI assistant specializing in restaurant and cafe customer insights. Provide clear, actionable analysis with specific recommendations. Use bullet points and keep the response structured.'
         },
-        body: JSON.stringify({
-          model: MIMO_MODEL,
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a business analytics AI assistant specializing in restaurant/coffee shop customer insights. Provide clear, actionable analysis with specific recommendations. Use bullet points and structure your response well.'
-            },
-            { role: 'user', content: prompt }
-          ],
-          temperature: 0.7,
-          max_tokens: 2048,
-        }),
-      });
-
-      const data = await res.json();
-      const content = data.choices?.[0]?.message?.reasoning_content
-        || data.choices?.[0]?.message?.content
-        || 'No analysis available. Please try again.';
+        { role: 'user', content: prompt }
+      ], { temperature: 0.7, maxTokens: 2048 });
       setAiAnalysis(content);
-    } catch (err) {
+    } catch {
       setAiAnalysis('Failed to fetch AI analysis. Please check your connection and try again.');
     } finally {
       setAiLoading(false);
@@ -263,16 +242,16 @@ Please provide:
     try {
       const saved = localStorage.getItem('coffeehouse_customers');
       const customers = saved ? JSON.parse(saved) : {};
-      downloadJson(customers, `arcbank_customers_${Date.now()}.json`);
-    } catch { downloadJson({}, `arcbank_customers_${Date.now()}.json`); }
+      downloadJson(customers, `thedailycup_customers_${Date.now()}.json`);
+    } catch { downloadJson({}, `thedailycup_customers_${Date.now()}.json`); }
   };
 
   const exportOrders = () => {
-    downloadJson(orders, `arcbank_orders_${Date.now()}.json`);
+    downloadJson(orders, `thedailycup_orders_${Date.now()}.json`);
   };
 
   const exportRatings = () => {
-    downloadJson(comments, `arcbank_ratings_${Date.now()}.json`);
+    downloadJson(comments, `thedailycup_ratings_${Date.now()}.json`);
   };
 
   const handleImportCustomers = (e: React.ChangeEvent<HTMLInputElement>) => {

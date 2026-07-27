@@ -29,7 +29,7 @@ export default function History() {
           <div className="card p-8 text-center max-w-md mx-auto">
             <Wallet className="w-12 h-12 text-slate-300 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-slate-900 mb-2">Connect Wallet</h3>
-            <p className="text-sm text-slate-500 mb-5">Connect to view your real transaction history on Ritual testnet.</p>
+            <p className="text-sm text-slate-500 mb-5">Connect to view your real transaction history on Ritual Testnet.</p>
             <WalletConnect />
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function History() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl font-extrabold text-slate-900">Transaction History</h1>
-            <p className="text-sm text-slate-400">Real-time on-chain data from Ritual testnet</p>
+            <p className="text-sm text-slate-400">Real-time on-chain data from Ritual Testnet</p>
           </div>
           <a href={`https://explorer.ritualfoundation.org/address/${address}`} target="_blank" rel="noreferrer"
             className="btn-secondary !text-xs flex items-center gap-1">
@@ -70,7 +70,7 @@ export default function History() {
           {loading ? (
             <div className="text-center py-12">
               <div className="animate-spin w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-3" />
-              <p className="text-sm text-slate-500">Loading transactions from Ritual testnet...</p>
+              <p className="text-sm text-slate-500">Loading transactions from Ritual Testnet...</p>
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-12">

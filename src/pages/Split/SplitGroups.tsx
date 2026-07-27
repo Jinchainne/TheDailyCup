@@ -23,7 +23,7 @@ export default function SplitGroups() {
           <div className="card p-8 text-center max-w-md mx-auto">
             <Wallet className="w-12 h-12 text-slate-300 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-slate-900 mb-2">Connect Wallet</h3>
-            <p className="text-sm text-slate-500 mb-5">Connect to manage split groups and settle on Ritual testnet.</p>
+            <p className="text-sm text-slate-500 mb-5">Connect to manage split groups and settle on Ritual Testnet.</p>
             <WalletConnect />
           </div>
         </div>
@@ -48,7 +48,7 @@ export default function SplitGroups() {
         {(isPending || isConfirming || isSuccess) && (
           <div className={`card p-4 mb-4 border-2 ${isSuccess ? 'border-emerald-200 bg-emerald-50' : 'border-blue-200 bg-blue-50'}`}>
             {isPending && <p className="text-sm text-blue-900 font-medium">⏳ Confirm settlement in MetaMask...</p>}
-            {isConfirming && <p className="text-sm text-blue-900 font-medium">⏳ Confirming on Ritual testnet...</p>}
+            {isConfirming && <p className="text-sm text-blue-900 font-medium">⏳ Confirming on Ritual Testnet...</p>}
             {isSuccess && (
               <div className="flex items-center gap-2">
                 <Check className="w-5 h-5 text-emerald-500" />

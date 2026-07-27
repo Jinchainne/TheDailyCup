@@ -23,7 +23,7 @@ const COUNTRIES = [
 export default function RemitTransfer() {
   const { contacts } = useStore();
   const { isConnected } = useAccount();
-  const { send: sendRITUAL, hash, isPending: txPending, isConfirming: txConfirming, isSuccess: txSuccess } = useSendRitual();
+  const { send: sendRitual, hash, isPending: txPending, isConfirming: txConfirming, isSuccess: txSuccess } = useSendRitual();
   const { showToast, ToastUI } = useToast();
   const [amount, setAmount] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
@@ -42,8 +42,8 @@ export default function RemitTransfer() {
     return (
       <div className="bg-white min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-          <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Cross-Border Transfer</h1>
-          <p className="text-sm text-slate-400 mb-8">Send RITUAL worldwide on Ritual testnet</p>
+          <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Global Transfer</h1>
+          <p className="text-sm text-slate-400 mb-8">Send RITUAL worldwide on Ritual Testnet</p>
           <div className="card p-8 text-center max-w-md mx-auto">
             <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-slate-900 mb-2">Connect Wallet First</h3>
@@ -58,8 +58,8 @@ export default function RemitTransfer() {
   return (
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Cross-Border Transfer</h1>
-        <p className="text-sm text-slate-400 mb-6">Send RITUAL/RITUAL worldwide on Ritual testnet — real-time FX rates</p>
+        <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Global Transfer</h1>
+        <p className="text-sm text-slate-400 mb-6">Send RITUAL worldwide on Ritual Testnet with live FX guidance</p>
 
         <div className="max-w-lg mx-auto space-y-4">
           {/* Live FX Rate Banner */}
@@ -70,14 +70,14 @@ export default function RemitTransfer() {
               </div>
               <div>
                 <p className="text-xs font-semibold text-slate-900">Live Exchange Rate</p>
-                <p className="text-[11px] text-slate-500">1 RITUAL = {selectedCountry.rate} {selectedCountry.currency} · Source: open.er-api.com (live)</p>
+                <p className="text-[11px] text-slate-500">1 RITUAL ≈ {selectedCountry.rate} {selectedCountry.currency} · Source: open.er-api.com</p>
               </div>
             </div>
           </div>
 
           {/* From Amount */}
           <div className="card p-5">
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 block">You Send</label>
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 block">You send</label>
             <div className="flex items-center gap-3">
               <input type="number" value={amount} onChange={e => setAmount(e.target.value)}
                 placeholder="0.00" className="text-2xl font-bold flex-1 !border-0 !bg-slate-50" />
@@ -132,21 +132,19 @@ export default function RemitTransfer() {
           <div className="card p-4">
             <label className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 block">Recipient Wallet</label>
             <div className="space-y-3">
-              {/* Manual paste */}
               <div>
-                <p className="text-[11px] text-slate-500 mb-1.5">Paste wallet address:</p>
+                <p className="text-[11px] text-slate-500 mb-1.5">Paste a wallet address:</p>
                 <input
                   value={recipient.startsWith('0x') && !contacts.find(c => c.address === recipient) ? recipient : ''}
                   onChange={e => setRecipient(e.target.value)}
-                  placeholder="0x... paste any Ritual testnet address"
+                  placeholder="0x... paste any Ritual Testnet address"
                   className="font-mono text-sm"
                 />
               </div>
-              {/* Or select from contacts */}
               <div>
-                <p className="text-[11px] text-slate-500 mb-1.5">Or select a contact:</p>
+                <p className="text-[11px] text-slate-500 mb-1.5">Or choose a saved contact:</p>
                 <select value={contacts.find(c => c.address === recipient) ? recipient : ''} onChange={e => setRecipient(e.target.value)} className="bg-white">
-                  <option value="">Choose from contacts...</option>
+                  <option value="">Choose a contact...</option>
                   {contacts.map(c => <option key={c.id} value={c.address}>{c.name} ({c.address.slice(0, 10)}...)</option>)}
                 </select>
               </div>
@@ -159,7 +157,7 @@ export default function RemitTransfer() {
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Transfer Summary</h3>
               <div className="space-y-2">
                 <div className="flex justify-between"><span className="text-xs text-slate-500">You send</span><span className="text-sm font-bold text-slate-900">{formatCurrency(parseFloat(amount))} RITUAL</span></div>
-                <div className="flex justify-between"><span className="text-xs text-slate-500">Exchange rate</span><span className="text-sm text-slate-700">1 RITUAL = {selectedCountry.rate} {selectedCountry.currency}</span></div>
+                <div className="flex justify-between"><span className="text-xs text-slate-500">Reference FX rate</span><span className="text-sm text-slate-700">1 RITUAL ≈ {selectedCountry.rate} {selectedCountry.currency}</span></div>
                 <div className="flex justify-between"><span className="text-xs text-slate-500">Network fee</span><span className="text-sm text-emerald-600">~${fee}</span></div>
                 <div className="border-t border-slate-100 pt-2 flex justify-between">
                   <span className="text-xs font-semibold text-slate-900">Recipient gets</span>
@@ -168,7 +166,7 @@ export default function RemitTransfer() {
                 <div className="flex items-center gap-4 mt-2 pt-2 border-t border-slate-100">
                   <span className="flex items-center gap-1 text-[10px] text-slate-400"><Zap className="w-3 h-3" /> Instant</span>
                   <span className="flex items-center gap-1 text-[10px] text-slate-400"><Clock className="w-3 h-3" /> &lt;1s finality</span>
-                  <span className="flex items-center gap-1 text-[10px] text-slate-400"><Shield className="w-3 h-3" /> Ritual</span>
+                  <span className="flex items-center gap-1 text-[10px] text-slate-400"><Shield className="w-3 h-3" /> Ritual-secured</span>
                 </div>
               </div>
             </div>
@@ -178,7 +176,7 @@ export default function RemitTransfer() {
           {(isPending || isConfirming || isSuccess) && (
             <div className={`card p-4 border-2 ${isSuccess ? 'border-emerald-200 bg-emerald-50' : 'border-blue-200 bg-blue-50'}`}>
               {isPending && <div className="flex items-center gap-2"><div className="animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" /><span className="text-sm text-blue-900 font-medium">Confirm in wallet...</span></div>}
-              {isConfirming && <div className="flex items-center gap-2"><div className="animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" /><span className="text-sm text-blue-900 font-medium">Confirming on Ritual testnet...</span></div>}
+              {isConfirming && <div className="flex items-center gap-2"><div className="animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" /><span className="text-sm text-blue-900 font-medium">Confirming on Ritual Testnet...</span></div>}
               {isSuccess && <div className="flex items-center gap-2"><span className="text-emerald-500">✓</span><span className="text-sm text-emerald-900 font-medium">Transfer confirmed!</span>
                 {hash && <a href={`https://explorer.ritualfoundation.org/tx/${hash}`} target="_blank" rel="noreferrer" className="text-xs text-emerald-600 hover:underline flex items-center gap-1">View <ExternalLink className="w-3 h-3" /></a>}
               </div>}
@@ -188,9 +186,9 @@ export default function RemitTransfer() {
           {/* Send Button */}
           <button onClick={() => {
             if (!recipient) { showToast('Select a recipient', 'error'); return; }
-            sendRITUAL(recipient, amount);
+            sendRitual(recipient, amount);
           }} disabled={!amount || !recipient || isPending || isConfirming} className="btn-primary w-full text-base py-4">
-            {isPending ? '⏳ Confirm in wallet...' : isConfirming ? '⏳ Confirming...' : <><Globe className="w-5 h-5" /> Send International Transfer</>}
+            {isPending ? '⏳ Confirm in wallet...' : isConfirming ? '⏳ Confirming...' : <><Globe className="w-5 h-5" /> Send global transfer</>}
           </button>
         </div>
         {ToastUI}

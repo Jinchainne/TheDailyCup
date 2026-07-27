@@ -264,14 +264,14 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [orders, setOrders] = useState<Order[]>(() => {
     try {
-      const saved = localStorage.getItem('arcbank_orders');
+      const saved = localStorage.getItem('thedailycup_orders');
       return saved ? JSON.parse(saved) : [];
     } catch { return []; }
   });
 
   const [products, setProducts] = useState<Product[]>(() => {
     try {
-      const saved = localStorage.getItem('arcbank_products');
+      const saved = localStorage.getItem('thedailycup_products');
       return saved ? JSON.parse(saved) : PRODUCTS;
     } catch { return PRODUCTS; }
   });
@@ -285,7 +285,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
           // Merge: server products as base, localStorage overrides on top
           const localOverrides = (() => {
             try {
-              const saved = localStorage.getItem('arcbank_products');
+              const saved = localStorage.getItem('thedailycup_products');
               return saved ? JSON.parse(saved) : null;
             } catch { return null; }
           })();
@@ -307,7 +307,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
 
   const persistProducts = useCallback((updated: Product[]) => {
     setProducts(updated);
-    localStorage.setItem('arcbank_products', JSON.stringify(updated));
+    localStorage.setItem('thedailycup_products', JSON.stringify(updated));
   }, []);
 
   const addProduct = useCallback((product: Omit<Product, 'id'>) => {
@@ -436,7 +436,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const requestRefund = useCallback((orderId: string, reason: string) => {
     setOrders(prev => {
       const updated = prev.map(o => o.id === orderId ? { ...o, status: 'refunded' as const, cancelReason: reason, cancelledAt: Date.now() } : o);
-      localStorage.setItem('arcbank_orders', JSON.stringify(updated));
+      localStorage.setItem('thedailycup_orders', JSON.stringify(updated));
       return updated;
     });
   }, []);
@@ -444,7 +444,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const saveOrder = useCallback((order: Order) => {
     setOrders(prev => {
       const updated = [order, ...prev];
-      localStorage.setItem('arcbank_orders', JSON.stringify(updated));
+      localStorage.setItem('thedailycup_orders', JSON.stringify(updated));
       return updated;
     });
   }, []);
@@ -457,7 +457,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
         const timestampField = `${status}At` as keyof Order;
         return { ...o, status, txHash: txHash || o.txHash, [timestampField]: now };
       });
-      localStorage.setItem('arcbank_orders', JSON.stringify(updated));
+      localStorage.setItem('thedailycup_orders', JSON.stringify(updated));
       return updated;
     });
   }, []);
@@ -469,7 +469,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const cancelOrder = useCallback((orderId: string, reason: string) => {
     setOrders(prev => {
       const updated = prev.map(o => o.id === orderId ? { ...o, status: 'cancelled' as const, cancelledAt: Date.now(), cancelReason: reason } : o);
-      localStorage.setItem('arcbank_orders', JSON.stringify(updated));
+      localStorage.setItem('thedailycup_orders', JSON.stringify(updated));
       return updated;
     });
   }, []);

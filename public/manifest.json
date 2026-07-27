@@ -1,7 +1,7 @@
 {
-  "name": "The Daily Cup — Powered by Ritual",
+  "name": "The Daily Cup",
   "short_name": "The Daily Cup",
-  "description": "Premium coffee shop. Order and pay with RITUAL on Ritual.",
+  "description": "Ritual-native cafe demo with wallet payments, faucet onboarding, deployment guides, and a mini runner game.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f0f4f8",

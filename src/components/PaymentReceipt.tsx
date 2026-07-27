@@ -44,7 +44,7 @@ export default function PaymentReceipt({ order, txHash, onClose, onTrack }: Prop
             <div className="text-center pr-24">
               <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">THE DAILY CUP</h2>
               <p className="text-[10px] text-slate-400 uppercase tracking-[0.2em]">Powered by Ritual</p>
-              <p className="text-[11px] text-slate-400 mt-1">Native {CURRENCY_SYMBOL} settlement on Ritual testnet</p>
+              <p className="text-[11px] text-slate-400 mt-1">Native {CURRENCY_SYMBOL} settlement on Ritual Testnet</p>
             </div>
           </div>
 

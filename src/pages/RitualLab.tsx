@@ -55,7 +55,7 @@ export default function RitualLab() {
             <h2 className="text-lg font-bold text-slate-900">Deploy on Ritual</h2>
           </div>
           <p className="text-sm text-slate-500 mb-4">
-            Ritual testnet uses native <strong>RITUAL</strong> and chain ID <strong>{CHAIN_ID}</strong>. For a straightforward EVM deployment flow, point your toolchain at the Ritual RPC and fund the deployer wallet first.
+            Ritual Testnet uses native <strong>RITUAL</strong> and chain ID <strong>{CHAIN_ID}</strong>. For a straightforward EVM deployment flow, point your toolchain at the Ritual RPC and fund the deployer wallet first.
           </p>
           <div className="space-y-3 mb-5">
             {deploySteps.map((step, index) => (

@@ -56,7 +56,7 @@ export default function Onboarding() {
               <div>
                 <h3 className="text-base font-bold text-slate-900">Get started on Ritual</h3>
                 <p className="text-xs text-slate-500">
-                  Add the network, claim faucet funds, and start paying or deploying on Ritual testnet.
+                  Add the network, claim faucet funds, and start paying or deploying on Ritual Testnet.
                 </p>
               </div>
             </div>

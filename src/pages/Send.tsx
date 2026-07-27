@@ -34,7 +34,7 @@ export default function Send() {
       <div className="bg-white min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
           <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Send Money</h1>
-          <p className="text-sm text-slate-400 mb-8">Transfer RITUAL on Ritual testnet</p>
+          <p className="text-sm text-slate-400 mb-8">Transfer RITUAL on Ritual Testnet</p>
           <div className="card p-8 text-center max-w-md mx-auto">
             <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-slate-900 mb-2">Connect Wallet</h3>
@@ -49,7 +49,7 @@ export default function Send() {
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Send Money</h1>
-        <p className="text-sm text-slate-400 mb-6">Transfer RITUAL on Ritual testnet</p>
+        <p className="text-sm text-slate-400 mb-6">Transfer RITUAL on Ritual Testnet</p>
 
         <div className="max-w-lg mx-auto">
           {/* Progress */}
@@ -103,7 +103,7 @@ export default function Send() {
                   {filtered.length > 0 ? 'Or Enter Address' : 'Recipient Address'}
                 </p>
                 <div className="flex gap-2">
-                  <input value={address} onChange={e => setAddress(e.target.value)} placeholder="0x... paste any Ritual testnet address" className="flex-1 font-mono text-sm" />
+                  <input value={address} onChange={e => setAddress(e.target.value)} placeholder="0x... paste any Ritual Testnet address" className="flex-1 font-mono text-sm" />
                   <button onClick={() => { if (isAddress(address)) setStep('amount'); else showToast('Invalid address', 'error'); }} disabled={!address} className="btn-primary !px-5">Next</button>
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function Send() {
                 <div className="space-y-3">
                   <div className="flex justify-between"><span className="text-xs text-slate-500">To</span><span className="text-sm font-mono text-slate-900">{shortenAddress(address)}</span></div>
                   <div className="flex justify-between"><span className="text-xs text-slate-500">Amount</span><span className="text-sm font-bold text-slate-900">{formatCurrency(parseFloat(amount))}</span></div>
-                  <div className="flex justify-between"><span className="text-xs text-slate-500">Network</span><span className="text-sm text-slate-700">Ritual testnet (1979)</span></div>
+                  <div className="flex justify-between"><span className="text-xs text-slate-500">Network</span><span className="text-sm text-slate-700">Ritual Testnet (1979)</span></div>
                   <div className="flex justify-between"><span className="text-xs text-slate-500">Fee</span><span className="text-sm text-emerald-600">~$0.01</span></div>
                   <div className="flex justify-between"><span className="text-xs text-slate-500">Finality</span><span className="text-sm text-slate-700">&lt;1 second</span></div>
                 </div>
@@ -153,7 +153,7 @@ export default function Send() {
               {(isPending || isConfirming || isSuccess || sendError) && (
                 <div className={`card p-4 border-2 ${isSuccess ? 'border-emerald-200 bg-emerald-50' : sendError ? 'border-red-200 bg-red-50' : 'border-blue-200 bg-blue-50'}`}>
                   {isPending && <p className="text-sm text-blue-900 font-medium">Waiting for MetaMask...</p>}
-                  {isConfirming && <p className="text-sm text-blue-900 font-medium">Confirming on Ritual testnet...</p>}
+                  {isConfirming && <p className="text-sm text-blue-900 font-medium">Confirming on Ritual Testnet...</p>}
                   {isSuccess && <div className="flex items-center gap-2"><Check className="w-5 h-5 text-emerald-500" /><span className="text-sm text-emerald-900 font-medium">Confirmed!</span>
                     {hash && <a href={`https://explorer.ritualfoundation.org/tx/${hash}`} target="_blank" rel="noreferrer" className="text-xs text-emerald-600 hover:underline flex items-center gap-1">Ritual Explorer <ExternalLink className="w-3 h-3" /></a>}
                   </div>}

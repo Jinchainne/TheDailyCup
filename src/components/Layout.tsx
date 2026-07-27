@@ -1,21 +1,35 @@
+import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
-import AIChat from './AIChat';
-import SocialShare from './SocialShare';
-import Onboarding from './Onboarding';
-import RitualDinoGame from './RitualDinoGame';
 import { CHAIN_ID, DOCS_URL, EXPLORER_URL, FAUCET_URL } from '../config/network';
+
+const AIChat = lazy(() => import('./AIChat'));
+const SocialShare = lazy(() => import('./SocialShare'));
+const Onboarding = lazy(() => import('./Onboarding'));
+const RitualDinoGame = lazy(() => import('./RitualDinoGame'));
+
+function WidgetLoader({ label }: { label: string }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 shadow-sm">
+      {label}
+    </div>
+  );
+}
 
 export default function Layout() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <Onboarding />
+      <Suspense fallback={null}>
+        <Onboarding />
+      </Suspense>
       <main className="max-w-7xl mx-auto">
         <Outlet />
       </main>
-      <AIChat />
-      <SocialShare />
+      <Suspense fallback={null}>
+        <AIChat />
+        <SocialShare />
+      </Suspense>
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 mt-12">
@@ -57,10 +71,12 @@ export default function Layout() {
             </div>
           </div>
           <div className="mb-8">
-            <RitualDinoGame />
+            <Suspense fallback={<WidgetLoader label="Loading Ritual Runner..." />}>
+              <RitualDinoGame />
+            </Suspense>
           </div>
           <div className="border-t border-slate-800 pt-6 text-center">
-            <p className="text-xs text-slate-500">&copy; 2026 The Daily Cup. Built for Ritual testnet builders and players.</p>
+            <p className="text-xs text-slate-500">&copy; 2026 The Daily Cup. Built for Ritual Testnet builders, payers, and players.</p>
           </div>
         </div>
       </footer>

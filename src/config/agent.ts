@@ -63,10 +63,10 @@ export function resolveContact(name: string, contacts: { name: string; address: 
   return found?.address || null;
 }
 
-// RITUAL/RITUAL real-time rate (simplified - in production use oracle)
+// Reference FX rate for RITUAL-based remittance previews (simplified; use an oracle in production)
 export function getSwapRate(tokenIn: string, tokenOut: string): number {
-  // RITUAL ≈ RITUAL on Arc (both stablecoins, RITUAL=$1, RITUAL≈€1)
-  // Real rate: 1 RITUAL = ~0.877 RITUAL (based on EUR/USD rate)
+  // Preview conversion between a USD-like and EUR-like display value.
+  // Reference rate: 1 RITUAL ~= 0.877 FX units and the inverse ~= 1.1407.
   if (tokenIn === 'RITUAL' && tokenOut === 'RITUAL') return 0.876691;
   if (tokenIn === 'RITUAL' && tokenOut === 'RITUAL') return 1.1407;
   return 1;

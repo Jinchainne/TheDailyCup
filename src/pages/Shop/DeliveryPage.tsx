@@ -263,8 +263,8 @@ export default function DeliveryPage() {
 
   const handleConfirm = () => {
     const delivery: DeliveryAddress = { lat: position.lat, lng: position.lng, address, note };
-    sessionStorage.setItem('arcbank_delivery', JSON.stringify(delivery));
-    sessionStorage.setItem('arcbank_shipping_fee', shippingFee.toString());
+    sessionStorage.setItem('thedailycup_delivery', JSON.stringify(delivery));
+    sessionStorage.setItem('thedailycup_shipping_fee', shippingFee.toString());
     navigate('/shop/checkout');
   };
 

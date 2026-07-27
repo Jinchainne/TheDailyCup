@@ -30,9 +30,9 @@ export default function ShopCheckout() {
 
   useEffect(() => {
     try {
-      const saved = sessionStorage.getItem('arcbank_delivery');
+      const saved = sessionStorage.getItem('thedailycup_delivery');
       if (saved) setDelivery(JSON.parse(saved));
-      const fee = sessionStorage.getItem('arcbank_shipping_fee');
+      const fee = sessionStorage.getItem('thedailycup_shipping_fee');
       if (fee) setShippingFee(parseFloat(fee));
     } catch {}
   }, []);
@@ -86,8 +86,8 @@ export default function ShopCheckout() {
         setTimeout(() => updateOrderStatus(orderId, 'shipping'), 15000);
         setTimeout(() => updateOrderStatus(orderId, 'delivered'), 30000);
       }
-      sessionStorage.removeItem('arcbank_delivery');
-      sessionStorage.removeItem('arcbank_shipping_fee');
+      sessionStorage.removeItem('thedailycup_delivery');
+      sessionStorage.removeItem('thedailycup_shipping_fee');
       setStep('done');
     }
     if (sendError && orderId) {
@@ -116,7 +116,7 @@ export default function ShopCheckout() {
         </button>
 
         <h1 className="text-2xl font-extrabold text-slate-900 mb-1">Checkout</h1>
-        <p className="text-sm text-slate-400 mb-6">Pay with native {CURRENCY_SYMBOL} on Ritual testnet</p>
+        <p className="text-sm text-slate-400 mb-6">Pay with native {CURRENCY_SYMBOL} on Ritual Testnet</p>
 
         {/* Step 1: Review */}
         {step === 'review' && (

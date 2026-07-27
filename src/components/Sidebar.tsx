@@ -75,7 +75,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
       <div className="p-4 border-t border-slate-100">
         <div className="flex items-center gap-2 px-2 mb-3">
           <div className="w-2 h-2 rounded-full bg-emerald-500 pulse-dot" />
-          <span className="text-[11px] text-slate-500">Ritual testnet Connected</span>
+          <span className="text-[11px] text-slate-500">Ritual Testnet connected</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex-1 flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50 text-xs text-slate-600">
