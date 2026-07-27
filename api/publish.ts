@@ -20,6 +20,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const updatedAt = new Date().toISOString();
     // Get current file SHA (needed for update)
     const getUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
     const getResp = await fetch(getUrl, {
@@ -38,7 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Prepare the JSON content
     const content = JSON.stringify({
       version: '1.0',
-      updatedAt: new Date().toISOString(),
+      updatedAt,
       products: products,
     }, null, 2);
 
@@ -67,6 +68,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       success: true,
       message: `Published ${products.length} products. Vercel will auto-deploy in ~30 seconds.`,
       commit: result.commit?.sha?.slice(0, 7),
+      updatedAt,
     });
   } catch (err) {
     return res.status(500).json({ error: (err as Error).message });

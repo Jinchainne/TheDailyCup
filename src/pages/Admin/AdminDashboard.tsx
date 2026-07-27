@@ -15,6 +15,9 @@ import { AdminAgentPanel } from './AgentDashboard';
 import CustomerInsights from './CustomerInsights';
 
 type Tab = 'dashboard' | 'orders' | 'finance' | 'tax' | 'products' | 'ai-agent' | 'customer-insights' | 'market-trends' | 'shipping' | 'pos-config' | 'backup';
+const PRODUCTS_STORAGE_KEY = 'thedailycup_products';
+const PRODUCTS_SYNCED_AT_STORAGE_KEY = 'thedailycup_products_synced_at';
+const PRODUCTS_DIRTY_STORAGE_KEY = 'thedailycup_products_dirty';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -750,6 +753,11 @@ function PublishButton({ products }: { products: any[] }) {
       });
       const data = await resp.json();
       if (data.success) {
+          localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(cleanProducts));
+          localStorage.setItem(PRODUCTS_DIRTY_STORAGE_KEY, 'false');
+          if (data.updatedAt) {
+            localStorage.setItem(PRODUCTS_SYNCED_AT_STORAGE_KEY, data.updatedAt);
+          }
           setResult(`✅ Published to The Daily Cup. Deploying in about 30 seconds. Commit: ${data.commit}`);
         } else {
           setResult(`❌ ${data.error}`);
@@ -1212,6 +1220,11 @@ function BackupTab({ products, orders }: { products: any[]; orders: any[] }) {
         });
         const data = await resp.json();
         if (data.success) {
+        localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(prods));
+        localStorage.setItem(PRODUCTS_DIRTY_STORAGE_KEY, 'false');
+        if (data.updatedAt) {
+          localStorage.setItem(PRODUCTS_SYNCED_AT_STORAGE_KEY, data.updatedAt);
+        }
         setPublishStatus('Published to The Daily Cup. Changes should be live in about 30 seconds.');
         localStorage.setItem('thedailycup_last_publish', new Date().toLocaleString());
       } else {

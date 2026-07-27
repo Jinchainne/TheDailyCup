@@ -68,6 +68,9 @@ const PROMO_DISCOUNT_STORAGE_KEY = 'thedailycup_promo_discount';
 const LEGACY_PROMO_DISCOUNT_STORAGE_KEY = 'coffeehouse_promo_discount';
 const RECENTLY_VIEWED_STORAGE_KEY = 'thedailycup_recently_viewed';
 const LEGACY_RECENTLY_VIEWED_STORAGE_KEY = 'coffeehouse_recently_viewed';
+const PRODUCTS_STORAGE_KEY = 'thedailycup_products';
+const PRODUCTS_SYNCED_AT_STORAGE_KEY = 'thedailycup_products_synced_at';
+const PRODUCTS_DIRTY_STORAGE_KEY = 'thedailycup_products_dirty';
 
 // Shipping configuration
 export interface ShippingConfig {
@@ -279,43 +282,61 @@ export function ShopProvider({ children }: { children: ReactNode }) {
 
   const [products, setProducts] = useState<Product[]>(() => {
     try {
-      const saved = localStorage.getItem('thedailycup_products');
+      const saved = localStorage.getItem(PRODUCTS_STORAGE_KEY);
       return saved ? JSON.parse(saved) : PRODUCTS;
     } catch { return PRODUCTS; }
   });
 
   // Fetch latest products from server on mount
   useEffect(() => {
-    fetch('/data/products.json')
+    fetch(`/data/products.json?v=${Date.now()}`, { cache: 'no-store' })
       .then(r => r.ok ? r.json() : null)
       .then(data => {
         if (data?.products?.length) {
-          // Merge: server products as base, localStorage overrides on top
-          const localOverrides = (() => {
+          const serverUpdatedAt = String(data.updatedAt || '');
+          const localDirty = localStorage.getItem(PRODUCTS_DIRTY_STORAGE_KEY) === 'true';
+          const localSyncedAt = localStorage.getItem(PRODUCTS_SYNCED_AT_STORAGE_KEY) || '';
+          const localProducts = (() => {
             try {
-              const saved = localStorage.getItem('thedailycup_products');
-              return saved ? JSON.parse(saved) : null;
+              const saved = localStorage.getItem(PRODUCTS_STORAGE_KEY);
+              return saved ? JSON.parse(saved) as Product[] : null;
             } catch { return null; }
           })();
-          if (localOverrides) {
-            // Merge: use local overrides for matching IDs, server for the rest
-            const localMap = new Map(localOverrides.map((p: Product) => [p.id, p]));
-            const merged = data.products.map((p: Product) => localMap.get(p.id) || p);
-            // Add any local-only products (custom added)
-            const serverIds = new Set(data.products.map((p: Product) => p.id));
-            const localOnly = localOverrides.filter((p: Product) => !serverIds.has(p.id));
-            setProducts([...localOnly, ...merged]);
-          } else {
-            setProducts(data.products);
+
+          // If local admin edits have not been published yet, preserve them.
+          if (localDirty && localProducts?.length) {
+            setProducts(localProducts);
+            return;
           }
+
+          const shouldUseServer =
+            !localProducts?.length ||
+            !localSyncedAt ||
+            (serverUpdatedAt && serverUpdatedAt > localSyncedAt);
+
+          if (shouldUseServer) {
+            setProducts(data.products);
+            localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(data.products));
+            localStorage.setItem(PRODUCTS_DIRTY_STORAGE_KEY, 'false');
+            if (serverUpdatedAt) {
+              localStorage.setItem(PRODUCTS_SYNCED_AT_STORAGE_KEY, serverUpdatedAt);
+            }
+            return;
+          }
+
+          setProducts(localProducts || data.products);
         }
       })
       .catch(() => { /* use default products */ });
   }, []);
 
-  const persistProducts = useCallback((updated: Product[]) => {
+  const persistProducts = useCallback((updated: Product[], options?: { dirty?: boolean; syncedAt?: string }) => {
     setProducts(updated);
-    localStorage.setItem('thedailycup_products', JSON.stringify(updated));
+    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(updated));
+    localStorage.setItem(PRODUCTS_DIRTY_STORAGE_KEY, options?.dirty === false ? 'false' : 'true');
+    if (options?.syncedAt) {
+      localStorage.setItem(PRODUCTS_SYNCED_AT_STORAGE_KEY, options.syncedAt);
+    }
   }, []);
 
   const addProduct = useCallback((product: Omit<Product, 'id'>) => {
